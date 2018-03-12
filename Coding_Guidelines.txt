@@ -1,0 +1,12 @@
+Coding Guidelines
+
+1. Namngivning av variabler: Liten bokstav först, stor bokstav i början av varje nytt ord (inget mellanrum eller understreck)
+Ex: basicEnemy
+
+2. Position av måsvingar: Ny rad när måsvingar läggs in (inte på samma rad som metodhuvudet eller if-satsen etc...)
+Ex: if (....)
+{
+...
+}
+
+3. 
