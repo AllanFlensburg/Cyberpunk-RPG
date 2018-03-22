@@ -102,6 +102,10 @@ namespace Cyberpunk_RPG
                     foreach (Enemy e in enemyList)
                     {
                         e.Update(gameTime);
+                        if (Vector2.Distance(e.pos, player.pos) < 300)
+                        {
+                            e.pos += e.speed * GetDirection(player.pos - e.pos) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        }
                         foreach (Projectile p in player.projectileList)
                         {
                             if (e.hitBox.Intersects(p.hitBox))
@@ -171,6 +175,12 @@ namespace Cyberpunk_RPG
                 Enemy enemy = new Enemy(enemyTex, new Vector2(x, y * i));
                 enemyList.Add(enemy);
             }
+        }
+
+        public Vector2 GetDirection(Vector2 dir)
+        {
+            Vector2 newDirection = dir;
+            return Vector2.Normalize(newDirection);
         }
     }
 }

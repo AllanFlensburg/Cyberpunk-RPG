@@ -13,7 +13,7 @@ namespace Cyberpunk_RPG
     {
         Texture2D playerTex;
         Texture2D projectileTex;
-        Vector2 pos;
+        public Vector2 pos;
         Vector2 mousePos;
         Vector2 projectileStart;
         Vector2 projectileSpeed;
@@ -107,7 +107,7 @@ namespace Cyberpunk_RPG
 
         private void ShootProjectile(KeyboardState currentKeyboardState)
         {
-            if (currentKeyboardState.IsKeyDown(Keys.Q) == true)
+            if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false)
             {
                 createNewProjectile(GetDirection(mousePos - pos));
             }

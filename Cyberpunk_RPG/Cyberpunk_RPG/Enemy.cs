@@ -11,7 +11,8 @@ namespace Cyberpunk_RPG
     class Enemy
     {
         Texture2D enemyTex;
-        Vector2 pos;
+        public Vector2 pos;
+        public Vector2 speed;
         public bool isHit = false;
         public Rectangle hitBox;
 
@@ -19,6 +20,7 @@ namespace Cyberpunk_RPG
         {
             this.enemyTex = enemyTex;
             this.pos = pos;
+            speed = new Vector2(100, 100);
         }
 
         public void Update(GameTime gameTime)
