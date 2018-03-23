@@ -1,0 +1,19 @@
+Snabbguide till github
+
+1. Lägg filerna du ska ladda upp i en mapp
+
+2. Starta kommandotolken och navigera dig till mappen (cd deskptop, cd MAPPNAMN)
+
+3. Skriv git init i kommandotolken
+
+4. Skriv git status för att se filerna i mappen och git add för att lägga till vilka filer som ska laddas upp
+
+5. För att göra en commit skrivs git commit -m "MEDDELANDE TILL RESTEN AV GRUPPEN"
+
+6. Det som ska skickas upp till github görs via en remote = git remote add origin https://github.com/användarnamn på GitHub/namn på GitHub repo.git
+
+7. git push --set-upstream origin master för att filerna ska hamna rätt (Vart filerna ska skickas kan variera, exempelvis en branch eller liknande)
+
+8. git push origin master skickar upp koden eller filerna till vårt github-projekt
+
+9. För att hämta ner från github: git pull origin master
