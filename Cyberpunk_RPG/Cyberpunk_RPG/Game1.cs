@@ -50,8 +50,8 @@ namespace Cyberpunk_RPG
             enemyTex = Content.Load<Texture2D>("enemy");
             projectileTex = Content.Load<Texture2D>("projectile");
 
-            graphics.PreferredBackBufferWidth = 1000;
-            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
             IsMouseVisible = true;
             CreateEnemies();
@@ -59,7 +59,7 @@ namespace Cyberpunk_RPG
             currentKeyboardState = new KeyboardState();
             lastKeyboardState = new KeyboardState();
 
-            player = new Player(playerTex, projectileTex, Vector2.Zero);
+            player = new Player(playerTex, projectileTex, Vector2.Zero, gameText);
 
             currentGameState = GameState.PlayingGame;
         }
