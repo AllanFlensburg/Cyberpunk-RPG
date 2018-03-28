@@ -13,6 +13,7 @@ namespace Cyberpunk_RPG
     {
         Texture2D playerTex;
         Texture2D projectileTex;
+        Texture2D reloadDisplay;
         SpriteFont font;
         public Vector2 pos;
         Vector2 mousePos;
@@ -26,7 +27,7 @@ namespace Cyberpunk_RPG
         int ammoCount;
         bool reloading;
         float reloadTimer;
-        //float jumpTime;
+        float reloadTime;
         bool jumping = false;
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
@@ -34,17 +35,18 @@ namespace Cyberpunk_RPG
         MouseState previousMouseState;
         public List<Projectile> projectileList;
 
-        public Player(Texture2D playerTex, Texture2D projectileTex, Vector2 pos, SpriteFont font)
+        public Player(Texture2D playerTex, Texture2D projectileTex, Vector2 pos, SpriteFont font, Texture2D reloadDisplay)
         {
             this.playerTex = playerTex;
             this.projectileTex = projectileTex;
+            this.reloadDisplay = reloadDisplay;
             this.font = font;
             this.pos = pos;
             playerSpeed = 100;
             ammoCount = 8;
             reloadTimer = 1.5f;
+            reloadTime = 1.5f;
             reloading = false;
-            //jumpTime = 0.8f;
             dashSpeed = new Vector2(300, 300);
             projectileSpeed = new Vector2(500, 500);
             projectileList = new List<Projectile>();
@@ -52,12 +54,6 @@ namespace Cyberpunk_RPG
 
         public void Update(GameTime gameTime)
         {
-            //jumpTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //if (jumpTime < 0)
-            //{
-            //    jumpTime = 0.8f;
-            //    jumping = false;
-            //}
             projectileStart = pos;
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
@@ -108,8 +104,7 @@ namespace Cyberpunk_RPG
                 if (currentKeyboardState.IsKeyDown(Keys.Space) == true)
                 {
                     startingPosition = pos;
-                    endPosition = pos += /*dashDistance **/ GetDirection(mousePos - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    //jumpTime = 0.8f;
+                    endPosition = pos += GetDirection(mousePos - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     jumping = true;
                 }
             }
@@ -143,14 +138,14 @@ namespace Cyberpunk_RPG
                 {
                     reloading = false;
                     ammoCount = 8;
-                    reloadTimer = 2.5f;
+                    reloadTimer = reloadTime;
                 }
             }
         }
 
         private void ShootProjectile(KeyboardState currentKeyboardState)
         {
-            if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false & ammoCount >= 1)
+            if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false & ammoCount >= 1 & reloading == false)
             {
                 ammoCount -= 1;
                 createNewProjectile(GetDirection(mousePos - pos));
@@ -176,9 +171,16 @@ namespace Cyberpunk_RPG
 
             sb.DrawString(font, ammoCount.ToString(), pos - new Vector2(0, 30), Color.Yellow);
 
-            if (ammoCount == 0)
+            if (ammoCount == 0 & reloading == false)
             {
                 sb.DrawString(font, "Press R to Reload", pos - new Vector2(0, 50), Color.Yellow);
+            }
+
+            if (reloading == true)
+            {
+                sb.Draw(reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 45, reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(reloadDisplay, null, new Rectangle((int)pos.X, (int)pos.Y - 50, (int)((reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45, reloadDisplay.Width, 44), new Vector2(), 0f, new Vector2(0.2f, 0.2f), Color.Green, SpriteEffects.None, 1);
+                sb.Draw(reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 0, reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
             }
 
             foreach (Projectile p in projectileList)
