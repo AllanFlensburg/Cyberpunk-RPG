@@ -1,6 +1,6 @@
 Coding Guidelines
 
-1. Namngivning av variabler: Liten bokstav först, stor bokstav i början av varje nytt ord (inget mellanrum eller understreck)
+1. Namngivning av övriga variabler (ej globala): Liten bokstav först, stor bokstav i början av varje nytt ord (inget mellanrum eller understreck)
 Ex: basicEnemy
 
 2. Position av måsvingar: Ny rad när måsvingar läggs in (inte på samma rad som metodhuvudet eller if-satsen etc...)
@@ -9,4 +9,11 @@ Ex: if (....)
 ...
 }
 
-3. 
+3. Namngivning av globala variabler: Samma som övriga variabler med undantaget att globala variabler ej bör ha förkortningar. Motiveras med att förståelse-kravet på globala variabler är större då de ska användas i olika klasser.
+Ex: cannonBallTexture
+
+4. Namngivning av metoder: Metoder ska namges med stor bokstav i början och storbokstav i början av varje nytt ord inom samma metodhuvud.
+Ex: EnemySpawnMethod
+
+5. Längd på kodrad: Varje rad av kod bör vara kort så att läsaren slipper att scrolla åt höger. Undantag är när detta ej kan undvikas som exempelvis i längre Draw-metoder.
+
