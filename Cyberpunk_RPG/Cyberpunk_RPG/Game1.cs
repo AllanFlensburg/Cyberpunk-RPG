@@ -25,6 +25,7 @@ namespace Cyberpunk_RPG
         SpriteFont gameText;
         Texture2D playerTex;
         Texture2D enemyTex;
+        Texture2D reloadDisplay;
         Texture2D projectileTex;
         List<Enemy> enemyList = new List<Enemy>();
 
@@ -49,9 +50,10 @@ namespace Cyberpunk_RPG
             playerTex = Content.Load<Texture2D>("player");
             enemyTex = Content.Load<Texture2D>("enemy");
             projectileTex = Content.Load<Texture2D>("projectile");
+            reloadDisplay = Content.Load<Texture2D>("healthbar");
 
-            graphics.PreferredBackBufferWidth = 1000;
-            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
             IsMouseVisible = true;
             CreateEnemies();
@@ -59,7 +61,7 @@ namespace Cyberpunk_RPG
             currentKeyboardState = new KeyboardState();
             lastKeyboardState = new KeyboardState();
 
-            player = new Player(playerTex, projectileTex, Vector2.Zero);
+            player = new Player(playerTex, projectileTex, Vector2.Zero, gameText, reloadDisplay);
 
             currentGameState = GameState.PlayingGame;
         }
@@ -102,7 +104,7 @@ namespace Cyberpunk_RPG
                     foreach (Enemy e in enemyList)
                     {
                         e.Update(gameTime);
-                        if (Vector2.Distance(e.pos, player.pos) < 300)
+                        if (Vector2.Distance(e.pos, player.pos) < 300 & e.isHit == false)
                         {
                             e.pos += e.speed * GetDirection(player.pos - e.pos) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         }
