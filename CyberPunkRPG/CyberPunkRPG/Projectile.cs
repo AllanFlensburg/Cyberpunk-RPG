@@ -8,27 +8,24 @@ using System.Threading.Tasks;
 
 namespace CyberPunkRPG
 {
-    class Projectile
+    class Projectile : GameObject
     {
-        Vector2 pos;
         Vector2 speed;
         Vector2 direction;
         const int maxDistance = 500;
-        float scale = 0.1f;
+        float scale = 0.15f;
         Vector2 startPosition;
         public bool Visible = false;
         public Rectangle hitBox;
-        Texture2D projectileTex;
 
-        public Projectile(Texture2D projectileTex, Vector2 pos, Vector2 speed, Vector2 direction)
+        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction) : base(pos)
         {
             this.pos = pos;
-            this.projectileTex = projectileTex;
             this.speed = speed;
             this.direction = direction;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (Visible)
             {
@@ -42,11 +39,11 @@ namespace CyberPunkRPG
             }
         }
 
-        public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
             if (Visible)
             {
-                sb.Draw(projectileTex, pos, null, Color.White, 0, new Vector2((projectileTex.Width / 2) * scale, (projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2) * scale, (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
             }
         }
 

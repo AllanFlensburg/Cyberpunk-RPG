@@ -8,5 +8,7 @@ namespace CyberPunkRPG
 {
     class Constants
     {
+        public static int ScreenWidth = 1920;
+        public static int ScreenHeight = 1080;
     }
 }

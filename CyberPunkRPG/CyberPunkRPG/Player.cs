@@ -9,13 +9,8 @@ using System.Threading.Tasks;
 
 namespace CyberPunkRPG
 {
-    class Player
+    class Player : GameObject
     {
-        Texture2D playerTex;
-        Texture2D projectileTex;
-        Texture2D reloadDisplay;
-        SpriteFont font;
-        public Vector2 pos;
         Vector2 mousePos;
         Vector2 projectileStart;
         Vector2 projectileSpeed;
@@ -35,12 +30,8 @@ namespace CyberPunkRPG
         MouseState previousMouseState;
         public List<Projectile> projectileList;
 
-        public Player(Texture2D playerTex, Texture2D projectileTex, Vector2 pos, SpriteFont font, Texture2D reloadDisplay)
+        public Player(Vector2 pos) : base(pos)
         {
-            this.playerTex = playerTex;
-            this.projectileTex = projectileTex;
-            this.reloadDisplay = reloadDisplay;
-            this.font = font;
             this.pos = pos;
             playerSpeed = 100;
             ammoCount = 8;
@@ -52,7 +43,7 @@ namespace CyberPunkRPG
             projectileList = new List<Projectile>();
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             projectileStart = pos;
             currentKeyboardState = Keyboard.GetState();
@@ -154,7 +145,7 @@ namespace CyberPunkRPG
 
         private void createNewProjectile(Vector2 direction)
         {
-            Projectile projectile = new Projectile(projectileTex, projectileStart, projectileSpeed, direction);
+            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction);
             projectile.distanceCheck(pos);
             projectileList.Add(projectile);
         }
@@ -165,22 +156,22 @@ namespace CyberPunkRPG
             return Vector2.Normalize(newDirection);
         }
 
-        public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(playerTex, pos, Color.White);
+            sb.Draw(AssetManager.playerTex, pos, Color.White);
 
-            sb.DrawString(font, ammoCount.ToString(), pos - new Vector2(0, 30), Color.Yellow);
+            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 30), Color.Yellow);
 
             if (ammoCount == 0 & reloading == false)
             {
-                sb.DrawString(font, "Press R to Reload", pos - new Vector2(0, 50), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(0, 50), Color.Yellow);
             }
 
             if (reloading == true)
             {
-                sb.Draw(reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 45, reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
-                sb.Draw(reloadDisplay, new Rectangle((int)pos.X, (int)pos.Y - 50, (int)((reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45, reloadDisplay.Width, 44), Color.Green);
-                sb.Draw(reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 0, reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X, (int)pos.Y - 50, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
             }
 
             foreach (Projectile p in projectileList)

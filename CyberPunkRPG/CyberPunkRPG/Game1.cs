@@ -22,11 +22,6 @@ namespace CyberPunkRPG
         KeyboardState lastKeyboardState;
         GameState currentGameState;
 
-        SpriteFont gameText;
-        Texture2D playerTex;
-        Texture2D enemyTex;
-        Texture2D reloadDisplay;
-        Texture2D projectileTex;
         List<Enemy> enemyList = new List<Enemy>();
 
         Player player;
@@ -46,14 +41,9 @@ namespace CyberPunkRPG
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            gameText = Content.Load<SpriteFont>("Gametext");
-            playerTex = Content.Load<Texture2D>("player");
-            enemyTex = Content.Load<Texture2D>("enemy");
-            projectileTex = Content.Load<Texture2D>("projectile");
-            reloadDisplay = Content.Load<Texture2D>("healthbar");
-
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
+            AssetManager.LoadContent(Content);
+            graphics.PreferredBackBufferWidth = Constants.ScreenWidth;
+            graphics.PreferredBackBufferHeight = Constants.ScreenHeight;
             graphics.ApplyChanges();
             IsMouseVisible = true;
             CreateEnemies();
@@ -61,7 +51,7 @@ namespace CyberPunkRPG
             currentKeyboardState = new KeyboardState();
             lastKeyboardState = new KeyboardState();
 
-            player = new Player(playerTex, projectileTex, Vector2.Zero, gameText, reloadDisplay);
+            player = new Player(Vector2.Zero);
 
             currentGameState = GameState.PlayingGame;
         }
@@ -140,7 +130,7 @@ namespace CyberPunkRPG
             switch (currentGameState)
             {
                 case GameState.Menu:
-                    spriteBatch.DrawString(gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 3), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 3), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     break;
                 case GameState.PlayingGame:
                     foreach (Enemy e in enemyList)
@@ -174,7 +164,7 @@ namespace CyberPunkRPG
                 int x = 400;
                 int y = 100;
 
-                Enemy enemy = new Enemy(enemyTex, new Vector2(x, y * i));
+                Enemy enemy = new Enemy(new Vector2(x, y * i));
                 enemyList.Add(enemy);
             }
         }

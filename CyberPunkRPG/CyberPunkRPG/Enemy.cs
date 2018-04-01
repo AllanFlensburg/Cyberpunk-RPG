@@ -8,35 +8,32 @@ using System.Threading.Tasks;
 
 namespace CyberPunkRPG
 {
-    class Enemy
+    class Enemy : GameObject
     {
-        Texture2D enemyTex;
-        public Vector2 pos;
         public Vector2 speed;
         public bool isHit = false;
         public Rectangle hitBox;
 
-        public Enemy(Texture2D enemyTex, Vector2 pos)
+        public Enemy(Vector2 pos) : base(pos)
         {
-            this.enemyTex = enemyTex;
             this.pos = pos;
             speed = new Vector2(100, 100);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            hitBox = new Rectangle((int)pos.X, (int)pos.Y, enemyTex.Width, enemyTex.Height);
+            hitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.enemyTex.Width, AssetManager.enemyTex.Height);
         }
 
-        public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
             if (!isHit)
             {
-                sb.Draw(enemyTex, pos, Color.White);
+                sb.Draw(AssetManager.enemyTex, pos, Color.White);
             }
             else
             {
-                sb.Draw(enemyTex, pos, Color.Black);
+                sb.Draw(AssetManager.enemyTex, pos, Color.Black);
             }
         }
     }
