@@ -21,6 +21,8 @@ namespace CyberPunkRPG
         KeyboardState currentKeyboardState;
         KeyboardState lastKeyboardState;
         GameState currentGameState;
+        Viewport view;
+        Camera camera;
 
         List<Enemy> enemyList = new List<Enemy>();
 
@@ -51,7 +53,9 @@ namespace CyberPunkRPG
             currentKeyboardState = new KeyboardState();
             lastKeyboardState = new KeyboardState();
 
-            player = new Player(Vector2.Zero);
+            view = GraphicsDevice.Viewport;
+            camera = new Camera(view);
+            player = new Player(Vector2.Zero, camera, this);
 
             currentGameState = GameState.PlayingGame;
         }
@@ -106,7 +110,9 @@ namespace CyberPunkRPG
                                 p.Visible = false;
                             }
                         }
+
                     }
+                    camera.SetPosition(player.pos);
                     break;
                 case GameState.GameOver:
                     break;
@@ -124,7 +130,7 @@ namespace CyberPunkRPG
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetTransformation(view));
             Window.Title = "Cyberpunk-RPG";
 
             switch (currentGameState)
@@ -173,6 +179,11 @@ namespace CyberPunkRPG
         {
             Vector2 newDirection = dir;
             return Vector2.Normalize(newDirection);
+        }
+
+        public Vector2 GetCameraPosition()
+        {
+            return camera.position;
         }
     }
 }

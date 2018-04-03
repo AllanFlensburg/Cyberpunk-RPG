@@ -11,6 +11,8 @@ namespace CyberPunkRPG
 {
     class Player : GameObject
     {
+        Camera camera;
+        Game1 game;
         Vector2 mousePos;
         Vector2 projectileStart;
         Vector2 projectileSpeed;
@@ -18,6 +20,7 @@ namespace CyberPunkRPG
         Vector2 dashDistance = new Vector2(400, 400);
         Vector2 startingPosition = Vector2.Zero;
         Vector2 endPosition = Vector2.Zero;
+        Vector2 worldPosition;
         int playerSpeed;
         int ammoCount;
         bool reloading;
@@ -30,9 +33,11 @@ namespace CyberPunkRPG
         MouseState previousMouseState;
         public List<Projectile> projectileList;
 
-        public Player(Vector2 pos) : base(pos)
+        public Player(Vector2 pos, Camera camera, Game1 game) : base(pos)
         {
             this.pos = pos;
+            this.camera = camera;
+            this.game = game;
             playerSpeed = 100;
             ammoCount = 8;
             reloadTimer = 1.5f;
@@ -50,6 +55,7 @@ namespace CyberPunkRPG
             currentMouseState = Mouse.GetState();
             mousePos.X = currentMouseState.X;
             mousePos.Y = currentMouseState.Y;
+            worldPosition = Vector2.Transform(mousePos, Matrix.Invert(camera.GetTransformation(camera.view)));
 
             UpdateMovement(currentKeyboardState, gameTime);
             ShootProjectile(currentKeyboardState);
@@ -95,7 +101,7 @@ namespace CyberPunkRPG
                 if (currentKeyboardState.IsKeyDown(Keys.Space) == true)
                 {
                     startingPosition = pos;
-                    endPosition = pos += GetDirection(mousePos - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    endPosition = pos += GetDirection(worldPosition - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     jumping = true;
                 }
             }
@@ -111,7 +117,6 @@ namespace CyberPunkRPG
                     endPosition = Vector2.Zero;
                 }
             }
-
         }
 
         private void Reload(KeyboardState currentKeyboardState, GameTime gameTime)
@@ -139,7 +144,7 @@ namespace CyberPunkRPG
             if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false & ammoCount >= 1 & reloading == false)
             {
                 ammoCount -= 1;
-                createNewProjectile(GetDirection(mousePos - pos));
+                createNewProjectile(GetDirection(worldPosition - pos));
             }
         }
 
@@ -158,20 +163,20 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.playerTex, pos, Color.White);
+            sb.Draw(AssetManager.playerTex, pos, null, Color.White, 0, new Vector2(AssetManager.playerTex.Width / 2, AssetManager.playerTex.Height / 2), 1, SpriteEffects.None, 1);
 
-            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 30), Color.Yellow);
+            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(46, 70), Color.Yellow);
 
             if (ammoCount == 0 & reloading == false)
             {
-                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(0, 50), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(46, 90), Color.Yellow);
             }
 
             if (reloading == true)
             {
-                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
-                sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X, (int)pos.Y - 50, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
-                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 50), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X - 46, pos.Y - 90), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X - 46, (int)pos.Y - 90, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X - 46, pos.Y - 90), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
             }
 
             foreach (Projectile p in projectileList)
