@@ -10,20 +10,24 @@ namespace CyberPunkRPG
 {
     class Wall : GameObject
     {
+        Rectangle position;
+        public Rectangle hitBox;
         protected bool wall;
         public bool isWall // Får in att det är en vägg när planen skapas
         {
             get { return wall; }
         }
 
-        public Wall(Vector2 pos, bool wall) : base(pos)
+        public Wall(Vector2 pos, Rectangle position, bool wall) : base(pos)
         {
+            this.position = position;
             this.wall = wall;
+            hitBox = position;
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            //sb.Draw(tex, pos, Color.White);
+            sb.Draw(AssetManager.wallTex, position, Color.White);
         }
     }
 }

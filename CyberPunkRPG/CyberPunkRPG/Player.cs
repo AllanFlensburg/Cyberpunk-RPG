@@ -13,6 +13,7 @@ namespace CyberPunkRPG
     {
         Camera camera;
         Game1 game;
+        MapManager map;
         Vector2 mousePos;
         Vector2 projectileStart;
         Vector2 projectileSpeed;
@@ -21,6 +22,7 @@ namespace CyberPunkRPG
         Vector2 startingPosition = Vector2.Zero;
         Vector2 endPosition = Vector2.Zero;
         Vector2 worldPosition;
+        Rectangle hitBox;
         int playerSpeed;
         int ammoCount;
         bool reloading;
@@ -33,11 +35,12 @@ namespace CyberPunkRPG
         MouseState previousMouseState;
         public List<Projectile> projectileList;
 
-        public Player(Vector2 pos, Camera camera, Game1 game) : base(pos)
+        public Player(Vector2 pos, Rectangle hitBox, Camera camera, Game1 game, MapManager map) : base(pos)
         {
             this.pos = pos;
             this.camera = camera;
             this.game = game;
+            this.map = map;
             playerSpeed = 100;
             ammoCount = 8;
             reloadTimer = 1.5f;
@@ -46,11 +49,15 @@ namespace CyberPunkRPG
             dashSpeed = new Vector2(300, 300);
             projectileSpeed = new Vector2(500, 500);
             projectileList = new List<Projectile>();
+            this.hitBox = hitBox;
         }
 
         public override void Update(GameTime gameTime)
         {
             projectileStart = pos;
+            hitBox.X = (int)pos.X;
+            hitBox.Y = (int)pos.Y;
+
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
             mousePos.X = currentMouseState.X;
@@ -58,6 +65,8 @@ namespace CyberPunkRPG
             worldPosition = Vector2.Transform(mousePos, Matrix.Invert(camera.GetTransformation(camera.view)));
 
             UpdateMovement(currentKeyboardState, gameTime);
+            WallColision();
+            CoverColision();
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
             foreach (Projectile p in projectileList)
@@ -159,6 +168,28 @@ namespace CyberPunkRPG
         {
             Vector2 newDirection = dir;
             return Vector2.Normalize(newDirection);
+        }
+
+        public void WallColision()
+        {
+            foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    pos = Vector2.Zero;
+                }
+            }
+        }
+
+        public void CoverColision()
+        {
+            foreach (Cover c in map.coverList)
+            {
+                if (hitBox.Intersects(c.hitBox))
+                {
+                    pos = Vector2.Zero;
+                }
+            }
         }
 
         public override void Draw(SpriteBatch sb)

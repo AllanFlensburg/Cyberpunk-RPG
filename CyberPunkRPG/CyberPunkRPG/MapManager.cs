@@ -12,8 +12,8 @@ namespace CyberPunkRPG
     class MapManager
     {
         List<string> strings = new List<string>();
-        List<Wall> wallList = new List<Wall>();
-        List<Cover> coverList = new List<Cover>();
+        public List<Wall> wallList = new List<Wall>();
+        public List<Cover> coverList = new List<Cover>();
 
         public MapManager()
         {
@@ -43,7 +43,7 @@ namespace CyberPunkRPG
                     int Width = Convert.ToInt32(allWalls[2]);
                     int Height = Convert.ToInt32(allWalls[3]);
                     Rectangle wallDestination = new Rectangle(x, y, Width, Height);
-                    Wall wall = new Wall(new Vector2(x, y), true);
+                    Wall wall = new Wall(Vector2.Zero, wallDestination, true);
                     wallList.Add(wall);
                 }
                 catch (FormatException e)
@@ -66,7 +66,7 @@ namespace CyberPunkRPG
                     int Width = Convert.ToInt32(allCovers[2]);
                     int Height = Convert.ToInt32(allCovers[3]);
                     Rectangle coverDestination = new Rectangle(x, y, Width, Height);
-                    Cover cover = new Cover();
+                    Cover cover = new Cover(Vector2.Zero, coverDestination, true);
                     coverList.Add(cover);
                 }
                 catch (FormatException e)
@@ -80,12 +80,12 @@ namespace CyberPunkRPG
         {
             foreach (Wall w in wallList)
             {
-                //w.Draw(sb);
+                w.Draw(sb);
             }
 
             foreach (Cover c in coverList)
             {
-                //c.Draw(sb);
+                c.Draw(sb);
             }
         }
     }

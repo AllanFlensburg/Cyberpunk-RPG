@@ -26,6 +26,7 @@ namespace CyberPunkRPG
 
         List<Enemy> enemyList = new List<Enemy>();
 
+        MapManager map;
         Player player;
 
         public Game1()
@@ -55,7 +56,9 @@ namespace CyberPunkRPG
 
             view = GraphicsDevice.Viewport;
             camera = new Camera(view);
-            player = new Player(Vector2.Zero, camera, this);
+
+            map = new MapManager();
+            player = new Player(Vector2.Zero, new Rectangle(0, 0, 92, 76), camera, this, map);
 
             currentGameState = GameState.PlayingGame;
         }
@@ -143,6 +146,8 @@ namespace CyberPunkRPG
                     {
                         e.Draw(spriteBatch);
                     }
+
+                    map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
                     break;
                 case GameState.GameOver:
