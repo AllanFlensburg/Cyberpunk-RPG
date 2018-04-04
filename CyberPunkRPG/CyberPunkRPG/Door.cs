@@ -8,5 +8,6 @@ namespace CyberPunkRPG
 {
     class Door
     {
+
     }
 }
