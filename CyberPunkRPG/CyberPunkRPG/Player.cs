@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace CyberPunkRPG
 {
+    enum gunState
+    {
+        pistol,
+        assaultRifle,
+        sniperRifle,
+    }
     class Player : GameObject
     {
         Camera camera;
@@ -34,6 +40,7 @@ namespace CyberPunkRPG
         MouseState currentMouseState;
         MouseState previousMouseState;
         public List<Projectile> projectileList;
+        gunState currentGunState;
 
         public Player(Vector2 pos, Rectangle hitBox, Camera camera, Game1 game, MapManager map) : base(pos)
         {
@@ -50,6 +57,7 @@ namespace CyberPunkRPG
             projectileSpeed = new Vector2(500, 500);
             projectileList = new List<Projectile>();
             this.hitBox = hitBox;
+            currentGunState = gunState.assaultRifle;
         }
 
         public override void Update(GameTime gameTime)
@@ -77,6 +85,11 @@ namespace CyberPunkRPG
                     projectileList.Remove(p);
                     break;
                 }
+            }
+
+            if (currentGunState == gunState.assaultRifle)
+            {
+                reloadTime = 2.0f;
             }
 
             previousKeyboardState = currentKeyboardState;
@@ -141,9 +154,18 @@ namespace CyberPunkRPG
 
                 if (reloadTimer <= 0)
                 {
-                    reloading = false;
-                    ammoCount = 8;
-                    reloadTimer = reloadTime;
+                    if (currentGunState == gunState.pistol)
+                    {
+                        reloading = false;
+                        ammoCount = 8;
+                        reloadTimer = reloadTime;
+                    }
+                    else if (currentGunState == gunState.assaultRifle)
+                    {
+                        reloading = false;
+                        ammoCount = 30;
+                        reloadTimer = reloadTime;
+                    }
                 }
             }
         }
