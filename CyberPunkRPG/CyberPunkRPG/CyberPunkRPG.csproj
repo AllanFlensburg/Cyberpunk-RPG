@@ -41,9 +41,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssaultRifle.cs" />
     <Compile Include="AssetManager.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="BarbedWire.cs" />
     <Compile Include="BasicEnemy.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Constants.cs" />
@@ -60,10 +60,8 @@
     <Compile Include="Projectile.cs" />
     <Compile Include="ProjectileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SniperRifle.cs" />
+    <Compile Include="Spikes.cs" />
     <Compile Include="StrongEnemy.cs" />
-    <Compile Include="Trap.cs" />
-    <Compile Include="TrapManager.cs" />
     <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>

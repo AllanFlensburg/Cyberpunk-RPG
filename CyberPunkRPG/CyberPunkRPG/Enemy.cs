@@ -27,13 +27,12 @@ namespace CyberPunkRPG
         public Enemy(Vector2 pos) : base(pos)
         {
             this.pos = pos;
-            speed = new Vector2(100, 100);
         }
 
         public override void Update(GameTime gameTime)
         {
             hitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.enemyTex.Width, AssetManager.enemyTex.Height);
-            frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            //frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
             //Animation(gameTime);
             //UpdateMovement(gameTime);
         }

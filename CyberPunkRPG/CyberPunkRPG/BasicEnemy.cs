@@ -11,10 +11,16 @@ namespace CyberPunkRPG
     class BasicEnemy : Enemy
     {
 
-
         public BasicEnemy(Vector2 pos) : base(pos)
         {
-
+            speed = new Vector2(150, 150);
+            damage = 1;
+            lives = 1;
+            frameTimer = 0;
+            frameInterval = 0;
+            frame = 0;
+            numberOfFrames = 0;
+            frameWidth = 0;
         }
 
         public override void Draw(SpriteBatch sb)
