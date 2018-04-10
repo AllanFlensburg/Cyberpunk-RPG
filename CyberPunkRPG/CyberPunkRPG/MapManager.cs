@@ -22,7 +22,7 @@ namespace CyberPunkRPG
 
         void CreateCurrentLevel()
         {
-            StreamReader sr = new StreamReader("MyMap.txt");
+            StreamReader sr = new StreamReader("../../../../Content/MyMap.txt");
             while (!sr.EndOfStream)
             {
                 strings.Add(sr.ReadLine());
