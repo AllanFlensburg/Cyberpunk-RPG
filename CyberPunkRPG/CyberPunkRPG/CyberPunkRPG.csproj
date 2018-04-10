@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Cover.png" />
+    <Content Include="Content\door.png" />
     <Content Include="Content\enemy.png" />
     <Content Include="Content\healthbar.png" />
     <Content Include="Content\player.png" />

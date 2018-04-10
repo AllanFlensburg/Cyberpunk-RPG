@@ -20,6 +20,7 @@ namespace CyberPunkRPG
         Camera camera;
         Game1 game;
         MapManager map;
+        Door door;
         Vector2 mousePos;
         Vector2 projectileStart;
         Vector2 projectileSpeed;
@@ -75,6 +76,7 @@ namespace CyberPunkRPG
             UpdateMovement(currentKeyboardState, gameTime);
             WallColision();
             CoverColision();
+            //InteractCollision(); //Programmet går att köras när denna rad är struken, men borde behövas för att checka kollision med player
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
             foreach (Projectile p in projectileList)
@@ -211,6 +213,15 @@ namespace CyberPunkRPG
                 {
                     pos = Vector2.Zero;
                 }
+            }
+        }
+
+        //Checkar kollision mellan dörr och spelare
+        public void InteractCollision()
+        {
+            if (hitBox.Intersects(door.interactHitBox) && door.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyDown(Keys.E))
+            {
+                door.isInteracted = true;
             }
         }
 

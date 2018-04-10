@@ -28,6 +28,7 @@ namespace CyberPunkRPG
 
         MapManager map;
         Player player;
+        Door door;
 
         public Game1()
         {
@@ -59,6 +60,7 @@ namespace CyberPunkRPG
 
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 92, 76), camera, this, map);
+            door = new Door(new Vector2(100,20));
 
             currentGameState = GameState.PlayingGame;
         }
@@ -98,6 +100,7 @@ namespace CyberPunkRPG
                     break;
                 case GameState.PlayingGame:
                     player.Update(gameTime);
+                    door.Update(gameTime);
                     foreach (Enemy e in enemyList)
                     {
                         e.Update(gameTime);
@@ -149,6 +152,7 @@ namespace CyberPunkRPG
 
                     map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
+                    door.Draw(spriteBatch);
                     break;
                 case GameState.GameOver:
 
