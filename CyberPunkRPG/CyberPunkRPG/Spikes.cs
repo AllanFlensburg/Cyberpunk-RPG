@@ -23,7 +23,7 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            //sb.Draw(null, position, Color.White);
+            sb.Draw(AssetManager.spikeTex, position, Color.White);
         }
     }
 }
