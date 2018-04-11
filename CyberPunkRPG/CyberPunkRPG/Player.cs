@@ -59,6 +59,20 @@ namespace CyberPunkRPG
             projectileList = new List<Projectile>();
             this.hitBox = hitBox;
             currentGunState = gunState.assaultRifle;
+
+            if (currentGunState == gunState.assaultRifle)
+            {
+                ammoCount = 30;
+                reloadTime = 2.0f;
+                reloadTimer = 2.0f;
+            }
+            else if (currentGunState == gunState.sniperRifle)
+            {
+                ammoCount = 5;
+                reloadTime = 3.0f;
+                reloadTimer = 3.0f;
+                projectileSpeed = new Vector2(1000, 1000);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -166,6 +180,12 @@ namespace CyberPunkRPG
                     {
                         reloading = false;
                         ammoCount = 30;
+                        reloadTimer = reloadTime;
+                    }
+                    else if (currentGunState == gunState.sniperRifle)
+                    {
+                        reloading = false;
+                        ammoCount = 5;
                         reloadTimer = reloadTime;
                     }
                 }
