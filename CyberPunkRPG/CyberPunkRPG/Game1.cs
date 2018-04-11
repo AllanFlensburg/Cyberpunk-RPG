@@ -134,7 +134,7 @@ namespace CyberPunkRPG
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkSlateGray);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetTransformation(view));
             Window.Title = "Cyberpunk-RPG";
