@@ -77,6 +77,29 @@ namespace CyberPunkRPG
                     Console.WriteLine("Someting went wrong");
                 }
             }
+            
+            string Doors = strings[2];
+            string[] allDoorDesntinations = Doors.Split(';');
+
+            for (int i = 0; i < allDoorDesntinations.Length; i++)
+            {
+                string[] allDoors = allDoorDesntinations[i].Split(',');
+
+                try
+                {
+                    int x = Convert.ToInt32(allDoors[0]);
+                    int y = Convert.ToInt32(allDoors[1]);
+                    int Width = Convert.ToInt32(allDoors[2]);
+                    int Height = Convert.ToInt32(allDoors[3]);
+                    Rectangle doorDestination = new Rectangle(x, y, Width, Height);
+                    Door door = new Door(Vector2.Zero, doorDestination);
+                    doorList.Add(door);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("Someting went wrong");
+                }
+            }
         }
 
         public void Draw(SpriteBatch sb)
@@ -87,6 +110,11 @@ namespace CyberPunkRPG
             }
 
             foreach (Cover c in coverList)
+            {
+                c.Draw(sb);
+            }
+
+            foreach (Door c in doorList)
             {
                 c.Draw(sb);
             }

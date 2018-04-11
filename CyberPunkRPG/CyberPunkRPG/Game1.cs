@@ -60,7 +60,7 @@ namespace CyberPunkRPG
 
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 92, 76), camera, this, map);
-            door = new Door(new Vector2(100,20));
+            door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
 
             currentGameState = GameState.PlayingGame;
         }

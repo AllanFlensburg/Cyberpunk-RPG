@@ -10,14 +10,15 @@ namespace CyberPunkRPG
 {
     class Door : InteractiveObject
     {
-        public Door(Vector2 pos) : base(pos)
+        Rectangle position;
+        public Door(Vector2 pos, Rectangle position) : base(pos)
         {
-
+        this.position=position;
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.doorTex, pos, Color.White);
+            sb.Draw(AssetManager.doorTex, position, Color.White);
         }
     }
 }
