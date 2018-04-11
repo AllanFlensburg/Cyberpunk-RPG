@@ -43,6 +43,13 @@ namespace CyberPunkRPG
         public List<Projectile> projectileList;
         gunState currentGunState;
 
+        protected double frameTimer;
+        protected double frameInterval;
+        protected int frame;
+        protected int numberOfFrames;
+        protected int frameWidth;
+        protected Rectangle sourceRect;
+
         public Player(Vector2 pos, Rectangle hitBox, Camera camera, Game1 game, MapManager map) : base(pos)
         {
             this.pos = pos;
@@ -59,6 +66,13 @@ namespace CyberPunkRPG
             projectileList = new List<Projectile>();
             this.hitBox = hitBox;
             currentGunState = gunState.assaultRifle;
+
+            frameTimer = 100;
+            frameInterval = 100;
+            frame = 0;
+            numberOfFrames = 9;
+            frameWidth = 64;
+            sourceRect = new Rectangle(0, 192, 64, 64);
         }
 
         public override void Update(GameTime gameTime)
@@ -76,6 +90,7 @@ namespace CyberPunkRPG
             UpdateMovement(currentKeyboardState, gameTime);
             WallColision();
             CoverColision();
+            Animation(gameTime);
             //InteractCollision(); //Programmet går att köras när denna rad är struken, men borde behövas för att checka kollision med player
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
@@ -98,28 +113,46 @@ namespace CyberPunkRPG
             previousMouseState = currentMouseState;
         }
 
+        private void Animation(GameTime gameTime)
+        {
+            if (frameTimer <= 0)
+            {
+                frameTimer = frameInterval;
+                frame++;
+                sourceRect.X = (frame % numberOfFrames) * frameWidth;
+            }
+        }
+
         private void UpdateMovement(KeyboardState currentKeyboardState, GameTime gameTime)
         {
             if (jumping == false)
             {
                 if (currentKeyboardState.IsKeyDown(Keys.A) == true)
                 {
+                    sourceRect.Y = 64;
                     pos.X -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 }
 
                 if (currentKeyboardState.IsKeyDown(Keys.D) == true)
                 {
+                    sourceRect.Y = 192;
                     pos.X += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 }
 
                 if (currentKeyboardState.IsKeyDown(Keys.S) == true)
                 {
+                    sourceRect.Y = 128;
                     pos.Y += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 }
 
                 if (currentKeyboardState.IsKeyDown(Keys.W) == true)
                 {
+                    sourceRect.Y = 0;
                     pos.Y -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 }
 
                 if (currentKeyboardState.IsKeyDown(Keys.Space) == true)
@@ -227,9 +260,9 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.playerTex, pos, null, Color.White, 0, new Vector2(AssetManager.playerTex.Width / 2, AssetManager.playerTex.Height / 2), 1, SpriteEffects.None, 1);
+            sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2((AssetManager.playerTex.Width / 9) / 2, (AssetManager.playerTex.Height / 9) / 2), 1, SpriteEffects.None, 1);
 
-            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(46, 70), Color.Yellow);
+            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(46, 72), Color.Yellow);
 
             if (ammoCount == 0 & reloading == false)
             {

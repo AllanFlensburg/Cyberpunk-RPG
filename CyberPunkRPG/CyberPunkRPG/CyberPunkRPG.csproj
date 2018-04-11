@@ -74,7 +74,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AgentShoot.png" />
+    <Content Include="Content\Armor2Shoot.png" />
+    <Content Include="Content\ArmorShoot.png" />
     <Content Include="Content\BarbedWire.png" />
+    <Content Include="Content\box.png" />
     <Content Include="Content\Cover.png" />
     <Content Include="Content\door.png" />
     <Content Include="Content\enemy.png" />
@@ -83,6 +87,8 @@
     <Content Include="Content\projectile.png" />
     <Content Include="Content\Spikes.png" />
     <Content Include="Content\Wall.png" />
+    <Content Include="Content\Cyberpunk Moonlight Sonata.mp3" />
+    <Content Include="Content\Wall1.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
