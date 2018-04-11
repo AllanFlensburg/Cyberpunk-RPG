@@ -12,6 +12,8 @@ namespace CyberPunkRPG
         public static Texture2D wallTex { get; private set; }
         public static Texture2D coverTex { get; private set; }
         public static Texture2D doorTex { get; private set; }
+        public static Texture2D wireTex { get; private set; }
+        public static Texture2D spikeTex { get; private set; }
         public static SpriteFont gameText { get; private set; }
 
         public static void LoadContent(ContentManager Content)
@@ -23,6 +25,8 @@ namespace CyberPunkRPG
             wallTex = Content.Load<Texture2D>("Wall");
             coverTex = Content.Load<Texture2D>("Cover");
             doorTex = Content.Load<Texture2D>("door");
+            wireTex = Content.Load<Texture2D>("BarbedWire");
+            spikeTex = Content.Load<Texture2D>("Spikes");
             gameText = Content.Load<SpriteFont>("Gametext");
         }
     }
