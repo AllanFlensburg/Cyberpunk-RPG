@@ -14,6 +14,9 @@ namespace CyberPunkRPG
         List<string> strings = new List<string>();
         public List<Wall> wallList = new List<Wall>();
         public List<Cover> coverList = new List<Cover>();
+        public List<Door> doorList = new List<Door>();
+        public List<BarbedWire> barbedWireList = new List<BarbedWire>();
+        public List<Spikes> spikeList = new List<Spikes>();
 
         public MapManager()
         {
