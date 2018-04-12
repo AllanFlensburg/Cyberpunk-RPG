@@ -13,7 +13,7 @@ namespace CyberPunkRPG
     {
         Vector2 speed;
         Vector2 direction;
-        const int maxDistance = 800;
+        int maxDistance;
         float scale = 0.15f;
         Vector2 startPosition;
         public bool Visible = false;

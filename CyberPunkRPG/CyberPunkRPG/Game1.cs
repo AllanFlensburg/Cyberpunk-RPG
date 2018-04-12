@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using System.Media;
 
 namespace CyberPunkRPG
 {
@@ -61,6 +63,7 @@ namespace CyberPunkRPG
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 92, 76), camera, this, map);
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
+            MediaPlayer.Play(AssetManager.song);
 
             currentGameState = GameState.PlayingGame;
         }
@@ -179,8 +182,10 @@ namespace CyberPunkRPG
                 int x = 400;
                 int y = 100;
 
-                Enemy enemy = new Enemy(new Vector2(x, y * i));
-                enemyList.Add(enemy);
+                Enemy basic = new BasicEnemy(new Vector2(x * i, 100));
+                enemyList.Add(basic);
+                Enemy strong = new StrongEnemy(new Vector2(x * i, 200));
+                enemyList.Add(strong);
             }
         }
 

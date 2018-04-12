@@ -27,11 +27,13 @@ namespace CyberPunkRPG
         public Enemy(Vector2 pos) : base(pos)
         {
             this.pos = pos;
+            sourceRect = new Rectangle(0, 64, 64, 64);
+            speed = new Vector2(100, 100);
         }
 
         public override void Update(GameTime gameTime)
         {
-            hitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.enemyTex.Width, AssetManager.enemyTex.Height);
+            hitBox = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
             //frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
             //Animation(gameTime);
             //UpdateMovement(gameTime);
@@ -57,15 +59,13 @@ namespace CyberPunkRPG
             if (!isHit)
             {
                 {
-                    sb.Draw(AssetManager.enemyTex, pos, Color.White);
-                    //sb.Draw(AssetManager.enemyTex, pos, sourceRect, Color.White, 0f, new Vector2(sourceRect.Width / 2, sourceRect.Width / 2), 1f, SpriteEffects.None, 1);
+                    sb.Draw(AssetManager.basicEnemyTex, pos, sourceRect, Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                 }
             }
             else
             {
                 {
-                    sb.Draw(AssetManager.enemyTex, pos, Color.Black);
-                    //sb.Draw(AssetManager.enemyTex, pos, sourceRect, Color.White, 0f, new Vector2(sourceRect.Width / 2, sourceRect.Width / 2), 1f, SpriteEffects.None, 1);
+                    sb.Draw(AssetManager.basicEnemyTex, pos, sourceRect, Color.Black, 0f, new Vector2(), 1f, SpriteEffects.None, 1);
                 }
             }
         }
