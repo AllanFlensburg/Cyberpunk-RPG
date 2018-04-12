@@ -113,7 +113,7 @@ namespace CyberPunkRPG
                         }
                         foreach (Projectile p in player.projectileList)
                         {
-                            if (e.hitBox.Intersects(p.hitBox))
+                            if (e.hitBox.Intersects(p.hitBox) && e.isHit == false)
                             {
                                 e.isHit = true;
                                 p.Visible = false;
