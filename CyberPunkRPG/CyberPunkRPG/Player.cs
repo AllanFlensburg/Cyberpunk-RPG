@@ -67,8 +67,8 @@ namespace CyberPunkRPG
             this.hitBox = hitBox;
             currentGunState = gunState.assaultRifle;
 
-            frameTimer = 100;
-            frameInterval = 100;
+            frameTimer = 60;
+            frameInterval = 60;
             frame = 0;
             numberOfFrames = 9;
             frameWidth = 64;
