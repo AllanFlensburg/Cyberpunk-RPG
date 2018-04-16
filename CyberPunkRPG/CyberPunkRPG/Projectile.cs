@@ -12,17 +12,18 @@ namespace CyberPunkRPG
     {
         Vector2 speed;
         Vector2 direction;
-        const int maxDistance = 500;
+        int maxDistance;
         float scale = 0.15f;
         Vector2 startPosition;
         public bool Visible = false;
         public Rectangle hitBox;
 
-        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction) : base(pos)
+        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance) : base(pos)
         {
             this.pos = pos;
             this.speed = speed;
             this.direction = direction;
+            this.maxDistance = maxDistance;
         }
 
         public override void Update(GameTime gameTime)

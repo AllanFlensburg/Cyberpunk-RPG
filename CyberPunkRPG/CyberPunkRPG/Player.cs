@@ -14,6 +14,7 @@ namespace CyberPunkRPG
         pistol,
         assaultRifle,
         sniperRifle,
+        rocketLauncher,
     }
     class Player : GameObject
     {
@@ -32,6 +33,7 @@ namespace CyberPunkRPG
         Rectangle hitBox;
         int playerSpeed;
         int ammoCount;
+        int maxDistance;
         bool reloading;
         float reloadTimer;
         float reloadTime;
@@ -79,6 +81,7 @@ namespace CyberPunkRPG
                 ammoCount = 30;
                 reloadTime = 2.0f;
                 reloadTimer = 2.0f;
+                maxDistance = 600;
             }
             else if (currentGunState == gunState.sniperRifle)
             {
@@ -86,7 +89,26 @@ namespace CyberPunkRPG
                 reloadTime = 3.0f;
                 reloadTimer = 3.0f;
                 projectileSpeed = new Vector2(1000, 1000);
+                maxDistance = 2000;
+                
             }
+            else if (currentGunState == gunState.pistol)
+            {
+                ammoCount = 8;
+                reloadTime = 1.5f;
+                reloadTimer = 1.5f;
+                maxDistance = 500;
+
+            }
+
+            //Kommer senare
+            //else if (currentGunState == gunState.rocketLauncher)
+            //{
+            //    ammoCount = 1;
+            //    reloadTime = 5.0f;
+            //    reloadTimer = 5.0f;
+            //    maxDistance = 1000;
+            //}
         }
 
         public override void Update(GameTime gameTime)
@@ -118,10 +140,11 @@ namespace CyberPunkRPG
                 }
             }
 
-            if (currentGunState == gunState.assaultRifle)
-            {
-                reloadTime = 2.0f;
-            }
+            //Kommer senare
+            //if (currentGunState == gunState.rocketLauncher)
+            //{
+            //    if ()
+            //}
 
             previousKeyboardState = currentKeyboardState;
             previousMouseState = currentMouseState;
@@ -221,12 +244,28 @@ namespace CyberPunkRPG
                         ammoCount = 5;
                         reloadTimer = reloadTime;
                     }
+                    else if (currentGunState == gunState.rocketLauncher)
+                    {
+                        reloading = false;
+                        ammoCount = 1;
+                        reloadTimer = reloadTime;
+                    }
                 }
             }
         }
 
         private void ShootProjectile(KeyboardState currentKeyboardState)
         {
+            // Kommer senare
+
+            //if (currentGunState == gunState.assaultRifle)
+            //{
+            //    if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false)
+            //    {
+            //        ammoCount -= 1;
+            //        createNewProjectile(GetDirection(worldPosition - pos));
+            //    }
+            //}
             if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false & ammoCount >= 1 & reloading == false)
             {
                 ammoCount -= 1;
@@ -236,7 +275,7 @@ namespace CyberPunkRPG
 
         private void createNewProjectile(Vector2 direction)
         {
-            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction);
+            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance);
             projectile.distanceCheck(pos);
             projectileList.Add(projectile);
         }
