@@ -13,7 +13,7 @@ namespace CyberPunkRPG
         Rectangle position;
         public Door(Vector2 pos, Rectangle position) : base(pos)
         {
-        this.position=position;
+            this.position = position;
         }
 
         public override void Draw(SpriteBatch sb)
