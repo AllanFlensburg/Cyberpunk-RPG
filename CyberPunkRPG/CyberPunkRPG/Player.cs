@@ -292,7 +292,22 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(w.hitBox))
                 {
-                    pos = Vector2.Zero;
+                    if (hitBox.X > w.hitBox.X && currentKeyboardState.IsKeyDown(Keys.A))
+                    {
+                        pos.X += w.hitBox.Width - hitBox.Width;
+                    }
+                    else if (hitBox.X > w.hitBox.X - hitBox.Width && currentKeyboardState.IsKeyDown(Keys.D))
+                    {
+                        pos.X -= w.hitBox.Width - hitBox.Width;
+                    }
+                    else if (hitBox.Y > w.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.W))
+                    {
+                        pos.Y += hitBox.Height;
+                    }
+                    else if (hitBox.Y < w.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        pos.Y -= hitBox.Height;   
+                    }
                 }
             }
         }
@@ -303,7 +318,22 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(c.hitBox))
                 {
-                    pos = Vector2.Zero;
+                    if (hitBox.X > c.hitBox.X && currentKeyboardState.IsKeyDown(Keys.A))
+                    {
+                        pos.X += hitBox.Width;
+                    }
+                    else if (hitBox.X < c.hitBox.X && currentKeyboardState.IsKeyDown(Keys.D))
+                    {
+                        pos.X -= hitBox.Width;
+                    }
+                    else if (hitBox.Y > c.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.W))
+                    {
+                        pos.Y += hitBox.Height;
+                    }
+                    else if (hitBox.Y < c.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.S))
+                    {
+                        pos.Y -= hitBox.Height;
+                    }
                 }
             }
         }
@@ -319,8 +349,9 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
+            
+            sb.Draw(AssetManager.doorTex, pos, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
             sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
-
             sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(46, 72), Color.Yellow);
 
             if (ammoCount == 0 & reloading == false)
