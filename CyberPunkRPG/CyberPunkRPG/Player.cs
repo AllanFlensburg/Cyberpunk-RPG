@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CyberPunkRPG
 {
-    enum gunState
+    enum weapon
     {
         pistol,
         assaultRifle,
@@ -44,7 +44,7 @@ namespace CyberPunkRPG
         MouseState currentMouseState;
         MouseState previousMouseState;
         public List<Projectile> projectileList;
-        gunState currentGunState;
+        weapon activeWeapon;
 
         protected double frameTimer;
         protected double frameInterval;
@@ -68,7 +68,7 @@ namespace CyberPunkRPG
             projectileSpeed = new Vector2(500, 500);
             projectileList = new List<Projectile>();
             this.hitBox = hitBox;
-            currentGunState = gunState.assaultRifle;
+            activeWeapon = weapon.assaultRifle;
 
             frameTimer = 100;
             frameInterval = 100;
@@ -77,14 +77,14 @@ namespace CyberPunkRPG
             frameWidth = 64;
             sourceRect = new Rectangle(0, 192, 64, 64);
 
-            if (currentGunState == gunState.assaultRifle)
+            if (activeWeapon == weapon.assaultRifle)
             {
                 ammoCount = 30;
                 reloadTime = 2.0f;
                 reloadTimer = 2.0f;
                 maxDistance = 600;
             }
-            else if (currentGunState == gunState.sniperRifle)
+            else if (activeWeapon == weapon.sniperRifle)
             {
                 ammoCount = 5;
                 reloadTime = 3.0f;
@@ -93,7 +93,7 @@ namespace CyberPunkRPG
                 maxDistance = 2000;
                 
             }
-            else if (currentGunState == gunState.pistol)
+            else if (activeWeapon == weapon.pistol)
             {
                 ammoCount = 8;
                 reloadTime = 1.5f;
@@ -140,7 +140,7 @@ namespace CyberPunkRPG
             WallColision();
             CoverColision();
             Animation(gameTime);
-            InteractCollision(); //Programmet går att köras när denna rad är struken, men borde behövas för att checka kollision med player
+            InteractCollision();
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
             foreach (Projectile p in projectileList)
@@ -239,25 +239,25 @@ namespace CyberPunkRPG
 
                 if (reloadTimer <= 0)
                 {
-                    if (currentGunState == gunState.pistol)
+                    if (activeWeapon == weapon.pistol)
                     {
                         reloading = false;
                         ammoCount = 8;
                         reloadTimer = reloadTime;
                     }
-                    else if (currentGunState == gunState.assaultRifle)
+                    else if (activeWeapon == weapon.assaultRifle)
                     {
                         reloading = false;
                         ammoCount = 30;
                         reloadTimer = reloadTime;
                     }
-                    else if (currentGunState == gunState.sniperRifle)
+                    else if (activeWeapon == weapon.sniperRifle)
                     {
                         reloading = false;
                         ammoCount = 5;
                         reloadTimer = reloadTime;
                     }
-                    else if (currentGunState == gunState.rocketLauncher)
+                    else if (activeWeapon == weapon.rocketLauncher)
                     {
                         reloading = false;
                         ammoCount = 1;

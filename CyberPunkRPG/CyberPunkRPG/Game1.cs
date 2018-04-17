@@ -63,8 +63,8 @@ namespace CyberPunkRPG
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map);
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
-            Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60);
-            Rectangle playerBackup = new Rectangle(0, 0, 92, 76);
+            //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
+            //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
             MediaPlayer.Play(AssetManager.song);
 
             currentGameState = GameState.PlayingGame;
