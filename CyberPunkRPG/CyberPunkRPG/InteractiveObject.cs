@@ -24,14 +24,6 @@ namespace CyberPunkRPG
         }
         public override void Draw(SpriteBatch sb)
         {
-            if (!isInteracted)
-            {
-                sb.Draw(AssetManager.doorTex, pos, Color.White);
-            }
-            else
-            {
-                sb.Draw(AssetManager.doorTex, pos, Color.Black);
-            }
         }
     }
 }

@@ -14,11 +14,24 @@ namespace CyberPunkRPG
         public Door(Vector2 pos, Rectangle position) : base(pos)
         {
             this.position = position;
+            interactHitBox = new Rectangle((int)position.X, (int)position.Y, AssetManager.doorTex.Width, AssetManager.doorTex.Height);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.doorTex, position, Color.White);
+            if (!isInteracted)
+            {
+                sb.Draw(AssetManager.doorTex, pos, Color.White);
+            }
+            else
+            {
+                sb.Draw(AssetManager.doorTex, pos, Color.Black);
+            }
         }
     }
 }

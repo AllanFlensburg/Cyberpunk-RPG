@@ -30,6 +30,7 @@ namespace CyberPunkRPG
         Vector2 startingPosition = Vector2.Zero;
         Vector2 endPosition = Vector2.Zero;
         Vector2 worldPosition;
+        Vector2 prevPos;
         Rectangle hitBox;
         int playerSpeed;
         int ammoCount;
@@ -113,21 +114,33 @@ namespace CyberPunkRPG
 
         public override void Update(GameTime gameTime)
         {
+            bool noCollision = true;
+            foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    noCollision = false;
+                }
+            }
+            if (noCollision)
+            {
+                prevPos = pos;
+            }
             projectileStart = pos;
-            hitBox.X = (int)pos.X;
-            hitBox.Y = (int)pos.Y;
+            hitBox.X = (int)pos.X + 20;
+            hitBox.Y = (int)pos.Y + 10;
 
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
             mousePos.X = currentMouseState.X;
             mousePos.Y = currentMouseState.Y;
             worldPosition = Vector2.Transform(mousePos, Matrix.Invert(camera.GetTransformation(camera.view)));
-
+            
             UpdateMovement(currentKeyboardState, gameTime);
             WallColision();
             CoverColision();
             Animation(gameTime);
-            //InteractCollision(); //Programmet går att köras när denna rad är struken, men borde behövas för att checka kollision med player
+            InteractCollision(); //Programmet går att köras när denna rad är struken, men borde behövas för att checka kollision med player
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
             foreach (Projectile p in projectileList)
@@ -292,21 +305,25 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(w.hitBox))
                 {
-                    if (hitBox.X > w.hitBox.X && currentKeyboardState.IsKeyDown(Keys.A))
+                    pos = prevPos;
+                    hitBox.X = (int)pos.X + 20;
+                    hitBox.Y = (int)pos.Y + 10;
+
+                    if (hitBox.X > w.hitBox.Right -3)
                     {
-                        pos.X += w.hitBox.Width - hitBox.Width;
+                        pos.X += 5;
                     }
-                    else if (hitBox.X > w.hitBox.X - hitBox.Width && currentKeyboardState.IsKeyDown(Keys.D))
+                    if (hitBox.X < w.hitBox.Left)
                     {
-                        pos.X -= w.hitBox.Width - hitBox.Width;
+                        pos.X -= 5;
                     }
-                    else if (hitBox.Y > w.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.W))
+                    if (hitBox.Y < w.hitBox.Top)
                     {
-                        pos.Y += hitBox.Height;
+                        pos.Y -= 5;
                     }
-                    else if (hitBox.Y < w.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.S))
+                    if (hitBox.Y > w.hitBox.Bottom -3)
                     {
-                        pos.Y -= hitBox.Height;   
+                        pos.Y += 5;
                     }
                 }
             }
@@ -318,21 +335,25 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(c.hitBox))
                 {
-                    if (hitBox.X > c.hitBox.X && currentKeyboardState.IsKeyDown(Keys.A))
+                    pos = prevPos;
+                    hitBox.X = (int)pos.X + 20;
+                    hitBox.Y = (int)pos.Y + 10;
+
+                    if (hitBox.X > c.hitBox.Right - 3)
                     {
-                        pos.X += hitBox.Width;
+                        pos.X += 5;
                     }
-                    else if (hitBox.X < c.hitBox.X && currentKeyboardState.IsKeyDown(Keys.D))
+                    if (hitBox.X < c.hitBox.Left)
                     {
-                        pos.X -= hitBox.Width;
+                        pos.X -= 5;
                     }
-                    else if (hitBox.Y > c.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.W))
+                    if (hitBox.Y < c.hitBox.Top)
                     {
-                        pos.Y += hitBox.Height;
+                        pos.Y -= 5;
                     }
-                    else if (hitBox.Y < c.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.S))
+                    if (hitBox.Y > c.hitBox.Bottom - 3)
                     {
-                        pos.Y -= hitBox.Height;
+                        pos.Y += 5;
                     }
                 }
             }
@@ -341,16 +362,19 @@ namespace CyberPunkRPG
         //Checkar kollision mellan dörr och spelare
         public void InteractCollision()
         {
-            if (hitBox.Intersects(door.interactHitBox) && door.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyDown(Keys.E))
+            foreach (Door d in map.doorList)
             {
-                door.isInteracted = true;
+                if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyDown(Keys.E))
+                {
+                    d.isInteracted = true;
+                }
             }
         }
 
         public override void Draw(SpriteBatch sb)
         {
             
-            sb.Draw(AssetManager.doorTex, pos, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
+            sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
             sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
             sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(46, 72), Color.Yellow);
 
