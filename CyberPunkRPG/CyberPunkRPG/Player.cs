@@ -311,19 +311,19 @@ namespace CyberPunkRPG
 
                     if (hitBox.X > w.hitBox.Right -3)
                     {
-                        pos.X += 5;
+                        pos.X += 2;
                     }
                     if (hitBox.X < w.hitBox.Left)
                     {
-                        pos.X -= 5;
+                        pos.X -= 2;
                     }
                     if (hitBox.Y < w.hitBox.Top)
                     {
-                        pos.Y -= 5;
+                        pos.Y -= 2;
                     }
                     if (hitBox.Y > w.hitBox.Bottom -3)
                     {
-                        pos.Y += 5;
+                        pos.Y += 2;
                     }
                 }
             }
@@ -341,19 +341,19 @@ namespace CyberPunkRPG
 
                     if (hitBox.X > c.hitBox.Right - 3)
                     {
-                        pos.X += 5;
+                        pos.X += 1;
                     }
                     if (hitBox.X < c.hitBox.Left)
                     {
-                        pos.X -= 5;
+                        pos.X -= 1;
                     }
                     if (hitBox.Y < c.hitBox.Top)
                     {
-                        pos.Y -= 5;
+                        pos.Y -= 1;
                     }
                     if (hitBox.Y > c.hitBox.Bottom - 3)
                     {
-                        pos.Y += 5;
+                        pos.Y += 1;
                     }
                 }
             }
