@@ -33,7 +33,7 @@ namespace CyberPunkRPG
 
         public override void Update(GameTime gameTime)
         {
-            hitBox = new Rectangle((int)pos.X, (int)pos.Y, 64, 64);
+            hitBox = new Rectangle((int)pos.X + 20, (int)pos.Y + 10, 25, 55);
             //frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
             //Animation(gameTime);
             //UpdateMovement(gameTime);
