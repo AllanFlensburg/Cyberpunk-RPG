@@ -1,0 +1,10 @@
+Fixa InteractiveObject
+Lägga till kollision för door-klassen
+Fixa vapenklasserna
+Fixa fällor
+Animationer för enemy
+Enemy ska kollidera med väggar
+Enemy ska skjuta mot player
+Dash-funktion fastnar i vägg, ska fixas
+Lägga till power-ups
+Göra en spelbar level-layout

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CyberPunkRPG
 {
-    enum gunState
+    enum weapon
     {
         pistol,
         assaultRifle,
@@ -30,6 +30,7 @@ namespace CyberPunkRPG
         Vector2 startingPosition = Vector2.Zero;
         Vector2 endPosition = Vector2.Zero;
         Vector2 worldPosition;
+        Vector2 prevPos;
         Rectangle hitBox;
         int playerSpeed;
         int ammoCount;
@@ -43,7 +44,7 @@ namespace CyberPunkRPG
         MouseState currentMouseState;
         MouseState previousMouseState;
         public List<Projectile> projectileList;
-        gunState currentGunState;
+        weapon activeWeapon;
 
         protected double frameTimer;
         protected double frameInterval;
@@ -67,7 +68,7 @@ namespace CyberPunkRPG
             projectileSpeed = new Vector2(500, 500);
             projectileList = new List<Projectile>();
             this.hitBox = hitBox;
-            currentGunState = gunState.assaultRifle;
+            activeWeapon = weapon.assaultRifle;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -76,14 +77,14 @@ namespace CyberPunkRPG
             frameWidth = 64;
             sourceRect = new Rectangle(0, 192, 64, 64);
 
-            if (currentGunState == gunState.assaultRifle)
+            if (activeWeapon == weapon.assaultRifle)
             {
                 ammoCount = 30;
                 reloadTime = 2.0f;
                 reloadTimer = 2.0f;
                 maxDistance = 600;
             }
-            else if (currentGunState == gunState.sniperRifle)
+            else if (activeWeapon == weapon.sniperRifle)
             {
                 ammoCount = 5;
                 reloadTime = 3.0f;
@@ -92,7 +93,7 @@ namespace CyberPunkRPG
                 maxDistance = 2000;
                 
             }
-            else if (currentGunState == gunState.pistol)
+            else if (activeWeapon == weapon.pistol)
             {
                 ammoCount = 8;
                 reloadTime = 1.5f;
@@ -113,21 +114,33 @@ namespace CyberPunkRPG
 
         public override void Update(GameTime gameTime)
         {
+            bool noCollision = true;
+            foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    noCollision = false;
+                }
+            }
+            if (noCollision)
+            {
+                prevPos = pos;
+            }
             projectileStart = pos;
-            hitBox.X = (int)pos.X;
-            hitBox.Y = (int)pos.Y;
+            hitBox.X = (int)pos.X + 20;
+            hitBox.Y = (int)pos.Y + 10;
 
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
             mousePos.X = currentMouseState.X;
             mousePos.Y = currentMouseState.Y;
             worldPosition = Vector2.Transform(mousePos, Matrix.Invert(camera.GetTransformation(camera.view)));
-
+            
             UpdateMovement(currentKeyboardState, gameTime);
             WallColision();
             CoverColision();
             Animation(gameTime);
-            //InteractCollision(); //Programmet går att köras när denna rad är struken, men borde behövas för att checka kollision med player
+            InteractCollision();
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
             foreach (Projectile p in projectileList)
@@ -226,25 +239,25 @@ namespace CyberPunkRPG
 
                 if (reloadTimer <= 0)
                 {
-                    if (currentGunState == gunState.pistol)
+                    if (activeWeapon == weapon.pistol)
                     {
                         reloading = false;
                         ammoCount = 8;
                         reloadTimer = reloadTime;
                     }
-                    else if (currentGunState == gunState.assaultRifle)
+                    else if (activeWeapon == weapon.assaultRifle)
                     {
                         reloading = false;
                         ammoCount = 30;
                         reloadTimer = reloadTime;
                     }
-                    else if (currentGunState == gunState.sniperRifle)
+                    else if (activeWeapon == weapon.sniperRifle)
                     {
                         reloading = false;
                         ammoCount = 5;
                         reloadTimer = reloadTime;
                     }
-                    else if (currentGunState == gunState.rocketLauncher)
+                    else if (activeWeapon == weapon.rocketLauncher)
                     {
                         reloading = false;
                         ammoCount = 1;
@@ -292,21 +305,25 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(w.hitBox))
                 {
-                    if (hitBox.X > w.hitBox.X && currentKeyboardState.IsKeyDown(Keys.A))
+                    pos = prevPos;
+                    hitBox.X = (int)pos.X + 20;
+                    hitBox.Y = (int)pos.Y + 10;
+
+                    if (hitBox.X > w.hitBox.Right -3)
                     {
-                        pos.X += w.hitBox.Width - hitBox.Width;
+                        pos.X += 2;
                     }
-                    else if (hitBox.X > w.hitBox.X - hitBox.Width && currentKeyboardState.IsKeyDown(Keys.D))
+                    if (hitBox.X < w.hitBox.Left)
                     {
-                        pos.X -= w.hitBox.Width - hitBox.Width;
+                        pos.X -= 2;
                     }
-                    else if (hitBox.Y > w.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.W))
+                    if (hitBox.Y < w.hitBox.Top)
                     {
-                        pos.Y += hitBox.Height;
+                        pos.Y -= 2;
                     }
-                    else if (hitBox.Y < w.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.S))
+                    if (hitBox.Y > w.hitBox.Bottom -3)
                     {
-                        pos.Y -= hitBox.Height;   
+                        pos.Y += 2;
                     }
                 }
             }
@@ -318,21 +335,25 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(c.hitBox))
                 {
-                    if (hitBox.X > c.hitBox.X && currentKeyboardState.IsKeyDown(Keys.A))
+                    pos = prevPos;
+                    hitBox.X = (int)pos.X + 20;
+                    hitBox.Y = (int)pos.Y + 10;
+
+                    if (hitBox.X > c.hitBox.Right - 3)
                     {
-                        pos.X += hitBox.Width;
+                        pos.X += 1;
                     }
-                    else if (hitBox.X < c.hitBox.X && currentKeyboardState.IsKeyDown(Keys.D))
+                    if (hitBox.X < c.hitBox.Left)
                     {
-                        pos.X -= hitBox.Width;
+                        pos.X -= 1;
                     }
-                    else if (hitBox.Y > c.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.W))
+                    if (hitBox.Y < c.hitBox.Top)
                     {
-                        pos.Y += hitBox.Height;
+                        pos.Y -= 1;
                     }
-                    else if (hitBox.Y < c.hitBox.Y && currentKeyboardState.IsKeyDown(Keys.S))
+                    if (hitBox.Y > c.hitBox.Bottom - 3)
                     {
-                        pos.Y -= hitBox.Height;
+                        pos.Y += 1;
                     }
                 }
             }
@@ -341,16 +362,19 @@ namespace CyberPunkRPG
         //Checkar kollision mellan dörr och spelare
         public void InteractCollision()
         {
-            if (hitBox.Intersects(door.interactHitBox) && door.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyDown(Keys.E))
+            foreach (Door d in map.doorList)
             {
-                door.isInteracted = true;
+                if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyDown(Keys.E))
+                {
+                    d.isInteracted = true;
+                }
             }
         }
 
         public override void Draw(SpriteBatch sb)
         {
             
-            sb.Draw(AssetManager.doorTex, pos, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
+            sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
             sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
             sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(46, 72), Color.Yellow);
 
