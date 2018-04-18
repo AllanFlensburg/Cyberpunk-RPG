@@ -1,5 +1,6 @@
 Fixa InteractiveObject
 Lägga till kollision för door-klassen
+Öppna/stänga/låsta dörrar
 Fixa vapenklasserna
 Fixa fällor
 Animationer för enemy
