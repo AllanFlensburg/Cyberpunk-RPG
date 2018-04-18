@@ -29,6 +29,7 @@ namespace CyberPunkRPG
             if (!isHit)
             {
                 {
+                    sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //Ritar ut enemy hitbox för testning
                     sb.Draw(AssetManager.strongEnemyTex, pos, sourceRect, Color.White);
                 }
             }

@@ -126,7 +126,7 @@ namespace CyberPunkRPG
             {
                 prevPos = pos;
             }
-            projectileStart = pos;
+            projectileStart = pos + new Vector2(0,25);
             hitBox.X = (int)pos.X + 20;
             hitBox.Y = (int)pos.Y + 10;
 
