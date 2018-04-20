@@ -61,11 +61,10 @@ namespace CyberPunkRPG
             camera = new Camera(view);
 
             map = new MapManager();
-            player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map);
+            player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window);
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
-            MediaPlayer.Play(AssetManager.song);
 
             currentGameState = GameState.PlayingGame;
         }
@@ -121,8 +120,8 @@ namespace CyberPunkRPG
                                 p.Visible = false;
                             }
                         }
-
                     }
+                    ChangeMusic();
                     camera.SetPosition(player.pos);
                     break;
                 case GameState.GameOver:
@@ -200,6 +199,30 @@ namespace CyberPunkRPG
         public Vector2 GetCameraPosition()
         {
             return camera.position;
+        }
+
+        public void ChangeMusic()
+        {
+            if (currentKeyboardState.IsKeyDown(Keys.F1) == true)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(AssetManager.song1);
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.F2) == true)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(AssetManager.song2);
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.F3) == true)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(AssetManager.song3);
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.F4) == true)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(AssetManager.song4);
+            }
         }
     }
 }

@@ -26,11 +26,11 @@ namespace CyberPunkRPG
         {
             if (!isInteracted)
             {
-                sb.Draw(AssetManager.doorTex, pos, Color.White);
+                sb.Draw(AssetManager.doorTex, position, Color.White);
             }
             else
             {
-                sb.Draw(AssetManager.doorTex, pos, Color.Black);
+                sb.Draw(AssetManager.doorTex, position, Color.Black);
             }
         }
     }

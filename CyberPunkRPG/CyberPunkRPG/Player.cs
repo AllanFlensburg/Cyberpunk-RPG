@@ -21,7 +21,6 @@ namespace CyberPunkRPG
         Camera camera;
         Game1 game;
         MapManager map;
-        Door door;
         Vector2 mousePos;
         Vector2 projectileStart;
         Vector2 projectileSpeed;
@@ -32,9 +31,15 @@ namespace CyberPunkRPG
         Vector2 worldPosition;
         Vector2 prevPos;
         Rectangle hitBox;
+        private Rectangle healthbarSource;
+        private Rectangle healthbarEdgesSource;
         int playerSpeed;
         int ammoCount;
         int maxDistance;
+        GameWindow window;
+        public int CurrentHealth = 100;
+        private int healthbarWidth = 467;
+        private int healthbarHeight = 44;
         bool reloading;
         float reloadTimer;
         float reloadTime;
@@ -53,8 +58,9 @@ namespace CyberPunkRPG
         protected int frameWidth;
         protected Rectangle sourceRect;
 
-        public Player(Vector2 pos, Rectangle hitBox, Camera camera, Game1 game, MapManager map) : base(pos)
+        public Player(Vector2 pos, Rectangle hitBox, Camera camera, Game1 game, MapManager map, GameWindow window) : base(pos)
         {
+            this.window = window;
             this.pos = pos;
             this.camera = camera;
             this.game = game;
@@ -76,6 +82,8 @@ namespace CyberPunkRPG
             numberOfFrames = 9;
             frameWidth = 64;
             sourceRect = new Rectangle(0, 192, 64, 64);
+            healthbarSource = new Rectangle(0, 45, healthbarWidth, healthbarHeight);
+            healthbarEdgesSource = new Rectangle(0, 0, healthbarWidth, healthbarHeight);
 
             if (activeWeapon == weapon.assaultRifle)
             {
@@ -126,7 +134,7 @@ namespace CyberPunkRPG
             {
                 prevPos = pos;
             }
-            projectileStart = pos + new Vector2(0,25);
+            projectileStart = pos + new Vector2(32,32);
             hitBox.X = (int)pos.X + 20;
             hitBox.Y = (int)pos.Y + 10;
 
@@ -289,7 +297,7 @@ namespace CyberPunkRPG
         private void createNewProjectile(Vector2 direction)
         {
             Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance);
-            projectile.distanceCheck(pos);
+            projectile.distanceCheck(projectileStart);
             projectileList.Add(projectile);
         }
 
@@ -376,24 +384,40 @@ namespace CyberPunkRPG
             
             sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
             sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
-            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(46, 72), Color.Yellow);
+            if (activeWeapon == weapon.pistol)
+            {
+                sb.Draw(AssetManager.pistolTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+            }
+            else if (activeWeapon == weapon.assaultRifle)
+            {
+                sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+            }
+            else if (activeWeapon == weapon.sniperRifle)
+            {
+                sb.Draw(AssetManager.sniperRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+            }
+            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Yellow);
 
             if (ammoCount == 0 & reloading == false)
             {
-                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(46, 90), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(0, 20), Color.Yellow);
             }
 
             if (reloading == true)
             {
-                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X - 46, pos.Y - 90), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
-                sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X - 46, (int)pos.Y - 90, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
-                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X - 46, pos.Y - 90), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y- 20), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X, (int)pos.Y - 20, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 20), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
             }
 
             foreach (Projectile p in projectileList)
             {
                 p.Draw(sb);
             }
+
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y - window.ClientBounds.Height/2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y - window.ClientBounds.Height / 2, (int)(healthbarWidth * ((double)CurrentHealth / 100)), healthbarHeight), healthbarSource, Color.Red);
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y - window.ClientBounds.Height / 2, healthbarWidth, healthbarHeight), healthbarEdgesSource, Color.White);
         }
     }
 }
