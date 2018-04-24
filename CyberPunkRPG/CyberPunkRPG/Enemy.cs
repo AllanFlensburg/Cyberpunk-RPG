@@ -19,6 +19,14 @@ namespace CyberPunkRPG
         public Rectangle hitBox;
         Player player;
         MapManager map;
+        ProjectileManager projectileManager;
+
+        Vector2 projectileStart;
+        Vector2 projectileSpeed;
+        int maxDistance;
+        float reloadTimer;
+        float reloadTime;
+        bool reloading;
 
         protected int damage;
         protected int lives;
@@ -28,18 +36,26 @@ namespace CyberPunkRPG
         protected int numberOfFrames;
         protected int frameWidth;
 
-        public Enemy(Vector2 pos, Player player, MapManager map) : base(pos)
+        public Enemy(Vector2 pos, Player player, MapManager map, ProjectileManager projectileManager) : base(pos)
         {
             this.pos = pos;
             this.player = player;
             this.map = map;
+            reloadTimer = 1.5f;
+            reloadTime = 1.5f;
+            reloading = false;
+            this.projectileManager = projectileManager;
             sourceRect = new Rectangle(0, 192, 64, 64);
             direction = Vector2.Zero;
             speed = Vector2.Zero;
+            projectileSpeed = new Vector2(500, 500);
+            maxDistance = 500;
         }
 
         public override void Update(GameTime gameTime)
         {
+            ShootPlayer(gameTime);
+
             foreach (Wall w in map.wallList)
             {
                 if (hitBox.Intersects(w.hitBox))
@@ -64,6 +80,7 @@ namespace CyberPunkRPG
                     isHit = true;
                     p.Visible = false;
                     speed = Vector2.Zero;
+                    direction = Vector2.Zero;
                 }
             }
         }
@@ -72,10 +89,15 @@ namespace CyberPunkRPG
         {
             pos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Vector2.Distance(pos, player.pos) < 300 & isHit == false)
+            if (Vector2.Distance(pos, player.pos) < 500 && (Vector2.Distance(pos, player.pos) >= 150 && isHit == false))
             {
                 speed = new Vector2(100, 100);
                 direction = GetDirection(player.pos - pos);
+            }
+            else
+            {
+                speed = Vector2.Zero;
+                direction = Vector2.Zero;
             }
         }
 
@@ -83,6 +105,35 @@ namespace CyberPunkRPG
         {
             Vector2 newDirection = dir;
             return Vector2.Normalize(newDirection);
+        }
+
+        private void ShootPlayer(GameTime gameTime)
+        {
+            projectileStart = pos;
+
+            if (Vector2.Distance(pos, player.pos) <= 200 && isHit == false && reloading == false)
+            {
+                createNewProjectile(GetDirection(player.pos - pos));
+                reloading = true;
+            }
+
+            if (reloading == true)
+            {
+                reloadTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (reloadTimer <= 0)
+                {
+                    reloadTimer = reloadTime;
+                    reloading = false;
+                }
+            }
+        }
+
+        private void createNewProjectile(Vector2 direction)
+        {
+            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance);
+            projectile.distanceCheck(pos);
+            projectileManager.projectileList.Add(projectile);
         }
 
         private void Animation(GameTime gameTime)

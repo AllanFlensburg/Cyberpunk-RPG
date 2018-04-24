@@ -10,11 +10,14 @@ namespace CyberPunkRPG
 {
     class EnemyManager
     {
+        Player player;
+        ProjectileManager projectileManager;
         public List<Enemy> enemyList = new List<Enemy>();
 
-        public EnemyManager()
+        public EnemyManager(Player player, ProjectileManager projectileManager)
         {
-
+            this.player = player;
+            this.projectileManager = projectileManager;
         }
 
         public void Update(GameTime gameTime)
@@ -32,5 +35,5 @@ namespace CyberPunkRPG
                 e.Draw(sb);
             }
         }
-    }
+    }   
 }

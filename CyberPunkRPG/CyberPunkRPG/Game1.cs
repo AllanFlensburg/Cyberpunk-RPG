@@ -31,7 +31,7 @@ namespace CyberPunkRPG
         MapManager map;
         Player player;
         EnemyManager enemyManager;
-        //ProjectileManager projectileManager;
+        ProjectileManager projectileManager;
         Door door;
 
         public Game1()
@@ -61,10 +61,10 @@ namespace CyberPunkRPG
             view = GraphicsDevice.Viewport;
             camera = new Camera(view);
 
-            //projectileManager = new ProjectileManager();
+            projectileManager = new ProjectileManager();
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window);
-            enemyManager = new EnemyManager();
+            enemyManager = new EnemyManager(player, projectileManager);
             CreateEnemies();
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
@@ -110,6 +110,7 @@ namespace CyberPunkRPG
                     player.Update(gameTime);
                     door.Update(gameTime);
                     enemyManager.Update(gameTime);
+                    projectileManager.Update(gameTime);
                     ChangeMusic();
                     camera.SetPosition(player.pos);
                     break;
@@ -141,6 +142,7 @@ namespace CyberPunkRPG
                     map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
                     enemyManager.Draw(spriteBatch);
+                    projectileManager.Draw(spriteBatch);
                     door.Draw(spriteBatch);
                     break;
                 case GameState.GameOver:
@@ -168,9 +170,9 @@ namespace CyberPunkRPG
                 int x = 400;
                 int y = 100;
 
-                Enemy basic = new BasicEnemy(new Vector2(x * i, 100), player, map);
+                Enemy basic = new BasicEnemy(new Vector2(x * i, 100), player, map, projectileManager);
                 enemyManager.enemyList.Add(basic);
-                Enemy strong = new StrongEnemy(new Vector2(x * i, 200), player, map);
+                Enemy strong = new StrongEnemy(new Vector2(x * i, 200), player, map, projectileManager);
                 enemyManager.enemyList.Add(strong);
             }
         }
