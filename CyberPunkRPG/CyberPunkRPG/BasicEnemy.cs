@@ -11,7 +11,7 @@ namespace CyberPunkRPG
     class BasicEnemy : Enemy
     {
 
-        public BasicEnemy(Vector2 pos, Player player) : base(pos, player)
+        public BasicEnemy(Vector2 pos, Player player, MapManager map) : base(pos, player, map)
         {
             speed = new Vector2(150, 150);
             damage = 1;

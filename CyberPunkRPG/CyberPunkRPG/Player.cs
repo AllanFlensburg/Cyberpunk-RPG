@@ -145,8 +145,8 @@ namespace CyberPunkRPG
             worldPosition = Vector2.Transform(mousePos, Matrix.Invert(camera.GetTransformation(camera.view)));
             
             UpdateMovement(currentKeyboardState, gameTime);
-            WallColision();
-            CoverColision();
+            WallCollision();
+            CoverCollision();
             Animation(gameTime);
             InteractCollision();
             ShootProjectile(currentKeyboardState);
@@ -307,7 +307,7 @@ namespace CyberPunkRPG
             return Vector2.Normalize(newDirection);
         }
 
-        public void WallColision()
+        public void WallCollision()
         {
             foreach (Wall w in map.wallList)
             {
@@ -337,7 +337,7 @@ namespace CyberPunkRPG
             }
         }
 
-        public void CoverColision()
+        public void CoverCollision()
         {
             foreach (Cover c in map.coverList)
             {

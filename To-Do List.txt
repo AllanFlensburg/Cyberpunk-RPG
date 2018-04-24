@@ -1,13 +1,17 @@
-Fixa InteractiveObject
+PRIO 1
+Enemy ska skjuta mot player
+Enemy ska kollidera med väggar
+Fixa vapenklasserna
+Göra en spelbar level-layout
+
+PRIO 2
 Lägga till kollision för door-klassen
 Öppna/stänga/låsta dörrar
-Fixa vapenklasserna
+Dash-funktion fastnar i vägg, ska fixas
+
+PRIO 3
 Fixa fällor
 Animationer för enemy
-Enemy ska kollidera med väggar
-Enemy ska skjuta mot player
-Dash-funktion fastnar i vägg, ska fixas
 Lägga till power-ups
-Göra en spelbar level-layout
-HUD
-Health-system
+Förfinad HUD
+Lägga till sprites för level dekoration, t.ex bord & stolar

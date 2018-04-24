@@ -13,9 +13,12 @@ namespace CyberPunkRPG
         protected Rectangle sourceRect;
         public Vector2 speed; // Lägg till i konstruktor // Kollisionen för spelaren mot väggar är fel på grund av draw-metoden (Player andvänder origin)
         public Vector2 direction; // Lägg till
+        Vector2 prevPos;
+        bool noCollision;
         public bool isHit = false;
         public Rectangle hitBox;
         Player player;
+        MapManager map;
 
         protected int damage;
         protected int lives;
@@ -25,10 +28,11 @@ namespace CyberPunkRPG
         protected int numberOfFrames;
         protected int frameWidth;
 
-        public Enemy(Vector2 pos, Player player) : base(pos)
+        public Enemy(Vector2 pos, Player player, MapManager map) : base(pos)
         {
             this.pos = pos;
             this.player = player;
+            this.map = map;
             sourceRect = new Rectangle(0, 192, 64, 64);
             direction = Vector2.Zero;
             speed = Vector2.Zero;
@@ -36,9 +40,22 @@ namespace CyberPunkRPG
 
         public override void Update(GameTime gameTime)
         {
+            foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    noCollision = false;
+                }
+            }
+            if (noCollision)
+            {
+                prevPos = pos;
+            }
+
             hitBox = new Rectangle((int)pos.X + 20, (int)pos.Y + 10, 25, 55);
             UpdateMovement(gameTime);
             Animation(gameTime);
+            EnemyWallCollision();
 
             foreach (Projectile p in player.projectileList)
             {
@@ -96,6 +113,36 @@ namespace CyberPunkRPG
             {
                 sourceRect.Y = 0;
                 frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+        }
+
+        public void EnemyWallCollision()
+        {
+            foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    pos = prevPos;
+                    //hitBox.X = (int)pos.X + 20;
+                    //hitBox.Y = (int)pos.Y + 10;
+
+                    if (hitBox.X > w.hitBox.Right - 3)
+                    {
+                        pos.X += 2;
+                    }
+                    if (hitBox.X < w.hitBox.Left)
+                    {
+                        pos.X -= 2;
+                    }
+                    if (hitBox.Y < w.hitBox.Top)
+                    {
+                        pos.Y -= 2;
+                    }
+                    if (hitBox.Y > w.hitBox.Bottom - 3)
+                    {
+                        pos.Y += 2;
+                    }
+                }
             }
         }
 

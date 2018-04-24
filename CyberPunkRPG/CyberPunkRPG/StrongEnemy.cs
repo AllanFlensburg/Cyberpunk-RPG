@@ -11,7 +11,7 @@ namespace CyberPunkRPG
     class StrongEnemy : Enemy
     {
 
-        public StrongEnemy(Vector2 pos, Player player) : base(pos, player)
+        public StrongEnemy(Vector2 pos, Player player, MapManager map) : base(pos, player, map)
         {
             speed = new Vector2(100, 100);
             damage = 1;

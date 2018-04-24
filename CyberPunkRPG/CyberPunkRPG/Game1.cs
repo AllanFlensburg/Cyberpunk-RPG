@@ -31,6 +31,7 @@ namespace CyberPunkRPG
         MapManager map;
         Player player;
         EnemyManager enemyManager;
+        //ProjectileManager projectileManager;
         Door door;
 
         public Game1()
@@ -60,6 +61,7 @@ namespace CyberPunkRPG
             view = GraphicsDevice.Viewport;
             camera = new Camera(view);
 
+            //projectileManager = new ProjectileManager();
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window);
             enemyManager = new EnemyManager();
@@ -166,9 +168,9 @@ namespace CyberPunkRPG
                 int x = 400;
                 int y = 100;
 
-                Enemy basic = new BasicEnemy(new Vector2(x * i, 100), player);
+                Enemy basic = new BasicEnemy(new Vector2(x * i, 100), player, map);
                 enemyManager.enemyList.Add(basic);
-                Enemy strong = new StrongEnemy(new Vector2(x * i, 200), player);
+                Enemy strong = new StrongEnemy(new Vector2(x * i, 200), player, map);
                 enemyManager.enemyList.Add(strong);
             }
         }
