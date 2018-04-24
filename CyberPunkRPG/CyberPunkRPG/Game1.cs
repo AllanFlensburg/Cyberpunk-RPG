@@ -30,6 +30,7 @@ namespace CyberPunkRPG
 
         MapManager map;
         Player player;
+        EnemyManager enemyManager;
         Door door;
 
         public Game1()
@@ -52,7 +53,6 @@ namespace CyberPunkRPG
             graphics.PreferredBackBufferHeight = Constants.ScreenHeight;
             graphics.ApplyChanges();
             IsMouseVisible = true;
-            CreateEnemies();
 
             currentKeyboardState = new KeyboardState();
             lastKeyboardState = new KeyboardState();
@@ -62,6 +62,8 @@ namespace CyberPunkRPG
 
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window);
+            enemyManager = new EnemyManager();
+            CreateEnemies();
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
@@ -105,22 +107,7 @@ namespace CyberPunkRPG
                 case GameState.PlayingGame:
                     player.Update(gameTime);
                     door.Update(gameTime);
-                    foreach (Enemy e in enemyList)
-                    {
-                        e.Update(gameTime);
-                        if (Vector2.Distance(e.pos, player.pos) < 300 & e.isHit == false)
-                        {
-                            e.pos += e.speed * GetDirection(player.pos - e.pos) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        }
-                        foreach (Projectile p in player.projectileList)
-                        {
-                            if (e.hitBox.Intersects(p.hitBox) && e.isHit == false)
-                            {
-                                e.isHit = true;
-                                p.Visible = false;
-                            }
-                        }
-                    }
+                    enemyManager.Update(gameTime);
                     ChangeMusic();
                     camera.SetPosition(player.pos);
                     break;
@@ -149,13 +136,9 @@ namespace CyberPunkRPG
                     spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 3), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     break;
                 case GameState.PlayingGame:
-                    foreach (Enemy e in enemyList)
-                    {
-                        e.Draw(spriteBatch);
-                    }
-
                     map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
+                    enemyManager.Draw(spriteBatch);
                     door.Draw(spriteBatch);
                     break;
                 case GameState.GameOver:
@@ -183,10 +166,10 @@ namespace CyberPunkRPG
                 int x = 400;
                 int y = 100;
 
-                Enemy basic = new BasicEnemy(new Vector2(x * i, 100));
-                enemyList.Add(basic);
-                Enemy strong = new StrongEnemy(new Vector2(x * i, 200));
-                enemyList.Add(strong);
+                Enemy basic = new BasicEnemy(new Vector2(x * i, 100), player);
+                enemyManager.enemyList.Add(basic);
+                Enemy strong = new StrongEnemy(new Vector2(x * i, 200), player);
+                enemyManager.enemyList.Add(strong);
             }
         }
 

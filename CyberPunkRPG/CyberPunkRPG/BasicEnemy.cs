@@ -11,7 +11,7 @@ namespace CyberPunkRPG
     class BasicEnemy : Enemy
     {
 
-        public BasicEnemy(Vector2 pos) : base(pos)
+        public BasicEnemy(Vector2 pos, Player player) : base(pos, player)
         {
             speed = new Vector2(150, 150);
             damage = 1;
@@ -21,7 +21,12 @@ namespace CyberPunkRPG
             frame = 0;
             numberOfFrames = 9;
             frameWidth = 64;
-            sourceRect = new Rectangle(0, 64, 64, 64);
+            //sourceRect = new Rectangle(0, 64, 64, 64);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch sb)
@@ -31,6 +36,7 @@ namespace CyberPunkRPG
                 {
                     sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //Ritar ut enemy hitbox för testning
                     sb.Draw(AssetManager.basicEnemyTex, pos, sourceRect, Color.White);
+                    sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 }
             }
             else
