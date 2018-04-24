@@ -15,6 +15,7 @@ namespace CyberPunkRPG
         public Vector2 direction; // Lägg till
         public bool isHit = false;
         public Rectangle hitBox;
+        Player player;
 
         protected int damage;
         protected int lives;
@@ -24,35 +25,79 @@ namespace CyberPunkRPG
         protected int numberOfFrames;
         protected int frameWidth;
 
-        public Enemy(Vector2 pos) : base(pos)
+        public Enemy(Vector2 pos, Player player) : base(pos)
         {
             this.pos = pos;
-            sourceRect = new Rectangle(0, 64, 64, 64);
-            speed = new Vector2(100, 100);
+            this.player = player;
+            sourceRect = new Rectangle(0, 192, 64, 64);
+            direction = Vector2.Zero;
+            speed = Vector2.Zero;
         }
 
         public override void Update(GameTime gameTime)
         {
             hitBox = new Rectangle((int)pos.X + 20, (int)pos.Y + 10, 25, 55);
-            //frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            //Animation(gameTime);
-            //UpdateMovement(gameTime);
+            UpdateMovement(gameTime);
+            Animation(gameTime);
+
+            foreach (Projectile p in player.projectileList)
+            {
+                if (hitBox.Intersects(p.hitBox) && isHit == false)
+                {
+                    isHit = true;
+                    p.Visible = false;
+                    speed = Vector2.Zero;
+                }
+            }
         }
 
-        //private void UpdateMovement(GameTime gameTime)
-        //{
-        //    pos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-        //}
+        private void UpdateMovement(GameTime gameTime)
+        {
+            pos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        //private void Animation(GameTime gameTime)
-        //{
-        //    if (frameTimer <= 0)
-        //    {
-        //        frameTimer = frameInterval;
-        //        frame++;
-        //        sourceRect.X = (frame % numberOfFrames) * frameWidth;
-        //    }
-        //}
+            if (Vector2.Distance(pos, player.pos) < 300 & isHit == false)
+            {
+                speed = new Vector2(100, 100);
+                direction = GetDirection(player.pos - pos);
+            }
+        }
+
+        public Vector2 GetDirection(Vector2 dir)
+        {
+            Vector2 newDirection = dir;
+            return Vector2.Normalize(newDirection);
+        }
+
+        private void Animation(GameTime gameTime)
+        {
+            if (frameTimer <= 0)
+            {
+                frameTimer = frameInterval;
+                frame++;
+                sourceRect.X = (frame % numberOfFrames) * frameWidth;
+            }
+
+            if (direction.X < 0 && direction.X < direction.Y)
+            {
+                sourceRect.Y = 64;
+                frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+            else if (direction.X > 0 && direction.X > direction.Y)
+            {
+                sourceRect.Y = 192;
+                frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+            else if (direction.Y > 0 && direction.Y > direction.X)
+            {
+                sourceRect.Y = 128;
+                frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+            else if (direction.Y < 0 && direction.Y < direction.X)
+            {
+                sourceRect.Y = 0;
+                frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+        }
 
         public override void Draw(SpriteBatch sb)
         {

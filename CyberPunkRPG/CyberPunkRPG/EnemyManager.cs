@@ -19,7 +19,10 @@ namespace CyberPunkRPG
 
         public void Update(GameTime gameTime)
         {
-
+            foreach (Enemy e in enemyList)
+            {
+                e.Update(gameTime);
+            }
         }
 
         public void Draw(SpriteBatch sb)
