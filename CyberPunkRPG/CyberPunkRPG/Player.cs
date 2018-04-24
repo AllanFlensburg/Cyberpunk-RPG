@@ -51,6 +51,8 @@ namespace CyberPunkRPG
         public List<Projectile> projectileList;
         weapon activeWeapon;
 
+        private int weaponTimer;
+
         protected double frameTimer;
         protected double frameInterval;
         protected int frame;
@@ -99,7 +101,7 @@ namespace CyberPunkRPG
                 reloadTimer = 3.0f;
                 projectileSpeed = new Vector2(1000, 1000);
                 maxDistance = 2000;
-                
+
             }
             else if (activeWeapon == weapon.pistol)
             {
@@ -111,13 +113,13 @@ namespace CyberPunkRPG
             }
 
             //Kommer senare
-            //else if (currentGunState == gunState.rocketLauncher)
-            //{
-            //    ammoCount = 1;
-            //    reloadTime = 5.0f;
-            //    reloadTimer = 5.0f;
-            //    maxDistance = 1000;
-            //}
+            else if (activeWeapon == weapon.rocketLauncher)
+            {
+                ammoCount = 1;
+                reloadTime = 6.0f;
+                reloadTimer = 6.0f;
+                maxDistance = 1000;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -134,7 +136,7 @@ namespace CyberPunkRPG
             {
                 prevPos = pos;
             }
-            projectileStart = pos + new Vector2(32,32);
+            projectileStart = pos + new Vector2(32, 32);
             hitBox.X = (int)pos.X + 20;
             hitBox.Y = (int)pos.Y + 10;
 
@@ -143,7 +145,7 @@ namespace CyberPunkRPG
             mousePos.X = currentMouseState.X;
             mousePos.Y = currentMouseState.Y;
             worldPosition = Vector2.Transform(mousePos, Matrix.Invert(camera.GetTransformation(camera.view)));
-            
+
             UpdateMovement(currentKeyboardState, gameTime);
             WallColision();
             CoverColision();
@@ -162,9 +164,11 @@ namespace CyberPunkRPG
             }
 
             //Kommer senare
-            //if (currentGunState == gunState.rocketLauncher)
+            //weaponTimer += gameTime.ElapsedGameTime.Seconds;
+
+            //if (activeWeapon == weapon.assaultRifle)
             //{
-            //    if ()
+
             //}
 
             previousKeyboardState = currentKeyboardState;
@@ -276,10 +280,10 @@ namespace CyberPunkRPG
         }
 
         private void ShootProjectile(KeyboardState currentKeyboardState)
-        {
+        {  
             // Kommer senare
 
-            //if (currentGunState == gunState.assaultRifle)
+            //if (activeWeapon == weapon.assaultRifle)
             //{
             //    if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false)
             //    {
@@ -287,17 +291,17 @@ namespace CyberPunkRPG
             //        createNewProjectile(GetDirection(worldPosition - pos));
             //    }
             //}
-            if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false & ammoCount >= 1 & reloading == false)
+            if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false && ammoCount >= 1 && reloading == false)
             {
                 ammoCount -= 1;
                 createNewProjectile(GetDirection(worldPosition - pos));
             }
-        }
+        } 
 
         private void createNewProjectile(Vector2 direction)
         {
             Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance);
-            projectile.distanceCheck(projectileStart);
+            projectile.distanceCheck(pos);
             projectileList.Add(projectile);
         }
 
