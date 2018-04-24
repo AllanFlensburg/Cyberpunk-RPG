@@ -225,7 +225,7 @@ namespace CyberPunkRPG
             {
                 pos += dashSpeed * GetDirection(endPosition - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (Vector2.Distance(startingPosition, pos) > 200)
+                if (Vector2.Distance(startingPosition, pos) > 600)
                 {
                     jumping = false;
                     startingPosition = Vector2.Zero;

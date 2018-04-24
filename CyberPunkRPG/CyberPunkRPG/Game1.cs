@@ -61,10 +61,10 @@ namespace CyberPunkRPG
             camera = new Camera(view);
 
             map = new MapManager();
-            player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window);
+            player = new Player(Vector2.Zero, new Rectangle(3000, 1000, 25, 55), camera, this, map, Window);
             enemyManager = new EnemyManager();
             CreateEnemies();
-            door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
+            door = new Door(Vector2.Zero, new Rectangle (3100, 1020, 50, 50));
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
 
@@ -163,8 +163,8 @@ namespace CyberPunkRPG
         {
             for (int i = 0; i < 3; i++)
             {
-                int x = 400;
-                int y = 100;
+                int x = 3700;
+                int y = 1100;
 
                 Enemy basic = new BasicEnemy(new Vector2(x * i, 100), player);
                 enemyManager.enemyList.Add(basic);
