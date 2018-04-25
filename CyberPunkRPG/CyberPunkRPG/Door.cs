@@ -14,7 +14,7 @@ namespace CyberPunkRPG
         public Door(Vector2 pos, Rectangle position) : base(pos)
         {
             this.position = position;
-            interactHitBox = new Rectangle((int)position.X, (int)position.Y, AssetManager.doorTex.Width, AssetManager.doorTex.Height);
+            interactHitBox = new Rectangle((int)position.X, (int)position.Y, position.Width, position.Height);
         }
 
         public override void Update(GameTime gameTime)
@@ -26,6 +26,7 @@ namespace CyberPunkRPG
         {
             if (!isInteracted)
             {
+                sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);
                 sb.Draw(AssetManager.doorTex, position, Color.White);
             }
             else
