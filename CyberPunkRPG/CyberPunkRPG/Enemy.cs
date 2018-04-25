@@ -11,8 +11,8 @@ namespace CyberPunkRPG
     class Enemy : GameObject
     {
         protected Rectangle sourceRect;
-        public Vector2 speed; // Lägg till i konstruktor // Kollisionen för spelaren mot väggar är fel på grund av draw-metoden (Player andvänder origin)
-        public Vector2 direction; // Lägg till
+        public Vector2 speed;
+        public Vector2 direction;
         Vector2 prevPos;
         bool noCollision;
         public bool isHit = false;
@@ -44,6 +44,7 @@ namespace CyberPunkRPG
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
             reloading = false;
+            noCollision = true;
             this.projectileManager = projectileManager;
             sourceRect = new Rectangle(0, 192, 64, 64);
             direction = Vector2.Zero;
@@ -62,7 +63,24 @@ namespace CyberPunkRPG
                 {
                     noCollision = false;
                 }
+                else
+                {
+                    noCollision = true;
+                }
             }
+
+            foreach (Cover c in map.coverList)
+            {
+                if (hitBox.Intersects(c.hitBox))
+                {
+                    noCollision = false;
+                }
+                else
+                {
+                    noCollision = true;
+                }
+            }
+
             if (noCollision)
             {
                 prevPos = pos;
@@ -72,6 +90,7 @@ namespace CyberPunkRPG
             UpdateMovement(gameTime);
             Animation(gameTime);
             EnemyWallCollision();
+            EnemyCoverCollision();
 
             foreach (Projectile p in player.projectileList)
             {
@@ -174,8 +193,6 @@ namespace CyberPunkRPG
                 if (hitBox.Intersects(w.hitBox))
                 {
                     pos = prevPos;
-                    //hitBox.X = (int)pos.X + 20;
-                    //hitBox.Y = (int)pos.Y + 10;
 
                     if (hitBox.X > w.hitBox.Right - 3)
                     {
@@ -190,6 +207,34 @@ namespace CyberPunkRPG
                         pos.Y -= 2;
                     }
                     if (hitBox.Y > w.hitBox.Bottom - 3)
+                    {
+                        pos.Y += 2;
+                    }
+                }
+            }
+        }
+
+        public void EnemyCoverCollision()
+        {
+            foreach (Cover c in map.coverList)
+            {
+                if (hitBox.Intersects(c.hitBox))
+                {
+                    pos = prevPos;
+
+                    if (hitBox.X > c.hitBox.Right - 3)
+                    {
+                        pos.X += 2;
+                    }
+                    if (hitBox.X < c.hitBox.Left)
+                    {
+                        pos.X -= 2;
+                    }
+                    if (hitBox.Y < c.hitBox.Top)
+                    {
+                        pos.Y -= 2;
+                    }
+                    if (hitBox.Y > c.hitBox.Bottom - 3)
                     {
                         pos.Y += 2;
                     }

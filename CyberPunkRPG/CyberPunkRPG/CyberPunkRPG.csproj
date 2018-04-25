@@ -83,13 +83,10 @@
     <Content Include="Content\box.png" />
     <Content Include="Content\buildy.mp3" />
     <Content Include="Content\core_175bpm.mp3" />
-    <Content Include="Content\Cover.png" />
     <Content Include="Content\CyberPunk_Chronicles.mp3" />
     <Content Include="Content\door.png" />
-    <Content Include="Content\enemy.png" />
     <Content Include="Content\healthbar.png" />
     <Content Include="Content\Pistols.png" />
-    <Content Include="Content\player.png" />
     <Content Include="Content\projectile.png" />
     <Content Include="Content\Sniper.png" />
     <Content Include="Content\Spikes.png" />
