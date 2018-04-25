@@ -22,7 +22,7 @@ namespace CyberPunkRPG
             this.player = player;
             this.projectileManager = projectileManager;
             this.map = map;
-            //CreateAllEnemies();
+            CreateAllEnemies();
         }
 
         void CreateAllEnemies()
@@ -34,7 +34,7 @@ namespace CyberPunkRPG
             }
             sr.Close();
 
-            string BasicEnemies = strings[0];
+            string BasicEnemies = strings[4];
             string[] allBasicEnemyDesntinations = BasicEnemies.Split(';');
 
             for (int i = 0; i < allBasicEnemyDesntinations.Length; i++)
@@ -55,7 +55,7 @@ namespace CyberPunkRPG
                 }
             }
 
-            string StrongEnemies = strings[0];
+            string StrongEnemies = strings[5];
             string[] allStrongEnemyDesntinations = StrongEnemies.Split(';');
 
             for (int i = 0; i < allStrongEnemyDesntinations.Length; i++)
