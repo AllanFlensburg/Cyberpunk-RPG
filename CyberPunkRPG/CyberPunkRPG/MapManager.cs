@@ -146,6 +146,11 @@ namespace CyberPunkRPG
             {
                 c.Draw(sb);
             }
+
+            foreach (BarbedWire b in barbedWireList)
+            {
+                b.Draw(sb);
+            }
         }
     }
 }

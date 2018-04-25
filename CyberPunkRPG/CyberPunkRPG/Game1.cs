@@ -33,6 +33,7 @@ namespace CyberPunkRPG
         EnemyManager enemyManager;
         ProjectileManager projectileManager;
         Door door;
+        BarbedWire b;
 
         public Game1()
         {
@@ -67,6 +68,8 @@ namespace CyberPunkRPG
             enemyManager = new EnemyManager(player, projectileManager);
             CreateEnemies();
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
+            b = new BarbedWire(Vector2.Zero, new Rectangle(500, 500, 50, 50));
+            map.barbedWireList.Add(b);
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
 

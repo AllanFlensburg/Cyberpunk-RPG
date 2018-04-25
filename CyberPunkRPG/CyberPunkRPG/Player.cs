@@ -33,7 +33,7 @@ namespace CyberPunkRPG
         Rectangle hitBox;
         private Rectangle healthbarSource;
         private Rectangle healthbarEdgesSource;
-        int playerSpeed;
+        float playerSpeed;
         int ammoCount;
         int maxDistance;
         GameWindow window;
@@ -152,6 +152,7 @@ namespace CyberPunkRPG
             CoverCollision();
             Animation(gameTime);
             InteractCollision();
+            WireColision();
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
             foreach (Projectile p in projectileList)
@@ -243,6 +244,24 @@ namespace CyberPunkRPG
                     jumping = false;
                     startingPosition = Vector2.Zero;
                     endPosition = Vector2.Zero;
+                }
+            }
+        }
+
+        private void WireColision()
+        {
+            foreach (BarbedWire b in map.barbedWireList)
+            {
+                bool wireColision = false;
+                if (hitBox.Intersects(b.hitBox) && !wireColision)
+                {
+                    playerSpeed = b.slowMultiplier;
+                    wireColision = true;
+                }
+                else
+                {
+                    playerSpeed = 100;
+                    wireColision = false;
                 }
             }
         }
