@@ -51,7 +51,8 @@ namespace CyberPunkRPG
         public List<Projectile> projectileList;
         weapon activeWeapon;
 
-        private int weaponTimer;
+        private float weaponTimer;
+        private bool weaponFire = false;
 
         protected double frameTimer;
         protected double frameInterval;
@@ -76,7 +77,7 @@ namespace CyberPunkRPG
             projectileSpeed = new Vector2(500, 500);
             projectileList = new List<Projectile>();
             this.hitBox = hitBox;
-            activeWeapon = weapon.assaultRifle;
+            activeWeapon = weapon.pistol;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -164,12 +165,20 @@ namespace CyberPunkRPG
             }
 
             //Kommer senare
-            //weaponTimer += gameTime.ElapsedGameTime.Seconds;
+            weaponTimer += (float)gameTime.ElapsedGameTime.Milliseconds;
 
-            //if (activeWeapon == weapon.assaultRifle)
-            //{
-
-            //}
+            if (activeWeapon == weapon.assaultRifle)
+            {
+                if (weaponTimer >= 300 || weaponTimer == 0)
+                {
+                    weaponTimer -= 300;
+                    weaponFire = true;
+                }
+                else
+                {
+                    weaponFire = false;
+                }
+            }
 
             previousKeyboardState = currentKeyboardState;
             previousMouseState = currentMouseState;
@@ -229,7 +238,7 @@ namespace CyberPunkRPG
             {
                 pos += dashSpeed * GetDirection(endPosition - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (Vector2.Distance(startingPosition, pos) > 600)
+                if (Vector2.Distance(startingPosition, pos) > 300)
                 {
                     jumping = false;
                     startingPosition = Vector2.Zero;
@@ -280,18 +289,18 @@ namespace CyberPunkRPG
         }
 
         private void ShootProjectile(KeyboardState currentKeyboardState)
-        {  
+        {
             // Kommer senare
 
-            //if (activeWeapon == weapon.assaultRifle)
-            //{
-            //    if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false)
-            //    {
-            //        ammoCount -= 1;
-            //        createNewProjectile(GetDirection(worldPosition - pos));
-            //    }
-            //}
-            if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false && ammoCount >= 1 && reloading == false)
+            if (activeWeapon == weapon.assaultRifle)
+            {
+                if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false && weaponFire == true)
+                {
+                    ammoCount -= 1;
+                    createNewProjectile(GetDirection(worldPosition - pos));
+                }
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false && ammoCount >= 1 && reloading == false)
             {
                 ammoCount -= 1;
                 createNewProjectile(GetDirection(worldPosition - pos));
