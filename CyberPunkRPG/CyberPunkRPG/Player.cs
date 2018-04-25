@@ -404,30 +404,35 @@ namespace CyberPunkRPG
         {
             foreach (Door d in map.doorList)
             {
-                if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == false)
+                if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == false)
                 {
                     pos = prevPos;
-                    if (hitBox.X > d.interactHitBox.Right - 3)
+                    if (hitBox.X > d.interactiveObjectHitBox.Right - 3)
                     {
                         pos.X += 1;
                     }
-                    if (hitBox.X < d.interactHitBox.Left)
+                    if (hitBox.X < d.interactiveObjectHitBox.Left)
                     {
                         pos.X -= 1;
                     }
-                    if (hitBox.Y < d.interactHitBox.Top)
+                    if (hitBox.Y < d.interactiveObjectHitBox.Top)
                     {
                         pos.Y -= 1;
                     }
-                    if (hitBox.Y > d.interactHitBox.Bottom - 3)
+                    if (hitBox.Y > d.interactiveObjectHitBox.Bottom - 3)
                     {
                         pos.Y += 1;
                     }
                 }
-
-                if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyDown(Keys.E))
+                //Öppnar dörr med E
+                if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
                 {
                     d.isInteracted = true;
+                }
+                //Stänger dörr med F
+                else if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == true && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
+                {
+                    d.isInteracted = false;
                 }
             }
         }
