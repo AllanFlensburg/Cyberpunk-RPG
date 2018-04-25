@@ -91,6 +91,7 @@ namespace CyberPunkRPG
             Animation(gameTime);
             EnemyWallCollision();
             EnemyCoverCollision();
+            EnemyDoorCollision();
 
             foreach (Projectile p in player.projectileList)
             {
@@ -235,6 +236,34 @@ namespace CyberPunkRPG
                         pos.Y -= 2;
                     }
                     if (hitBox.Y > c.hitBox.Bottom - 3)
+                    {
+                        pos.Y += 2;
+                    }
+                }
+            }
+        }
+
+        public void EnemyDoorCollision()
+        {
+            foreach (Door d in map.doorList)
+            {
+                if (hitBox.Intersects(d.interactiveObjectHitBox) && !d.isInteracted)
+                {
+                    pos = prevPos;
+
+                    if (hitBox.X > d.interactiveObjectHitBox.Right - 3)
+                    {
+                        pos.X += 2;
+                    }
+                    if (hitBox.X < d.interactiveObjectHitBox.Left)
+                    {
+                        pos.X -= 2;
+                    }
+                    if (hitBox.Y < d.interactiveObjectHitBox.Top)
+                    {
+                        pos.Y -= 2;
+                    }
+                    if (hitBox.Y > d.interactiveObjectHitBox.Bottom - 3)
                     {
                         pos.Y += 2;
                     }

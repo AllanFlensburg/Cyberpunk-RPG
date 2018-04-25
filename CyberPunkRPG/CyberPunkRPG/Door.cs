@@ -27,7 +27,7 @@ namespace CyberPunkRPG
         {
             if (!isInteracted)
             {
-                sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);//Ritar ut interactHitbox
+                //sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);//Ritar ut interactHitbox
                 sb.Draw(AssetManager.doorTex, position, Color.White);
             }
             else
