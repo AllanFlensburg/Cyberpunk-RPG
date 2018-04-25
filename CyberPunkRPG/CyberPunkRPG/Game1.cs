@@ -65,7 +65,7 @@ namespace CyberPunkRPG
             projectileManager = new ProjectileManager();
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window);
-            enemyManager = new EnemyManager(player, projectileManager);
+            enemyManager = new EnemyManager(player, projectileManager, map);
             CreateEnemies();
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
             b = new BarbedWire(Vector2.Zero, new Rectangle(500, 500, 50, 50));
