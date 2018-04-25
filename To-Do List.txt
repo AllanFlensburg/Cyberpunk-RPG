@@ -1,5 +1,6 @@
 PRIO 1
 Enemy ska skjuta mot player (måste fixa så att de skjuter mot players centrum)
+Health ska ta skada från enemyprojektil
 Fixa vapenklasserna
 Göra en spelbar level-layout
 

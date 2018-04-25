@@ -404,6 +404,27 @@ namespace CyberPunkRPG
         {
             foreach (Door d in map.doorList)
             {
+                if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == false)
+                {
+                    pos = prevPos;
+                    if (hitBox.X > d.interactHitBox.Right - 3)
+                    {
+                        pos.X += 1;
+                    }
+                    if (hitBox.X < d.interactHitBox.Left)
+                    {
+                        pos.X -= 1;
+                    }
+                    if (hitBox.Y < d.interactHitBox.Top)
+                    {
+                        pos.Y -= 1;
+                    }
+                    if (hitBox.Y > d.interactHitBox.Bottom - 3)
+                    {
+                        pos.Y += 1;
+                    }
+                }
+
                 if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && previousKeyboardState.IsKeyDown(Keys.E))
                 {
                     d.isInteracted = true;
