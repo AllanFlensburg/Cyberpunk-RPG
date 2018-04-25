@@ -12,18 +12,18 @@ namespace CyberPunkRPG
     {
         Rectangle position;
         public Rectangle hitBox;
-        private float slowMultiplier;
+        public float slowMultiplier;
 
         public BarbedWire(Vector2 pos, Rectangle position) : base(pos)
         {
             this.position = position;
             hitBox = position;
-            slowMultiplier = 0.5f;
+            slowMultiplier = 50;
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            //sb.Draw(null, position, Color.White);
+            sb.Draw(AssetManager.wireTex, position, Color.White);
         }
     }
 }

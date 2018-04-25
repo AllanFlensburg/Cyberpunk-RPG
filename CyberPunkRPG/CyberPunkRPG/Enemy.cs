@@ -44,6 +44,7 @@ namespace CyberPunkRPG
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
             reloading = false;
+            noCollision = true;
             this.projectileManager = projectileManager;
             sourceRect = new Rectangle(0, 192, 64, 64);
             direction = Vector2.Zero;
