@@ -5,6 +5,7 @@ Fixa vapenklasserna
 Göra en spelbar level-layout
 
 PRIO 2
+Player och Enemy ska inte kunna skjuta genom väggar
 Enemy ska skjuta mot player (måste fixa så att de skjuter mot players centrum)
 Öppna/stänga/låsta dörrar (Större interactHitbox)
 Lägga till power-ups

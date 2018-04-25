@@ -424,11 +424,11 @@ namespace CyberPunkRPG
                     }
                 }
 
-                if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
+                if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
                 {
                     d.isInteracted = true;
                 }
-                else if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == true && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
+                else if (hitBox.Intersects(d.interactHitBox) && d.isInteracted == true && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
                 {
                     d.isInteracted = false;
                 }

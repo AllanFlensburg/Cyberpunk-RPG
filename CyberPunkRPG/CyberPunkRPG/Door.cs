@@ -15,7 +15,7 @@ namespace CyberPunkRPG
         {
             this.position = position;
             interactiveObjectHitBox = new Rectangle((int)position.X, (int)position.Y, position.Width, position.Height);
-
+            interactHitBox = new Rectangle((int)position.X - 20, (int)position.Y - 15, position.Width + 40, position.Height + 30);
         }
 
         public override void Update(GameTime gameTime)
@@ -27,7 +27,7 @@ namespace CyberPunkRPG
         {
             if (!isInteracted)
             {
-                sb.Draw(AssetManager.doorTex, interactiveObjectHitBox, Color.Red);
+                sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);//Ritar ut interactHitbox
                 sb.Draw(AssetManager.doorTex, position, Color.White);
             }
             else
