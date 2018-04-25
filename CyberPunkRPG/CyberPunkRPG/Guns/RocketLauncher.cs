@@ -16,6 +16,7 @@ namespace CyberPunkRPG
         float scale = 0.4f;
         Vector2 startPosition;
         public bool Visible = false;
+        bool explosion = false;
         public Rectangle hitBox;
         public RocketLauncher(Vector2 pos, Vector2 speed, Vector2 direction) : base(pos)
         {
@@ -35,6 +36,8 @@ namespace CyberPunkRPG
             if (Vector2.Distance(startPosition, pos) > maxDistance)
             {
                 Visible = false;
+                explosion = true;
+                hitBox = new Rectangle((int)pos.X, (int)pos.Y, 15, 15);
             }
         }
 
@@ -44,7 +47,7 @@ namespace CyberPunkRPG
             {
                 sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2 * scale), (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
             }
-            if (Visible == false)
+            if (explosion == true)
             {
                 sb.Draw(AssetManager.explosionTex, pos, null, Color.White, 0, new Vector2((AssetManager.explosionTex.Width / 2 * scale), (AssetManager.explosionTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
             }
