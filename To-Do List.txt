@@ -1,17 +1,17 @@
 PRIO 1
-Enemy ska skjuta mot player (måste fixa så att de skjuter mot players centrum)
+Dash-funktion fastnar i vägg, ska fixas
 Health ska ta skada från enemyprojektil
 Fixa vapenklasserna
 Göra en spelbar level-layout
 
 PRIO 2
-Lägga till kollision för door-klassen
-Öppna/stänga/låsta dörrar
-Dash-funktion fastnar i vägg, ska fixas
+Enemy ska skjuta mot player (måste fixa så att de skjuter mot players centrum)
+Öppna/stänga/låsta dörrar (Större interactHitbox)
+Lägga till power-ups
+
 
 PRIO 3
 Fixa fällor (lägga till spikes som skadar player)
 Animationer för enemy (Kan förfinas)
-Lägga till power-ups
 Förfinad HUD
 Lägga till sprites för level dekoration, t.ex bord & stolar

@@ -398,8 +398,7 @@ namespace CyberPunkRPG
                 }
             }
         }
-
-        //Checkar kollision mellan dörr och spelare
+        
         public void InteractCollision()
         {
             foreach (Door d in map.doorList)
@@ -424,12 +423,11 @@ namespace CyberPunkRPG
                         pos.Y += 1;
                     }
                 }
-                //Öppnar dörr med E
+
                 if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
                 {
                     d.isInteracted = true;
                 }
-                //Stänger dörr med F
                 else if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == true && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
                 {
                     d.isInteracted = false;
