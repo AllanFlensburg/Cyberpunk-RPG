@@ -66,7 +66,6 @@ namespace CyberPunkRPG
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
             enemyManager = new EnemyManager(player, projectileManager, map);
-            door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
             b = new BarbedWire(Vector2.Zero, new Rectangle(500, 500, 50, 50));
             map.barbedWireList.Add(b);
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
@@ -110,7 +109,6 @@ namespace CyberPunkRPG
                     break;
                 case GameState.PlayingGame:
                     player.Update(gameTime);
-                    door.Update(gameTime);
                     enemyManager.Update(gameTime);
                     projectileManager.Update(gameTime);
                     ChangeMusic();
@@ -145,7 +143,6 @@ namespace CyberPunkRPG
                     player.Draw(spriteBatch);
                     enemyManager.Draw(spriteBatch);
                     projectileManager.Draw(spriteBatch);
-                    door.Draw(spriteBatch);
                     break;
                 case GameState.GameOver:
 
