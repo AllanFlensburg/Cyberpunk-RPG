@@ -82,6 +82,10 @@ namespace CyberPunkRPG
             foreach (Enemy e in enemyList)
             {
                 e.Update(gameTime);
+                if (e.lives <= 0)
+                {
+                    e.isHit = true;
+                }
             }
         }
 

@@ -21,6 +21,7 @@ namespace CyberPunkRPG
         Camera camera;
         Game1 game;
         MapManager map;
+        ProjectileManager projectileManager;
         Vector2 mousePos;
         Vector2 projectileStart;
         Vector2 projectileSpeed;
@@ -48,11 +49,11 @@ namespace CyberPunkRPG
         KeyboardState previousKeyboardState;
         MouseState currentMouseState;
         MouseState previousMouseState;
-        public List<Projectile> projectileList;
         weapon activeWeapon;
 
         private float weaponTimer;
         private bool weaponFire = false;
+        private int damage = 10;
 
         protected double frameTimer;
         protected double frameInterval;
@@ -61,11 +62,12 @@ namespace CyberPunkRPG
         protected int frameWidth;
         protected Rectangle sourceRect;
 
-        public Player(Vector2 pos, Rectangle hitBox, Camera camera, Game1 game, MapManager map, GameWindow window) : base(pos)
+        public Player(Vector2 pos, Rectangle hitBox, Camera camera, Game1 game, MapManager map, GameWindow window, ProjectileManager projectileManager) : base(pos)
         {
             this.window = window;
             this.pos = pos;
             this.camera = camera;
+            this.projectileManager = projectileManager;
             this.game = game;
             this.map = map;
             playerSpeed = 100;
@@ -75,9 +77,8 @@ namespace CyberPunkRPG
             reloading = false;
             dashSpeed = new Vector2(300, 300);
             projectileSpeed = new Vector2(500, 500);
-            projectileList = new List<Projectile>();
             this.hitBox = hitBox;
-            activeWeapon = weapon.assaultRifle;
+            activeWeapon = weapon.pistol;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -153,17 +154,9 @@ namespace CyberPunkRPG
             Animation(gameTime);
             InteractCollision();
             WireColision();
+            EnemyBulletCollision();
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
-            foreach (Projectile p in projectileList)
-            {
-                p.Update(gameTime);
-                if (p.Visible == false)
-                {
-                    projectileList.Remove(p);
-                    break;
-                }
-            }
 
             weaponTimer += (float)gameTime.ElapsedGameTime.Milliseconds;
 
@@ -327,9 +320,9 @@ namespace CyberPunkRPG
 
         private void createNewProjectile(Vector2 direction)
         {
-            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance);
+            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance, damage);
             projectile.distanceCheck(pos);
-            projectileList.Add(projectile);
+            projectileManager.playerProjectileList.Add(projectile);
         }
 
         public Vector2 GetDirection(Vector2 dir)
@@ -364,6 +357,18 @@ namespace CyberPunkRPG
                     {
                         pos.Y += 2;
                     }
+                }
+            }
+        }
+
+        private void EnemyBulletCollision()
+        {
+            foreach (Projectile e in projectileManager.enemyProjectileList)
+            {
+                if (hitBox.Intersects(e.hitBox))
+                {
+                    e.Visible = false;
+                    CurrentHealth -= e.damage;
                 }
             }
         }
@@ -463,11 +468,6 @@ namespace CyberPunkRPG
                 sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y- 20), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X, (int)pos.Y - 20, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
                 sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 20), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
-            }
-
-            foreach (Projectile p in projectileList)
-            {
-                p.Draw(sb);
             }
 
             sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y - window.ClientBounds.Height/2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);

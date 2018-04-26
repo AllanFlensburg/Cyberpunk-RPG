@@ -16,6 +16,7 @@ namespace CyberPunkRPG
         float scale = 0.15f;
         Vector2 startPosition;
         public bool Visible = false;
+        public int damage;
         //bool explosion = false;
         //Vector2 explosionPos;
 
@@ -29,10 +30,11 @@ namespace CyberPunkRPG
         //protected Rectangle explosionRect;
         public Rectangle hitBox;
 
-        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance) : base(pos)
+        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance, int damage) : base(pos)
         {
             this.pos = pos;
             this.speed = speed;
+            this.damage = damage;
             this.direction = direction;
             this.maxDistance = maxDistance;
 

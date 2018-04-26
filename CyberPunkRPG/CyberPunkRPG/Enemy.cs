@@ -29,7 +29,7 @@ namespace CyberPunkRPG
         bool reloading;
 
         protected int damage;
-        protected int lives;
+        public int lives;
         protected double frameTimer;
         protected double frameInterval;
         protected int frame;
@@ -93,14 +93,14 @@ namespace CyberPunkRPG
             EnemyCoverCollision();
             EnemyDoorCollision();
 
-            foreach (Projectile p in player.projectileList)
+            foreach (Projectile p in projectileManager.playerProjectileList)
             {
                 if (hitBox.Intersects(p.hitBox) && isHit == false)
                 {
-                    isHit = true;
                     p.Visible = false;
                     speed = Vector2.Zero;
                     direction = Vector2.Zero;
+                    lives -= p.damage;
                 }
             }
         }
@@ -151,9 +151,9 @@ namespace CyberPunkRPG
 
         private void createNewProjectile(Vector2 direction)
         {
-            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance);
+            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance, damage);
             projectile.distanceCheck(pos);
-            projectileManager.projectileList.Add(projectile);
+            projectileManager.enemyProjectileList.Add(projectile);
         }
 
         private void Animation(GameTime gameTime)
