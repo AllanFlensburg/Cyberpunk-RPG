@@ -66,7 +66,6 @@ namespace CyberPunkRPG
             map = new MapManager();
             player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window);
             enemyManager = new EnemyManager(player, projectileManager, map);
-            CreateEnemies();
             door = new Door(Vector2.Zero, new Rectangle (100, 20, 50, 50));
             b = new BarbedWire(Vector2.Zero, new Rectangle(500, 500, 50, 50));
             map.barbedWireList.Add(b);
@@ -166,20 +165,6 @@ namespace CyberPunkRPG
                 return false;
         }
 
-        public void CreateEnemies()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                int x = 400;
-                int y = 100;
-
-                Enemy basic = new BasicEnemy(new Vector2(x * i, 100), player, map, projectileManager);
-                enemyManager.enemyList.Add(basic);
-                Enemy strong = new StrongEnemy(new Vector2(x * i, 200), player, map, projectileManager);
-                enemyManager.enemyList.Add(strong);
-            }
-        }
-
         public Vector2 GetDirection(Vector2 dir)
         {
             Vector2 newDirection = dir;
@@ -212,6 +197,11 @@ namespace CyberPunkRPG
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(AssetManager.song4);
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.F5) == true)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(AssetManager.song5);
             }
         }
     }

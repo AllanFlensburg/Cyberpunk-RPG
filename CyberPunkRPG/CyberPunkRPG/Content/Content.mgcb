@@ -224,3 +224,9 @@
 /processorParam:TextureFormat=Color
 /build:Explosion.png
 
+#begin Wonderland_round_3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Wonderland_round_3.mp3
+

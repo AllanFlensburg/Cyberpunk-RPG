@@ -77,7 +77,7 @@ namespace CyberPunkRPG
             projectileSpeed = new Vector2(500, 500);
             projectileList = new List<Projectile>();
             this.hitBox = hitBox;
-            activeWeapon = weapon.pistol;
+            activeWeapon = weapon.assaultRifle;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -165,7 +165,6 @@ namespace CyberPunkRPG
                 }
             }
 
-            //Kommer senare
             weaponTimer += (float)gameTime.ElapsedGameTime.Milliseconds;
 
             if (activeWeapon == weapon.assaultRifle)
@@ -313,7 +312,7 @@ namespace CyberPunkRPG
 
             if (activeWeapon == weapon.assaultRifle)
             {
-                if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false && weaponFire == true)
+                if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false && weaponFire == true) //Ser till att man kan hålla inne "Q" för att skjuta
                 {
                     ammoCount -= 1;
                     createNewProjectile(GetDirection(worldPosition - pos));

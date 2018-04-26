@@ -26,6 +26,7 @@ namespace CyberPunkRPG
         public static Song song2 { get; private set; }
         public static Song song3 { get; private set; }
         public static Song song4 { get; private set; }
+        public static Song song5 { get; private set; }
 
         public static void LoadContent(ContentManager Content)
         {            
@@ -49,6 +50,7 @@ namespace CyberPunkRPG
             song2 = Content.Load<Song>("buildy");
             song3 = Content.Load<Song>("CyberPunk_Chronicles");
             song4 = Content.Load<Song>("core_175bpm");
+            song5 = Content.Load<Song>("Wonderland_Round_3");
         }
     }
 }

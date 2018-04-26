@@ -16,6 +16,17 @@ namespace CyberPunkRPG
         float scale = 0.15f;
         Vector2 startPosition;
         public bool Visible = false;
+        //bool explosion = false;
+        //Vector2 explosionPos;
+
+        //private float explosionTimer;
+        //bool explosionStart = false;
+        //protected double explosionFrameTimer;
+        //protected double explosionFrameInterval;
+        //protected int explosionFrame;
+        //protected int numberOfExplosionFrames;
+        //protected int explosionFrameWidth;
+        //protected Rectangle explosionRect;
         public Rectangle hitBox;
 
         public Projectile(Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance) : base(pos)
@@ -24,10 +35,25 @@ namespace CyberPunkRPG
             this.speed = speed;
             this.direction = direction;
             this.maxDistance = maxDistance;
+
+            //explosionFrameTimer = 120;
+            //explosionFrameInterval = 120;
+            //explosionFrame = 0;
+            //numberOfExplosionFrames = 3;
         }
 
         public override void Update(GameTime gameTime)
         {
+            //if (explosionStart)
+            //{
+            //    explosionTimer += gameTime.ElapsedGameTime.Milliseconds;
+            //}
+
+            //if (explosionTimer >= 100)
+            //{
+
+            //}
+
             if (Visible)
             {
                 pos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -37,8 +63,41 @@ namespace CyberPunkRPG
             if (Vector2.Distance(startPosition, pos) > maxDistance)
             {
                 Visible = false;
+                //explosion = true;
             }
+
+            //if (explosion)
+            //{
+            //    hitBox = explosionRect;
+            //}
         }
+
+        //Animation för explosion Kommer senare
+
+        //private void ExplosionAnimation(GameTime gameTime)
+        //{
+        //    if (explosionFrameTimer <= 0)
+        //    {
+        //        explosionFrameTimer = explosionFrameInterval;
+        //        explosionFrame++;
+        //        if (explosionFrame == 1)
+        //        {
+        //            explosionRect = new Rectangle(25, 33, 80, 72);
+        //            explosionFrameWidth = 80;
+        //        }
+        //        else if (explosionFrame == 2)
+        //        {
+        //            explosionRect = new Rectangle(127, 30, 105, 88);
+        //            explosionFrameWidth = 105;
+        //        }
+        //        else if (explosionFrame == 3)
+        //        {
+        //            explosionRect = new Rectangle(240, 17, 127, 113);
+        //            explosionFrameWidth = 127;
+        //        }
+        //        explosionRect.X = (explosionFrame % numberOfExplosionFrames) * explosionFrameWidth;
+        //    }
+        //}
 
         public override void Draw(SpriteBatch sb)
         {
@@ -46,6 +105,10 @@ namespace CyberPunkRPG
             {
                 sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2) * scale, (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
             }
+            //if (explosion)
+            //{
+            //    sb.Draw(AssetManager.explosionTex, pos, null, Color.White, 0, new Vector2((AssetManager.explosionTex.Width / 2) * scale, (AssetManager.explosionTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
+            //}
         }
 
         public void distanceCheck(Vector2 theStartPosition) // Metod för en ny projektil

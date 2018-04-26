@@ -37,7 +37,6 @@ namespace CyberPunkRPG
             {
                 Visible = false;
                 explosion = true;
-                hitBox = new Rectangle((int)pos.X, (int)pos.Y, 15, 15);
             }
         }
 
@@ -47,7 +46,7 @@ namespace CyberPunkRPG
             {
                 sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2 * scale), (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
             }
-            if (explosion == true)
+            if (explosion)
             {
                 sb.Draw(AssetManager.explosionTex, pos, null, Color.White, 0, new Vector2((AssetManager.explosionTex.Width / 2 * scale), (AssetManager.explosionTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
             }
