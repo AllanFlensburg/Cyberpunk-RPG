@@ -1,12 +1,11 @@
 PRIO 1
 Dash-funktion fastnar i vägg, ska fixas
-Health ska ta skada från enemyprojektil
 Fixa vapenklasserna
+Enemy ska skjuta mot player (måste fixa så att de skjuter mot players centrum)
 Göra en spelbar level-layout
 
 PRIO 2
 Player och Enemy ska inte kunna skjuta genom väggar
-Enemy ska skjuta mot player (måste fixa så att de skjuter mot players centrum)
 Öppna/stänga/låsta dörrar (Större interactHitbox)
 Lägga till power-ups
 
