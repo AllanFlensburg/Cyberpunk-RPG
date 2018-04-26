@@ -29,14 +29,16 @@ namespace CyberPunkRPG
         //protected int explosionFrameWidth;
         //protected Rectangle explosionRect;
         public Rectangle hitBox;
+        MapManager map;
 
-        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance, int damage) : base(pos)
+        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance, int damage, MapManager map) : base(pos)
         {
             this.pos = pos;
             this.speed = speed;
             this.damage = damage;
             this.direction = direction;
             this.maxDistance = maxDistance;
+            this.map = map;
 
             //explosionFrameTimer = 120;
             //explosionFrameInterval = 120;
@@ -55,6 +57,10 @@ namespace CyberPunkRPG
             //{
 
             //}
+
+            projectileWallCollision();
+            projectileCoverCollision();
+            projectileDoorCollision();
 
             if (Visible)
             {
@@ -100,6 +106,39 @@ namespace CyberPunkRPG
         //        explosionRect.X = (explosionFrame % numberOfExplosionFrames) * explosionFrameWidth;
         //    }
         //}
+        public void projectileWallCollision()
+        {
+            foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    Visible = false;
+                }
+            }
+        }
+
+        public void projectileCoverCollision()
+        {
+            foreach (Cover c in map.coverList)
+            {
+                if (hitBox.Intersects(c.hitBox))
+                {
+                    Visible = false;
+                }
+            }
+        }
+
+        public void projectileDoorCollision()
+        {
+            foreach (Door d in map.doorList)
+            {
+                if (hitBox.Intersects(d.interactiveObjectHitBox) && !d.isInteracted)
+                {
+                    Visible = false;
+                }
+            }
+        }
+
 
         public override void Draw(SpriteBatch sb)
         {
