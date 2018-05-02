@@ -21,6 +21,7 @@ namespace CyberPunkRPG
         public static Texture2D sniperRifleTex { get; private set; }
         public static Texture2D explosionTex { get; private set; }
         public static Texture2D healthbarTex { get; private set; }
+        public static Texture2D pickupTex { get; private set; }
         public static SpriteFont gameText { get; private set; }
         public static Song song1 { get; private set; }
         public static Song song2 { get; private set; }
@@ -45,6 +46,7 @@ namespace CyberPunkRPG
             sniperRifleTex = Content.Load<Texture2D>("Sniper");
             explosionTex = Content.Load<Texture2D>("Explosion");
             healthbarTex = Content.Load<Texture2D>("healthBar");
+            pickupTex = Content.Load<Texture2D>("LightsUp_Spritesheet");
             gameText = Content.Load<SpriteFont>("Gametext");
             song1 = Content.Load<Song>("Cyberpunk Moonlight Sonata");
             song2 = Content.Load<Song>("buildy");

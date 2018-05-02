@@ -25,6 +25,9 @@ namespace CyberPunkRPG
         GameState currentGameState;
         Viewport view;
         Camera camera;
+        HealthPickup h = new HealthPickup(Vector2.Zero);
+        InvinciblePickup i = new InvinciblePickup(new Vector2(100, 100));
+        Speedpickup s = new Speedpickup(new Vector2(200, 200));
 
         List<Enemy> enemyList = new List<Enemy>();
 
@@ -139,6 +142,9 @@ namespace CyberPunkRPG
                     spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 3), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     break;
                 case GameState.PlayingGame:
+                    h.Draw(spriteBatch);
+                    i.Draw(spriteBatch);
+                    s.Draw(spriteBatch);
                     map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
                     enemyManager.Draw(spriteBatch);
