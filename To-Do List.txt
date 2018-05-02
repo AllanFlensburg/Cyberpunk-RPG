@@ -1,12 +1,11 @@
 PRIO 1
 Dash-funktion fastnar i vägg, ska fixas
 Fixa vapenklasserna
-Enemy ska skjuta mot player (måste fixa så att de skjuter mot players centrum)
 Göra en spelbar level-layout
 
 PRIO 2
-Player och Enemy ska inte kunna skjuta genom väggar
-Öppna/stänga/låsta dörrar (Större interactHitbox)
+Player & Enemy kan skjuta genom väggar om de själva går in i väggen
+Öppna/stänga/låsta dörrar
 Lägga till power-ups
 
 

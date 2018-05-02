@@ -113,6 +113,7 @@ namespace CyberPunkRPG
                     projectileManager.Update(gameTime);
                     ChangeMusic();
                     camera.SetPosition(player.pos);
+                    map.Update(gameTime);
                     break;
                 case GameState.GameOver:
                     break;

@@ -21,8 +21,8 @@ namespace CyberPunkRPG
 
         public override void Update(GameTime gameTime)
         {
-            interactHitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.doorTex.Width, AssetManager.doorTex.Height);
-            interactiveObjectHitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.doorTex.Width, AssetManager.doorTex.Height);
+            //interactHitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.doorTex.Width, AssetManager.doorTex.Height);
+            //interactiveObjectHitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.doorTex.Width, AssetManager.doorTex.Height);
         }
         public override void Draw(SpriteBatch sb)
         {

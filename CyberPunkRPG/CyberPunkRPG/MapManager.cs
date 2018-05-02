@@ -17,6 +17,7 @@ namespace CyberPunkRPG
         public List<Door> doorList = new List<Door>();
         public List<BarbedWire> barbedWireList = new List<BarbedWire>();
         public List<Spikes> spikeList = new List<Spikes>();
+        MapManager map;
 
         public MapManager()
         {
@@ -122,6 +123,14 @@ namespace CyberPunkRPG
                 {
                     Console.WriteLine("Someting went wrong");
                 }
+            }
+        }
+
+        public void Update(GameTime gt)
+        {
+            foreach (Door d in doorList)
+            {
+                d.Update(gt);
             }
         }
 
