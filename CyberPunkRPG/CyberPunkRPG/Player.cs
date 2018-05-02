@@ -98,6 +98,7 @@ namespace CyberPunkRPG
             }
             else if (activeWeapon == weapon.sniperRifle)
             {
+                damage = 50;
                 ammoCount = 5;
                 reloadTime = 3.0f;
                 reloadTimer = 3.0f;
@@ -111,10 +112,9 @@ namespace CyberPunkRPG
                 reloadTime = 1.5f;
                 reloadTimer = 1.5f;
                 maxDistance = 500;
-
             }
 
-            //Kommer senare
+            //Inte klar
             else if (activeWeapon == weapon.rocketLauncher)
             {
                 ammoCount = 1;
@@ -170,6 +170,19 @@ namespace CyberPunkRPG
                 else
                 {
                     weaponFire = false;
+                }
+            }
+            if (activeWeapon == weapon.pistol)
+            {
+                weaponFire = true;
+
+                if (weaponFire)
+                {
+                    
+                }
+                else if (weaponFire != true)
+                {
+
                 }
             }
 
@@ -301,14 +314,20 @@ namespace CyberPunkRPG
 
         private void ShootProjectile(KeyboardState currentKeyboardState)
         {
-            // Kommer senare
-
             if (activeWeapon == weapon.assaultRifle)
             {
                 if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false && weaponFire == true) //Ser till att man kan hålla inne "Q" för att skjuta
                 {
                     ammoCount -= 1;
                     createNewProjectile(GetDirection(worldPosition - pos));
+                }
+            }
+
+            if (activeWeapon == weapon.pistol)
+            {
+                if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) && ammoCount >= 1 && reloading == false && weaponFire == true)
+                {
+
                 }
             }
             else if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false && ammoCount >= 1 && reloading == false)

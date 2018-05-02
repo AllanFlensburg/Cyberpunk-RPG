@@ -30,7 +30,7 @@ namespace CyberPunkRPG
             numberOfExplosionFrames = 13;
             explosionFrameWidth = 128;
             explosionRect = new Rectangle(0, 0, 128, 128);
-    }
+        }
 
         public override void Update(GameTime gameTime)
         {
