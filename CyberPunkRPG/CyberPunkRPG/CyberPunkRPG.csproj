@@ -54,7 +54,9 @@
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Healthpickup.cs" />
     <Compile Include="InteractiveObject.cs" />
+    <Compile Include="Invinciblepickup.cs" />
     <Compile Include="MapManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Guns\SniperRifle.cs" />
     <Compile Include="Guns\RocketLauncher.cs" />
+    <Compile Include="Speedpickup.cs" />
     <Compile Include="Spikes.cs" />
     <Compile Include="StrongEnemy.cs" />
     <Compile Include="Wall.cs" />
@@ -88,6 +91,7 @@
     <Content Include="Content\door.png" />
     <Content Include="Content\Explosion.png" />
     <Content Include="Content\healthbar.png" />
+    <Content Include="Content\LightsUp_Spritesheet.png" />
     <Content Include="Content\Pistols.png" />
     <Content Include="Content\projectile.png" />
     <Content Include="Content\Sniper.png" />

@@ -78,7 +78,7 @@ namespace CyberPunkRPG
             dashSpeed = new Vector2(300, 300);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
-            activeWeapon = weapon.pistol;
+            activeWeapon = weapon.assaultRifle;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -460,20 +460,26 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            
+            Rectangle uiWeapon = new Rectangle(0, 192, 64, 64);
             sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
             sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
             if (activeWeapon == weapon.pistol)
             {
                 sb.Draw(AssetManager.pistolTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.pistolTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
+                sb.DrawString(AssetManager.gameText, "Pistol", new Vector2(pos.X - 330, pos.Y - 530), Color.Yellow);
             }
             else if (activeWeapon == weapon.assaultRifle)
             {
                 sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.assaultRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
+                sb.DrawString(AssetManager.gameText, "Assaultrifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Yellow);
             }
             else if (activeWeapon == weapon.sniperRifle)
             {
                 sb.Draw(AssetManager.sniperRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.sniperRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
+                sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Yellow);
             }
             sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Yellow);
 
