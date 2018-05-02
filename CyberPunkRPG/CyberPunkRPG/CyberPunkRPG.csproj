@@ -86,6 +86,7 @@
     <Content Include="Content\core_175bpm.mp3" />
     <Content Include="Content\CyberPunk_Chronicles.mp3" />
     <Content Include="Content\door.png" />
+    <Content Include="Content\Explosion.png" />
     <Content Include="Content\healthbar.png" />
     <Content Include="Content\Pistols.png" />
     <Content Include="Content\projectile.png" />
