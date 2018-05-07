@@ -25,9 +25,9 @@ namespace CyberPunkRPG
         GameState currentGameState;
         Viewport view;
         Camera camera;
-        HealthPickup h = new HealthPickup(Vector2.Zero);
-        InvinciblePickup i = new InvinciblePickup(new Vector2(100, 100));
-        Speedpickup s = new Speedpickup(new Vector2(200, 200));
+        HealthPickup h = new HealthPickup(new Vector2(3000, 1000));
+        InvinciblePickup i = new InvinciblePickup(new Vector2(3100, 1100));
+        Speedpickup s = new Speedpickup(new Vector2(3200, 1200));
 
         List<Enemy> enemyList = new List<Enemy>();
 
@@ -67,9 +67,9 @@ namespace CyberPunkRPG
 
             projectileManager = new ProjectileManager();
             map = new MapManager();
-            player = new Player(Vector2.Zero, new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
+            player = new Player(new Vector2(3000, 1000), new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
             enemyManager = new EnemyManager(player, projectileManager, map);
-            b = new BarbedWire(Vector2.Zero, new Rectangle(500, 500, 50, 50));
+            b = new BarbedWire(Vector2.Zero, new Rectangle(3500, 1500, 50, 50));
             map.barbedWireList.Add(b);
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
