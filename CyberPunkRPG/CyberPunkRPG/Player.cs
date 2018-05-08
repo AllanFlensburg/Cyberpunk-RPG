@@ -41,6 +41,10 @@ namespace CyberPunkRPG
         private int healthbarWidth = 467;
         private int healthbarHeight = 44;
         bool reloading;
+        bool speedBoosted;
+        bool invincibleBoosted;
+        float speedBoostTimer;
+        float invincibleTimer;
         float reloadTimer;
         float reloadTime;
         bool jumping = false;
@@ -71,9 +75,13 @@ namespace CyberPunkRPG
             this.map = map;
             playerSpeed = 120;
             ammoCount = 8;
+            invincibleTimer = 5;
+            speedBoostTimer = 5;
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
             reloading = false;
+            speedBoosted = false;
+            invincibleBoosted = false;
             dashSpeed = new Vector2(300, 300);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
@@ -154,6 +162,8 @@ namespace CyberPunkRPG
             InteractCollision();
             WireColision();
             EnemyBulletCollision();
+            PowerUpCollision();
+            HandlePowerUpBoosts(gameTime);
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
 
@@ -257,7 +267,7 @@ namespace CyberPunkRPG
             foreach (BarbedWire b in map.barbedWireList)
             {
                 bool wireColision = false;
-                if (hitBox.Intersects(b.hitBox) && !wireColision)
+                if (hitBox.Intersects(b.hitBox) && !wireColision && !speedBoosted)
                 {
                     playerSpeed = b.slowMultiplier;
                     wireColision = true;
@@ -379,11 +389,59 @@ namespace CyberPunkRPG
             }
         }
 
+        private void PowerUpCollision()
+        {
+            foreach (InteractiveObject i in map.powerUpList)
+            {
+                if (hitBox.Intersects(i.interactHitBox) && i.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
+                {
+                    i.isInteracted = true;
+
+                    if (i is HealthPickup && CurrentHealth <= 90)
+                    {
+                        CurrentHealth += 10;
+                    }
+                    else if (i is Speedpickup)
+                    {
+                        speedBoosted = true;
+                    }
+                    else if (i is InvinciblePickup)
+                    {
+                        invincibleBoosted = true;
+                    }
+                }
+            }
+        }
+
+        private void HandlePowerUpBoosts(GameTime gameTime)
+        {
+            if (speedBoosted)
+            {
+                speedBoostTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerSpeed = 200;
+
+                if (speedBoostTimer <= 0)
+                {
+                    speedBoosted = false;
+                }
+            }
+
+            if (invincibleBoosted)
+            {
+                invincibleTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (invincibleTimer <= 0)
+                {
+                    invincibleBoosted = false;
+                }
+            }
+        }
+
         private void EnemyBulletCollision()
         {
             foreach (Projectile e in projectileManager.enemyProjectileList)
             {
-                if (hitBox.Intersects(e.hitBox))
+                if (hitBox.Intersects(e.hitBox) && !invincibleBoosted)
                 {
                     e.Visible = false;
                     CurrentHealth -= e.damage;

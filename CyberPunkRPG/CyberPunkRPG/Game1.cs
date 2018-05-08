@@ -25,9 +25,9 @@ namespace CyberPunkRPG
         GameState currentGameState;
         Viewport view;
         Camera camera;
-        HealthPickup h = new HealthPickup(new Vector2(3000, 1000));
-        InvinciblePickup i = new InvinciblePickup(new Vector2(3100, 1100));
-        Speedpickup s = new Speedpickup(new Vector2(3200, 1200));
+        HealthPickup h;
+        InvinciblePickup i;
+        Speedpickup s;
 
         List<Enemy> enemyList = new List<Enemy>();
 
@@ -77,6 +77,12 @@ namespace CyberPunkRPG
             wonTheGame = false;
             lostTheGame = false;
             endPos = new Rectangle(4900, 3600, 50, 50);
+            s = new Speedpickup(new Vector2(3200, 1200));
+            map.powerUpList.Add(s);
+            i = new InvinciblePickup(new Vector2(3100, 1100));
+            map.powerUpList.Add(i);
+            h = new HealthPickup(new Vector2(3000, 1000));
+            map.powerUpList.Add(h);
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
 
@@ -151,9 +157,6 @@ namespace CyberPunkRPG
                     spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     break;
                 case GameState.PlayingGame:
-                    h.Draw(spriteBatch);
-                    i.Draw(spriteBatch);
-                    s.Draw(spriteBatch);
                     map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
                     enemyManager.Draw(spriteBatch);
