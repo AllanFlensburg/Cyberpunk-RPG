@@ -131,7 +131,7 @@ namespace CyberPunkRPG
         {
             projectileStart = pos;
 
-            if (Vector2.Distance(pos, player.pos) <= 200 && isHit == false && reloading == false)
+            if (Vector2.Distance(pos, player.pos) <= 400 && isHit == false && reloading == false)
             {
                 createNewProjectile(GetDirection((player.pos + new Vector2(32, 32)) - pos));
                 reloading = true;

@@ -26,12 +26,11 @@ namespace CyberPunkRPG
         Vector2 projectileStart;
         Vector2 projectileSpeed;
         Vector2 dashSpeed;
-        Vector2 dashDistance = new Vector2(400, 400);
         Vector2 startingPosition = Vector2.Zero;
         Vector2 endPosition = Vector2.Zero;
         Vector2 worldPosition;
         Vector2 prevPos;
-        Rectangle hitBox;
+        public Rectangle hitBox;
         private Rectangle healthbarSource;
         private Rectangle healthbarEdgesSource;
         float playerSpeed;
@@ -70,7 +69,7 @@ namespace CyberPunkRPG
             this.projectileManager = projectileManager;
             this.game = game;
             this.map = map;
-            playerSpeed = 100;
+            playerSpeed = 120;
             ammoCount = 8;
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
@@ -244,7 +243,7 @@ namespace CyberPunkRPG
             {
                 pos += dashSpeed * GetDirection(endPosition - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (Vector2.Distance(startingPosition, pos) > 300)
+                if (Vector2.Distance(startingPosition, pos) > 200)
                 {
                     jumping = false;
                     startingPosition = Vector2.Zero;
@@ -316,31 +315,31 @@ namespace CyberPunkRPG
         {
             if (activeWeapon == weapon.assaultRifle)
             {
-                if (currentKeyboardState.IsKeyDown(Keys.Q) == true && ammoCount >= 1 && reloading == false && weaponFire == true) //Ser till att man kan hålla inne "Q" för att skjuta
+                if (currentMouseState.LeftButton == ButtonState.Pressed && ammoCount >= 1 && reloading == false && weaponFire == true) //Ser till att man kan hålla inne "Q" för att skjuta
                 {
                     ammoCount -= 1;
-                    createNewProjectile(GetDirection(worldPosition - pos));
+                    createNewProjectile(GetDirection(worldPosition - projectileStart));
                 }
             }
 
             if (activeWeapon == weapon.pistol)
             {
-                if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) && ammoCount >= 1 && reloading == false && weaponFire == true)
+                if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && ammoCount >= 1 && reloading == false && weaponFire == true)
                 {
 
                 }
             }
-            else if (currentKeyboardState.IsKeyDown(Keys.Q) == true && previousKeyboardState.IsKeyDown(Keys.Q) == false && ammoCount >= 1 && reloading == false)
+            else if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && ammoCount >= 1 && reloading == false)
             {
                 ammoCount -= 1;
-                createNewProjectile(GetDirection(worldPosition - pos));
+                createNewProjectile(GetDirection(worldPosition - projectileStart));
             }
         } 
 
         private void createNewProjectile(Vector2 direction)
         {
             Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance, damage, map);
-            projectile.distanceCheck(pos);
+            projectile.distanceCheck(projectileStart);
             projectileManager.playerProjectileList.Add(projectile);
         }
 

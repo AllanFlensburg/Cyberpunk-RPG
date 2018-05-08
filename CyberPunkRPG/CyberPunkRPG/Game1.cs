@@ -35,6 +35,9 @@ namespace CyberPunkRPG
         Player player;
         EnemyManager enemyManager;
         ProjectileManager projectileManager;
+        Rectangle endPos;
+        bool wonTheGame;
+        bool lostTheGame;
         Door door;
         BarbedWire b;
 
@@ -71,10 +74,13 @@ namespace CyberPunkRPG
             enemyManager = new EnemyManager(player, projectileManager, map);
             b = new BarbedWire(Vector2.Zero, new Rectangle(3500, 1500, 50, 50));
             map.barbedWireList.Add(b);
+            wonTheGame = false;
+            lostTheGame = false;
+            endPos = new Rectangle(4900, 3600, 50, 50);
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
 
-            currentGameState = GameState.PlayingGame;
+            currentGameState = GameState.Menu;
         }
 
         protected override void UnloadContent()
@@ -108,9 +114,10 @@ namespace CyberPunkRPG
             switch (currentGameState)
             {
                 case GameState.Menu:
-
+                    camera.SetPosition(new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2));
                     break;
                 case GameState.PlayingGame:
+                    EndGame();
                     player.Update(gameTime);
                     enemyManager.Update(gameTime);
                     projectileManager.Update(gameTime);
@@ -119,6 +126,7 @@ namespace CyberPunkRPG
                     map.Update(gameTime);
                     break;
                 case GameState.GameOver:
+                    camera.SetPosition(new Vector2 (Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2));
                     break;
                 case GameState.Restart: // Man kan starta om när en spelrunda tar slut, loadcontent ändrar automatiskt till meny igen
                     LoadContent();
@@ -140,7 +148,7 @@ namespace CyberPunkRPG
             switch (currentGameState)
             {
                 case GameState.Menu:
-                    spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 3), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     break;
                 case GameState.PlayingGame:
                     h.Draw(spriteBatch);
@@ -152,7 +160,16 @@ namespace CyberPunkRPG
                     projectileManager.Draw(spriteBatch);
                     break;
                 case GameState.GameOver:
-
+                    if (wonTheGame)
+                    {
+                        spriteBatch.DrawString(AssetManager.gameText, "You won the game!", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                        spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to restart", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2 + 30), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                    }
+                    else if (lostTheGame)
+                    {
+                        spriteBatch.DrawString(AssetManager.gameText, "You lost the game!", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                        spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to try agian", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2 + 30), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                    }
                     break;
             }
 
@@ -178,6 +195,20 @@ namespace CyberPunkRPG
         public Vector2 GetCameraPosition()
         {
             return camera.position;
+        }
+
+        public void EndGame()
+        {
+            if (player.hitBox.Intersects(endPos))
+            {
+                wonTheGame = true;
+                currentGameState = GameState.GameOver;
+            }
+            else if (player.CurrentHealth == 0)
+            {
+                lostTheGame = true;
+                currentGameState = GameState.GameOver;
+            }
         }
 
         public void ChangeMusic()

@@ -43,6 +43,7 @@ namespace CyberPunkRPG
             {
                 {
                     sb.Draw(AssetManager.basicEnemyTex, pos, sourceRect, Color.Red);
+                    sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.Red, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 }
             }
         }
