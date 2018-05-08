@@ -43,10 +43,13 @@ namespace CyberPunkRPG
         bool reloading;
         bool speedBoosted;
         bool invincibleBoosted;
+        bool doDeathAnimation;
+        public bool gameOver;
         float speedBoostTimer;
         float invincibleTimer;
         float reloadTimer;
         float reloadTime;
+        float deathAnimationTimer;
         bool jumping = false;
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
@@ -79,9 +82,12 @@ namespace CyberPunkRPG
             speedBoostTimer = 5;
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
+            deathAnimationTimer = 3.6f;
             reloading = false;
             speedBoosted = false;
             invincibleBoosted = false;
+            doDeathAnimation = false;
+            gameOver = false;
             dashSpeed = new Vector2(300, 300);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
@@ -92,7 +98,7 @@ namespace CyberPunkRPG
             frame = 0;
             numberOfFrames = 9;
             frameWidth = 64;
-            sourceRect = new Rectangle(0, 192, 64, 64);
+            sourceRect = new Rectangle(0, 0, 64, 64);
             healthbarSource = new Rectangle(0, 45, healthbarWidth, healthbarHeight);
             healthbarEdgesSource = new Rectangle(0, 0, healthbarWidth, healthbarHeight);
 
@@ -134,6 +140,39 @@ namespace CyberPunkRPG
         public override void Update(GameTime gameTime)
         {
             bool noCollision = true;
+            int status = 0;
+            if (CurrentHealth <= 0)
+            {
+                if (!doDeathAnimation)
+                {
+                    doDeathAnimation = true;
+                    status = 1;
+                }
+            }
+
+            if (status == 1)
+            {
+                frameTimer = 600;
+                frameInterval = 600;
+                status = 0;
+                sourceRect.X = 0;
+                sourceRect.Y = 0;
+                frame = 0;
+            }
+
+            if (doDeathAnimation)
+            {
+                numberOfFrames = 6;
+                frameWidth = 64;
+                frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                deathAnimationTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (deathAnimationTimer < 0)
+                {
+                    doDeathAnimation = false;
+                    gameOver = true;
+                }
+            }
             foreach (Wall w in map.wallList)
             {
                 if (hitBox.Intersects(w.hitBox))
@@ -211,7 +250,7 @@ namespace CyberPunkRPG
 
         private void UpdateMovement(KeyboardState currentKeyboardState, GameTime gameTime)
         {
-            if (jumping == false)
+            if (jumping == false && !doDeathAnimation)
             {
                 if (currentKeyboardState.IsKeyDown(Keys.A) == true)
                 {
@@ -399,7 +438,7 @@ namespace CyberPunkRPG
 
                     if (i is HealthPickup && CurrentHealth <= 90)
                     {
-                        CurrentHealth += 10;
+                        CurrentHealth += 25;
                     }
                     else if (i is Speedpickup)
                     {
@@ -423,6 +462,7 @@ namespace CyberPunkRPG
                 if (speedBoostTimer <= 0)
                 {
                     speedBoosted = false;
+                    speedBoostTimer = 5;
                 }
             }
 
@@ -433,6 +473,7 @@ namespace CyberPunkRPG
                 if (invincibleTimer <= 0)
                 {
                     invincibleBoosted = false;
+                    invincibleTimer = 5;
                 }
             }
         }
@@ -518,21 +559,28 @@ namespace CyberPunkRPG
         public override void Draw(SpriteBatch sb)
         {
             Rectangle uiWeapon = new Rectangle(0, 192, 64, 64);
-            sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //ritar ut karaktärens hitbox för att testa kollision
-            sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
-            if (activeWeapon == weapon.pistol)
+            /*sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red);*/ //ritar ut karaktärens hitbox för att testa kollision
+            if (CurrentHealth > 0)
+            {
+                sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+            }
+            else
+            {
+                sb.Draw(AssetManager.playerDeathTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+            }
+            if (activeWeapon == weapon.pistol && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.pistolTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.pistolTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
                 sb.DrawString(AssetManager.gameText, "Pistol", new Vector2(pos.X - 330, pos.Y - 530), Color.Yellow);
             }
-            else if (activeWeapon == weapon.assaultRifle)
+            else if (activeWeapon == weapon.assaultRifle && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.assaultRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
                 sb.DrawString(AssetManager.gameText, "Assaultrifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Yellow);
             }
-            else if (activeWeapon == weapon.sniperRifle)
+            else if (activeWeapon == weapon.sniperRifle && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.sniperRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.sniperRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);

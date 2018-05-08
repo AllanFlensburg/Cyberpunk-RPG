@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AgentShoot.png" />
+    <Content Include="Content\AgentWalkSouth.png" />
     <Content Include="Content\Armor2Shoot.png" />
     <Content Include="Content\ArmorShoot.png" />
     <Content Include="Content\AssaultRifle.png" />

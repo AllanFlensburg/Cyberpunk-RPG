@@ -157,6 +157,7 @@ namespace CyberPunkRPG
                     spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     break;
                 case GameState.PlayingGame:
+                    spriteBatch.Draw(AssetManager.doorTex, endPos, Color.White);
                     map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
                     enemyManager.Draw(spriteBatch);
@@ -207,7 +208,7 @@ namespace CyberPunkRPG
                 wonTheGame = true;
                 currentGameState = GameState.GameOver;
             }
-            else if (player.CurrentHealth == 0)
+            else if (player.gameOver)
             {
                 lostTheGame = true;
                 currentGameState = GameState.GameOver;

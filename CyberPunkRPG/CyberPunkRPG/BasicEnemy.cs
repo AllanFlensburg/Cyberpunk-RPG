@@ -16,6 +16,8 @@ namespace CyberPunkRPG
             speed = new Vector2(150, 150);
             damage = 10;
             lives = 10;
+            reloadTimer = 1.2f;
+            reloadTime = 1.2f;
             frameTimer = 100;
             frameInterval = 100;
             frame = 0;

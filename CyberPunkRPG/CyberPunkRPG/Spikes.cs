@@ -12,7 +12,7 @@ namespace CyberPunkRPG
     {
         Rectangle position;
         public Rectangle hitBox;
-        private int damage;
+        public int damage;
 
         public Spikes(Vector2 pos, Rectangle position) : base(pos)
         {
