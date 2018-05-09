@@ -245,23 +245,23 @@ namespace CyberPunkRPG
         {
             foreach (Door d in map.doorList)
             {
-                if (hitBox.Intersects(d.interactiveObjectHitBox) && !d.isInteracted)
+                if (hitBox.Intersects(d.doorHitBox) && !d.isInteracted)
                 {
                     pos = prevPos;
 
-                    if (hitBox.X > d.interactiveObjectHitBox.Right - 3)
+                    if (hitBox.X > d.doorHitBox.Right - 3)
                     {
                         pos.X += 2;
                     }
-                    if (hitBox.X < d.interactiveObjectHitBox.Left)
+                    if (hitBox.X < d.doorHitBox.Left)
                     {
                         pos.X -= 2;
                     }
-                    if (hitBox.Y < d.interactiveObjectHitBox.Top)
+                    if (hitBox.Y < d.doorHitBox.Top)
                     {
                         pos.Y -= 2;
                     }
-                    if (hitBox.Y > d.interactiveObjectHitBox.Bottom - 3)
+                    if (hitBox.Y > d.doorHitBox.Bottom - 3)
                     {
                         pos.Y += 2;
                     }

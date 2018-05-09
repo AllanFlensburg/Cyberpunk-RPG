@@ -54,6 +54,7 @@
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Guns\Pistol.cs" />
     <Compile Include="Healthpickup.cs" />
     <Compile Include="InteractiveObject.cs" />
     <Compile Include="Invinciblepickup.cs" />

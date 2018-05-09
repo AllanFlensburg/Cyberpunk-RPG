@@ -28,6 +28,7 @@ namespace CyberPunkRPG
         HealthPickup h;
         InvinciblePickup i;
         Speedpickup s;
+        AssaultRifle ar;
 
         List<Enemy> enemyList = new List<Enemy>();
 
@@ -38,7 +39,6 @@ namespace CyberPunkRPG
         Rectangle endPos;
         bool wonTheGame;
         bool lostTheGame;
-        Door door;
         BarbedWire b;
 
         public Game1()
@@ -83,6 +83,8 @@ namespace CyberPunkRPG
             map.powerUpList.Add(i);
             h = new HealthPickup(new Vector2(3000, 1000));
             map.powerUpList.Add(h);
+            ar = new AssaultRifle(new Vector2(2900, 1000));
+            map.weaponList.Add(ar);
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
 

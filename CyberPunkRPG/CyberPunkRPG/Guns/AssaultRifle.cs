@@ -9,50 +9,26 @@ using System.Threading.Tasks;
 
 namespace CyberPunkRPG
 {
-    class AssaultRifle : GameObject
+    class AssaultRifle : InteractiveObject
     {
-        Vector2 speed;
-        Vector2 direction;
-        int maxDistance;
-        float scale = 0.15f;
-        Vector2 startPosition;
-        public bool Visible = false;
-        public Rectangle hitBox;
+        Rectangle sourceRect;
 
-        public AssaultRifle(Vector2 pos, Vector2 speed, Vector2 direction) : base(pos)
+        public AssaultRifle(Vector2 pos) : base(pos)
         {
-            this.direction = direction;
-            this.speed = speed;
-            this.pos = pos;
+            sourceRect = new Rectangle(0, 192, 32, 32);
+            interactHitBox = new Rectangle((int)pos.X, (int)pos.Y, sourceRect.Width, sourceRect.Height);
+            identify = 1;
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Visible)
-            {
-                pos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                hitBox = new Rectangle((int)pos.X, (int)pos.Y, 9, 7);
-            }
 
-            if (Vector2.Distance(startPosition, pos) > maxDistance)
-            {
-                Visible = false;
-            }
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            if(Visible)
-            {
-                sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2 * scale), (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
-            }
-        }
-
-        public void distanceCheckAssault(Vector2 theStartPosition) // Metod för en ny projektil
-        {
-            pos = theStartPosition;                     
-            startPosition = theStartPosition;
-            Visible = true;
+            sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);
+            sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White);
         }
     }
 }

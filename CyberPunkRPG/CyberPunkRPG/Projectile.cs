@@ -132,7 +132,7 @@ namespace CyberPunkRPG
         {
             foreach (Door d in map.doorList)
             {
-                if (hitBox.Intersects(d.interactiveObjectHitBox) && !d.isInteracted)
+                if (hitBox.Intersects(d.doorHitBox) && !d.isInteracted)
                 {
                     Visible = false;
                 }

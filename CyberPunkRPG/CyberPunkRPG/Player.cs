@@ -55,7 +55,7 @@ namespace CyberPunkRPG
         KeyboardState previousKeyboardState;
         MouseState currentMouseState;
         MouseState previousMouseState;
-        weapon activeWeapon;
+        public weapon activeWeapon;
 
         private float weaponTimer;
         private bool weaponFire = false;
@@ -91,7 +91,7 @@ namespace CyberPunkRPG
             dashSpeed = new Vector2(300, 300);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
-            activeWeapon = weapon.assaultRifle;
+            activeWeapon = weapon.sniperRifle;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -202,6 +202,7 @@ namespace CyberPunkRPG
             WireColision();
             EnemyBulletCollision();
             PowerUpCollision();
+            WeaponCollision();
             HandlePowerUpBoosts(gameTime);
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
@@ -432,7 +433,7 @@ namespace CyberPunkRPG
         {
             foreach (InteractiveObject i in map.powerUpList)
             {
-                if (hitBox.Intersects(i.interactHitBox) && i.isInteracted == false && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
+                if (hitBox.Intersects(i.interactHitBox) && !i.isInteracted && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
                 {
                     i.isInteracted = true;
 
@@ -447,6 +448,35 @@ namespace CyberPunkRPG
                     else if (i is InvinciblePickup)
                     {
                         invincibleBoosted = true;
+                    }
+                }
+            }
+        }
+
+        private void WeaponCollision()
+        {
+            foreach (InteractiveObject w in map.weaponList)
+            {
+                if (hitBox.Intersects(w.interactHitBox) && !w.isInteracted && currentKeyboardState.IsKeyDown(Keys.E) && !previousKeyboardState.IsKeyDown(Keys.E))
+                {
+                    w.isInteracted = true;
+                    int weaponType = w.myIdentifier();
+
+                    if (weaponType == 1)
+                    {
+                        activeWeapon = weapon.assaultRifle;
+                    }
+                    if (weaponType == 2)
+                    {
+                        activeWeapon = weapon.sniperRifle;
+                    }
+                    if (weaponType == 3)
+                    {
+                        activeWeapon = weapon.pistol;
+                    }
+                    if (weaponType == 4)
+                    {
+                        activeWeapon = weapon.rocketLauncher;
                     }
                 }
             }
@@ -524,22 +554,22 @@ namespace CyberPunkRPG
         {
             foreach (Door d in map.doorList)
             {
-                if (hitBox.Intersects(d.interactiveObjectHitBox) && d.isInteracted == false)
+                if (hitBox.Intersects(d.doorHitBox) && d.isInteracted == false)
                 {
                     pos = prevPos;
-                    if (hitBox.X > d.interactiveObjectHitBox.Right - 3)
+                    if (hitBox.X > d.doorHitBox.Right - 3)
                     {
                         pos.X += 1;
                     }
-                    if (hitBox.X < d.interactiveObjectHitBox.Left)
+                    if (hitBox.X < d.doorHitBox.Left)
                     {
                         pos.X -= 1;
                     }
-                    if (hitBox.Y < d.interactiveObjectHitBox.Top)
+                    if (hitBox.Y < d.doorHitBox.Top)
                     {
                         pos.Y -= 1;
                     }
-                    if (hitBox.Y > d.interactiveObjectHitBox.Bottom - 3)
+                    if (hitBox.Y > d.doorHitBox.Bottom - 3)
                     {
                         pos.Y += 1;
                     }
@@ -578,7 +608,7 @@ namespace CyberPunkRPG
             {
                 sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.assaultRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
-                sb.DrawString(AssetManager.gameText, "Assaultrifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Assault Rifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Yellow);
             }
             else if (activeWeapon == weapon.sniperRifle && CurrentHealth > 0)
             {

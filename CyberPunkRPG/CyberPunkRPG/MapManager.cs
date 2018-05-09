@@ -18,7 +18,7 @@ namespace CyberPunkRPG
         public List<BarbedWire> barbedWireList = new List<BarbedWire>();
         public List<Spikes> spikeList = new List<Spikes>();
         public List<InteractiveObject> powerUpList = new List<InteractiveObject>();
-        MapManager map;
+        public List<InteractiveObject> weaponList = new List<InteractiveObject>();
 
         public MapManager()
         {
@@ -147,6 +147,20 @@ namespace CyberPunkRPG
                     }
                 }
             }
+
+            foreach (InteractiveObject w in weaponList)
+            {
+                w.Update(gt);
+
+                if (w is AssaultRifle)
+                {
+                    if (w.isInteracted == true)
+                    {
+                        weaponList.Remove(w);
+                        break;
+                    }
+                }
+            }
         }
 
         public void Draw(SpriteBatch sb)
@@ -179,6 +193,11 @@ namespace CyberPunkRPG
             foreach (InteractiveObject i in powerUpList)
             {
                 i.Draw(sb);
+            }
+
+            foreach (InteractiveObject w in weaponList)
+            {
+                w.Draw(sb);
             }
         }
     }

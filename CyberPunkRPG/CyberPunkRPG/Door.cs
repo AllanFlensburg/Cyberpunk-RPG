@@ -12,16 +12,17 @@ namespace CyberPunkRPG
     {
         Rectangle position;
         Rectangle positionOrigin;
+        public Rectangle doorHitBox;
         int doorTimer;
         public Door(Vector2 pos, Rectangle position) : base(pos)
         {
             this.position = position;
-            interactiveObjectHitBox = new Rectangle((int)position.X, (int)position.Y, position.Width, position.Height);
-            if (interactiveObjectHitBox.Width < interactiveObjectHitBox.Height)
+            doorHitBox = new Rectangle((int)position.X, (int)position.Y, position.Width, position.Height);
+            if (doorHitBox.Width < doorHitBox.Height)
             {
                 interactHitBox = new Rectangle((int)position.X - 50, (int)position.Y, position.Width + 100, position.Height);
             }
-            if (interactiveObjectHitBox.Width > interactiveObjectHitBox.Height)
+            if (doorHitBox.Width > doorHitBox.Height)
             {
                 interactHitBox = new Rectangle((int)position.X, (int)position.Y - 50, position.Width, position.Height + 100);
             }
