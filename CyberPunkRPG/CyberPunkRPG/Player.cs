@@ -88,7 +88,7 @@ namespace CyberPunkRPG
             invincibleBoosted = false;
             doDeathAnimation = false;
             gameOver = false;
-            dashSpeed = new Vector2(300, 300);
+            dashSpeed = new Vector2(200, 200);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
             activeWeapon = weapon.sniperRifle;
@@ -293,7 +293,7 @@ namespace CyberPunkRPG
             {
                 pos += dashSpeed * GetDirection(endPosition - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (Vector2.Distance(startingPosition, pos) > 200)
+                if (Vector2.Distance(startingPosition, pos) > 120)
                 {
                     jumping = false;
                     startingPosition = Vector2.Zero;
@@ -405,28 +405,59 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(w.hitBox))
                 {
-                    pos = prevPos;
+                    if (!jumping)
+                    {
+                        pos = prevPos;
+                    }
                     hitBox.X = (int)pos.X + 20;
                     hitBox.Y = (int)pos.Y + 10;
 
                     if (hitBox.X > w.hitBox.Right -3)
                     {
                         pos.X += 2;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X += 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.X < w.hitBox.Left)
                     {
                         pos.X -= 2;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X -= 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.Y < w.hitBox.Top)
                     {
                         pos.Y -= 2;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y -= 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.Y > w.hitBox.Bottom -3)
                     {
                         pos.Y += 2;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y += 20;
+                            JumpReset();
+                        }
                     }
                 }
             }
+        }
+
+        private void JumpReset()
+        {
+            endPosition = endPosition * -1;
+            jumping = false;
+            startingPosition = Vector2.Zero;
+            endPosition = Vector2.Zero;
         }
 
         private void PowerUpCollision()
@@ -437,9 +468,13 @@ namespace CyberPunkRPG
                 {
                     i.isInteracted = true;
 
-                    if (i is HealthPickup && CurrentHealth <= 90)
+                    if (i is HealthPickup)
                     {
                         CurrentHealth += 25;
+                        if (CurrentHealth > 100)
+                        {
+                            CurrentHealth = 100;
+                        }
                     }
                     else if (i is Speedpickup)
                     {
@@ -593,6 +628,20 @@ namespace CyberPunkRPG
             if (CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
+
+                if (speedBoosted)
+                {
+                    Rectangle sourceRect = new Rectangle(0, 160, 32, 32);
+                    sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 550, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
+                    sb.DrawString(AssetManager.gameText, "Speedboost: " + (int)speedBoostTimer, new Vector2(pos.X - 560, pos.Y - 540), Color.Yellow);
+                }
+
+                if (invincibleBoosted)
+                {
+                    Rectangle sourceRect = new Rectangle(96, 160, 32, 32);
+                    sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 450, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
+                    sb.DrawString(AssetManager.gameText, "Invincible: " + (int)invincibleTimer, new Vector2(pos.X - 450, pos.Y - 540), Color.Yellow);
+                }
             }
             else
             {
