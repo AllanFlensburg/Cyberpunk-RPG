@@ -23,8 +23,8 @@ namespace CyberPunkRPG
 
         public RocketLauncher(Vector2 pos) : base(pos)
         {
-            sourceRect = new Rectangle(0, 32, 32, 32);
-            interactHitBox = new Rectangle((int)pos.X, (int)pos.Y, sourceRect.Width, sourceRect.Height);
+            sourceRect = new Rectangle(0, 32, 32, 12);
+            interactHitBox = new Rectangle((int)pos.X - 6, (int)pos.Y - 6, sourceRect.Width + 12, sourceRect.Height + 12);
             identify = 4;
             //this.direction = direction;
             //this.speed = speed;

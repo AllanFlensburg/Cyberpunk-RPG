@@ -133,7 +133,7 @@ namespace CyberPunkRPG
             switch (currentGameState)
             {
                 case GameState.Menu:
-                    camera.SetPosition(new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2));
+                    camera.SetPosition(new Vector2(Window.ClientBounds.Width / 2 + 200, Window.ClientBounds.Height / 2));
                     break;
                 case GameState.PlayingGame:
                     EndGame();

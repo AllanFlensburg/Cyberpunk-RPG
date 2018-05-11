@@ -1,18 +1,20 @@
 PRIO 1
 Dash-funktion är delvis fixad, dash in från höger och nedifrån behöver en fix
 Cooldown för dash-funktion, så att man inte bara kan hålla ned space
-Fixa vapenklasserna, så att de kan placeras ut via MyMap.txt
+Fixa vapenklasserna, så att de kan placeras ut via MyMap.txt och texturerna ska ritas ut på rätt sätt
+Få pistol och rocketlauncher att funka
 Göra en spelbar level-layout
 
 PRIO 2
+När man byter vapen ska de placeras ut i världen så att de kan plockas upp igen
 HUD ska ritas ut högst ut, player ska också helst ritas ut över enemies
 Player & Enemy kan skjuta genom väggar om de själva går in i väggen
 Lägga till sprites för level dekoration, t.ex bord & stolar
-Spikes-fälla (ska skada spelare)
 Organisera spaghetti-koden
 
 
 PRIO 3
+Spikes-fälla (ska skada spelare)
 Göra så att musik aktiveras efter att man tagit sig till en viss del av leveln ELLER efter en viss tid
 Animationer för enemy (Kan förfinas)
 Förfinad HUD
