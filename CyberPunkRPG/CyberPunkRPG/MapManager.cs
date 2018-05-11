@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CyberPunkRPG.Guns;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -152,7 +153,7 @@ namespace CyberPunkRPG
             {
                 w.Update(gt);
 
-                if (w is AssaultRifle)
+                if (w is AssaultRifle || w is Pistol || w is SniperRifle || w is RocketLauncher)
                 {
                     if (w.isInteracted == true)
                     {

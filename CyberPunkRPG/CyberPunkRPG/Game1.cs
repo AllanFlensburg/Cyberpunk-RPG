@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CyberPunkRPG.Guns;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -29,6 +30,9 @@ namespace CyberPunkRPG
         InvinciblePickup i;
         Speedpickup s;
         AssaultRifle ar;
+        Pistol p;
+        SniperRifle sr;
+        RocketLauncher rl;
 
         List<Enemy> enemyList = new List<Enemy>();
 
@@ -85,6 +89,13 @@ namespace CyberPunkRPG
             map.powerUpList.Add(h);
             ar = new AssaultRifle(new Vector2(2900, 1000));
             map.weaponList.Add(ar);
+            p = new Pistol(new Vector2(2850, 1000));
+            map.weaponList.Add(p);
+            sr = new SniperRifle(new Vector2(2800, 1000));
+            map.weaponList.Add(sr);
+            rl = new RocketLauncher(new Vector2(2800, 920));
+            map.weaponList.Add(rl);
+
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
 

@@ -19,10 +19,10 @@ namespace CyberPunkRPG
         //public Rectangle hitBox;
         Rectangle sourceRect;
 
-        public SniperRifle(Vector2 pos, Vector2 speed, Vector2 direction) : base(pos)
+        public SniperRifle(Vector2 pos) : base(pos)
         {
-            sourceRect = new Rectangle(0, 192, 64, 64);
-            interactHitBox = new Rectangle((int)pos.X, (int)pos.Y, sourceRect.Width, sourceRect.Height);
+            sourceRect = new Rectangle(30, 230, 32, 12);
+            interactHitBox = new Rectangle((int)pos.X - 6, (int)pos.Y - 6 , sourceRect.Width + 12, sourceRect.Height + 12);
             identify = 2;
             //this.direction = direction;
             //this.speed = speed;
@@ -45,6 +45,8 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
+            sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);
+            sb.Draw(AssetManager.sniperRifleTex, sourceRect, Color.White);
         //    if (Visible)
         //    {
         //        sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2 * scale), (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);

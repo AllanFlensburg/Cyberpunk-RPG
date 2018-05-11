@@ -1,16 +1,18 @@
 PRIO 1
-Dash-funktion fastnar i vägg, ska fixas
-Fixa vapenklasserna
+Dash-funktion är delvis fixad, dash in från höger och nedifrån behöver en fix
+Cooldown för dash-funktion, så att man inte bara kan hålla ned space
+Fixa vapenklasserna, så att de kan placeras ut via MyMap.txt
 Göra en spelbar level-layout
 
 PRIO 2
+HUD ska ritas ut högst ut, player ska också helst ritas ut över enemies
 Player & Enemy kan skjuta genom väggar om de själva går in i väggen
-Öppna/stänga/låsta dörrar
-Lägga till power-ups
+Lägga till sprites för level dekoration, t.ex bord & stolar
+Spikes-fälla (ska skada spelare)
+Organisera spaghetti-koden
 
 
 PRIO 3
-Fixa fällor (lägga till spikes som skadar player)
+Göra så att musik aktiveras efter att man tagit sig till en viss del av leveln ELLER efter en viss tid
 Animationer för enemy (Kan förfinas)
 Förfinad HUD
-Lägga till sprites för level dekoration, t.ex bord & stolar

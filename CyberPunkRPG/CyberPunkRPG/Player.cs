@@ -91,7 +91,7 @@ namespace CyberPunkRPG
             dashSpeed = new Vector2(200, 200);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
-            activeWeapon = weapon.sniperRifle;
+            activeWeapon = weapon.assaultRifle;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -500,18 +500,22 @@ namespace CyberPunkRPG
                     if (weaponType == 1)
                     {
                         activeWeapon = weapon.assaultRifle;
+                        ammoCount = 30;
                     }
                     if (weaponType == 2)
                     {
                         activeWeapon = weapon.sniperRifle;
+                        ammoCount = 5;
                     }
                     if (weaponType == 3)
                     {
                         activeWeapon = weapon.pistol;
+                        ammoCount = 8;
                     }
                     if (weaponType == 4)
                     {
                         activeWeapon = weapon.rocketLauncher;
+                        ammoCount = 1;
                     }
                 }
             }
@@ -624,7 +628,7 @@ namespace CyberPunkRPG
         public override void Draw(SpriteBatch sb)
         {
             Rectangle uiWeapon = new Rectangle(0, 192, 64, 64);
-            /*sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red);*/ //ritar ut karaktärens hitbox för att testa kollision
+            //sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red);  //ritar ut karaktärens hitbox för att testa kollision
             if (CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);

@@ -23,7 +23,7 @@ namespace CyberPunkRPG
 
         public RocketLauncher(Vector2 pos) : base(pos)
         {
-            sourceRect = new Rectangle(0, 192, 64, 64);
+            sourceRect = new Rectangle(0, 32, 32, 32);
             interactHitBox = new Rectangle((int)pos.X, (int)pos.Y, sourceRect.Width, sourceRect.Height);
             identify = 4;
             //this.direction = direction;
@@ -48,6 +48,7 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
+            sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);
             //if (Visible)
             //{
             //    sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2 * scale), (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);

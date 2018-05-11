@@ -14,8 +14,8 @@ namespace CyberPunkRPG.Guns
 
         public Pistol(Vector2 pos) : base(pos)
         {
-            sourceRect = new Rectangle(0, 192, 64, 64);
-            interactHitBox = new Rectangle((int)pos.X, (int)pos.Y, sourceRect.Width, sourceRect.Height);
+            sourceRect = new Rectangle(30, 228, 32, 12);
+            interactHitBox = new Rectangle((int)pos.X - 6, (int)pos.Y - 6, sourceRect.Width + 12, sourceRect.Height + 12);
             identify = 3;
         }
 
@@ -26,7 +26,8 @@ namespace CyberPunkRPG.Guns
 
         public override void Draw(SpriteBatch sb)
         {
-
+            sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);
+            sb.Draw(AssetManager.pistolTex, sourceRect, Color.White);
         }
     }
 }
