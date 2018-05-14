@@ -7,7 +7,6 @@ Göra en spelbar level-layout
 
 PRIO 2
 När man byter vapen ska de placeras ut i världen så att de kan plockas upp igen
-HUD ska ritas ut högst ut, player ska också helst ritas ut över enemies
 Player & Enemy kan skjuta genom väggar om de själva går in i väggen
 Lägga till sprites för level dekoration, t.ex bord & stolar
 Organisera spaghetti-koden
