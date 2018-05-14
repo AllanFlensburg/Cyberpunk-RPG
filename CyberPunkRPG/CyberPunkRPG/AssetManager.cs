@@ -7,6 +7,9 @@ namespace CyberPunkRPG
     class AssetManager
     {
         public static Texture2D groundTex1 { get; private set; }
+        public static Texture2D groundTex2 { get; private set; }
+        public static Texture2D groundTex3 { get; private set; }
+        public static Texture2D groundTex4 { get; private set; }
         public static Texture2D playerTex { get; private set; }
         public static Texture2D basicEnemyTex { get; private set; }
         public static Texture2D strongEnemyTex { get; private set; }
@@ -34,6 +37,9 @@ namespace CyberPunkRPG
         public static void LoadContent(ContentManager Content)
         {
             groundTex1 = Content.Load<Texture2D>("images/Ground1_01");
+            groundTex2 = Content.Load<Texture2D>("images/Ground1_02");
+            groundTex3 = Content.Load<Texture2D>("images/Ground1_03");
+            groundTex4 = Content.Load<Texture2D>("images/Ground1_04");
             playerTex = Content.Load<Texture2D>("AgentShoot");
             basicEnemyTex = Content.Load<Texture2D>("Armor2Shoot");
             strongEnemyTex = Content.Load<Texture2D>("ArmorShoot");

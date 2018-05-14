@@ -44,7 +44,7 @@ namespace CyberPunkRPG
         bool wonTheGame;
         bool lostTheGame;
         BarbedWire b;
-
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -170,7 +170,10 @@ namespace CyberPunkRPG
                     spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to start game", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     break;
                 case GameState.PlayingGame:
-                    spriteBatch.Draw(AssetManager.groundTex1, Vector2.Zero, Color.White);
+                    spriteBatch.Draw(AssetManager.groundTex1, new Vector2(0, 0), Color.White);
+                    spriteBatch.Draw(AssetManager.groundTex2, new Vector2(4000, 0), Color.White);
+                    spriteBatch.Draw(AssetManager.groundTex3, new Vector2(0, 4000), Color.White);
+                    spriteBatch.Draw(AssetManager.groundTex4, new Vector2(4001, 4000), Color.White);
                     spriteBatch.Draw(AssetManager.doorTex, endPos, Color.White);
                     map.Draw(spriteBatch);
                     player.Draw(spriteBatch);
