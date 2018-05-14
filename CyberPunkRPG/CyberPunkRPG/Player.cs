@@ -35,6 +35,7 @@ namespace CyberPunkRPG
         private Rectangle healthbarEdgesSource;
         float playerSpeed;
         int ammoCount;
+        int ammoCapacity;
         int maxDistance;
         GameWindow window;
         public int CurrentHealth = 100;
@@ -77,7 +78,6 @@ namespace CyberPunkRPG
             this.game = game;
             this.map = map;
             playerSpeed = 120;
-            ammoCount = 8;
             invincibleTimer = 5;
             speedBoostTimer = 5;
             reloadTimer = 1.5f;
@@ -102,9 +102,10 @@ namespace CyberPunkRPG
             healthbarSource = new Rectangle(0, 45, healthbarWidth, healthbarHeight);
             healthbarEdgesSource = new Rectangle(0, 0, healthbarWidth, healthbarHeight);
 
+            CheckActiveWeapon();
             if (activeWeapon == weapon.assaultRifle)
             {
-                ammoCount = 30;
+                ammoCapacity = 30;
                 reloadTime = 2.0f;
                 reloadTimer = 2.0f;
                 maxDistance = 600;
@@ -112,7 +113,7 @@ namespace CyberPunkRPG
             else if (activeWeapon == weapon.sniperRifle)
             {
                 damage = 50;
-                ammoCount = 5;
+                ammoCapacity = 5;
                 reloadTime = 3.0f;
                 reloadTimer = 3.0f;
                 projectileSpeed = new Vector2(1000, 1000);
@@ -121,7 +122,7 @@ namespace CyberPunkRPG
             }
             else if (activeWeapon == weapon.pistol)
             {
-                ammoCount = 8;
+                ammoCapacity = 8;
                 reloadTime = 1.5f;
                 reloadTimer = 1.5f;
                 maxDistance = 500;
@@ -130,7 +131,7 @@ namespace CyberPunkRPG
             //Inte klar
             else if (activeWeapon == weapon.rocketLauncher)
             {
-                ammoCount = 1;
+                ammoCapacity = 1;
                 reloadTime = 6.0f;
                 reloadTimer = 6.0f;
                 maxDistance = 1000;
@@ -302,6 +303,31 @@ namespace CyberPunkRPG
             }
         }
 
+        public void CheckActiveWeapon()
+        {
+            if (activeWeapon == weapon.assaultRifle)
+            {
+                ammoCapacity = 30;
+                ammoCount = ammoCapacity;
+            }
+
+            else if (activeWeapon == weapon.sniperRifle)
+            {
+                ammoCapacity = 5;
+                ammoCount = ammoCapacity;
+            }
+            else if (activeWeapon == weapon.pistol)
+            {
+                ammoCapacity = 8;
+                ammoCount = ammoCapacity;
+            }
+            else if (activeWeapon == weapon.rocketLauncher)
+            {
+                ammoCapacity = 1;
+                ammoCount = ammoCapacity;
+            }
+        }
+
         private void WireColision()
         {
             foreach (BarbedWire b in map.barbedWireList)
@@ -322,8 +348,9 @@ namespace CyberPunkRPG
 
         private void Reload(KeyboardState currentKeyboardState, GameTime gameTime)
         {
-            if (currentKeyboardState.IsKeyDown(Keys.R) == true)
+            if (currentKeyboardState.IsKeyDown(Keys.R) == true && ammoCapacity != ammoCount)
             {
+                CheckActiveWeapon();
                 reloading = true;
             }
 
@@ -336,25 +363,21 @@ namespace CyberPunkRPG
                     if (activeWeapon == weapon.pistol)
                     {
                         reloading = false;
-                        ammoCount = 8;
                         reloadTimer = reloadTime;
                     }
                     else if (activeWeapon == weapon.assaultRifle)
                     {
                         reloading = false;
-                        ammoCount = 30;
                         reloadTimer = reloadTime;
                     }
                     else if (activeWeapon == weapon.sniperRifle)
                     {
                         reloading = false;
-                        ammoCount = 5;
                         reloadTimer = reloadTime;
                     }
                     else if (activeWeapon == weapon.rocketLauncher)
                     {
                         reloading = false;
-                        ammoCount = 1;
                         reloadTimer = reloadTime;
                     }
                 }
@@ -517,6 +540,8 @@ namespace CyberPunkRPG
                         activeWeapon = weapon.rocketLauncher;
                         ammoCount = 1;
                     }
+
+                    CheckActiveWeapon();
                 }
             }
         }

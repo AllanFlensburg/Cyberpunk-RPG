@@ -16,7 +16,7 @@ namespace CyberPunkRPG.Guns
         {
             sourceRect = new Rectangle(30, 228, 32, 12);
             interactHitBox = new Rectangle((int)pos.X - 6, (int)pos.Y - 6, sourceRect.Width + 12, sourceRect.Height + 12);
-            identify = 3;
+            weaponID = 3;
         }
 
         public override void Update(GameTime gameTime)

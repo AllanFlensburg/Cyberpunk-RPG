@@ -25,7 +25,7 @@ namespace CyberPunkRPG
         {
             sourceRect = new Rectangle(0, 32, 32, 12);
             interactHitBox = new Rectangle((int)pos.X - 6, (int)pos.Y - 6, sourceRect.Width + 12, sourceRect.Height + 12);
-            identify = 4;
+            weaponID = 4;
             //this.direction = direction;
             //this.speed = speed;
             //this.pos = pos;

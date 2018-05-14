@@ -12,7 +12,7 @@ namespace CyberPunkRPG
     {
         public Rectangle interactHitBox;
         public bool isInteracted = false;
-        protected int identify;
+        protected int weaponID;
 
         public InteractiveObject(Vector2 pos) : base(pos)
         {
@@ -26,7 +26,7 @@ namespace CyberPunkRPG
         
         public int myIdentifier()
         {
-            return identify;
+            return weaponID;
         }
 
 

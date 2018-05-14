@@ -15,6 +15,7 @@ Organisera spaghetti-koden
 
 PRIO 3
 Spikes-fälla (ska skada spelare)
+Lägga till ljud för skotten
 Göra så att musik aktiveras efter att man tagit sig till en viss del av leveln ELLER efter en viss tid
 Animationer för enemy (Kan förfinas)
 Förfinad HUD
