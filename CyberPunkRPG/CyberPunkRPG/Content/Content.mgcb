@@ -254,7 +254,7 @@
 /processorParam:TextureFormat=Color
 /build:AgentWalkSouth.png
 
-#begin images/Ground1_01.jpg
+#begin Ground1_01.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -264,9 +264,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Ground1_01.jpg
+/build:Ground1_01.jpg
 
-#begin images/Ground1_02.jpg
+#begin Ground1_02.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -276,9 +276,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Ground1_02.jpg
+/build:Ground1_02.jpg
 
-#begin images/Ground1_03.jpg
+#begin Ground1_03.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -288,9 +288,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Ground1_03.jpg
+/build:Ground1_03.jpg
 
-#begin images/Ground1_04.jpg
+#begin Ground1_04.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -300,5 +300,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Ground1_04.jpg
+/build:Ground1_04.jpg
 
