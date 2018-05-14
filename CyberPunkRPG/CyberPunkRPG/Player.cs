@@ -348,7 +348,7 @@ namespace CyberPunkRPG
 
         private void Reload(KeyboardState currentKeyboardState, GameTime gameTime)
         {
-            if (currentKeyboardState.IsKeyDown(Keys.R) == true && ammoCapacity != ammoCount)
+            if (currentKeyboardState.IsKeyDown(Keys.R) == true && ammoCapacity != ammoCount && CurrentHealth > 0)
             {
                 CheckActiveWeapon();
                 reloading = true;
