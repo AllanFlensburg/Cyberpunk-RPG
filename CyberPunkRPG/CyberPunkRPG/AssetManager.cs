@@ -36,10 +36,10 @@ namespace CyberPunkRPG
 
         public static void LoadContent(ContentManager Content)
         {
-            groundTex1 = Content.Load<Texture2D>("images/Ground1_01");
-            groundTex2 = Content.Load<Texture2D>("images/Ground1_02");
-            groundTex3 = Content.Load<Texture2D>("images/Ground1_03");
-            groundTex4 = Content.Load<Texture2D>("images/Ground1_04");
+            groundTex1 = Content.Load<Texture2D>("Ground1_01");
+            groundTex2 = Content.Load<Texture2D>("Ground1_02");
+            groundTex3 = Content.Load<Texture2D>("Ground1_03");
+            groundTex4 = Content.Load<Texture2D>("Ground1_04");
             playerTex = Content.Load<Texture2D>("AgentShoot");
             basicEnemyTex = Content.Load<Texture2D>("Armor2Shoot");
             strongEnemyTex = Content.Load<Texture2D>("ArmorShoot");

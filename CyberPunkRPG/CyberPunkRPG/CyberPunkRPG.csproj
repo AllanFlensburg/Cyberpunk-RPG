@@ -93,6 +93,10 @@
     <Content Include="Content\CyberPunk_Chronicles.mp3" />
     <Content Include="Content\door.png" />
     <Content Include="Content\Explosion.png" />
+    <Content Include="Content\Ground1_01.jpg" />
+    <Content Include="Content\Ground1_02.jpg" />
+    <Content Include="Content\Ground1_03.jpg" />
+    <Content Include="Content\Ground1_04.jpg" />
     <Content Include="Content\healthbar.png" />
     <Content Include="Content\LightsUp_Spritesheet.png" />
     <Content Include="Content\Pistols.png" />

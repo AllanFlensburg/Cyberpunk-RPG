@@ -171,11 +171,11 @@ namespace CyberPunkRPG
                     break;
                 case GameState.PlayingGame:
 
-                    spriteBatch.Draw(AssetManager.doorTex, endPos, Color.White);
                     map.Draw(spriteBatch);
-                    player.Draw(spriteBatch);
+                    spriteBatch.Draw(AssetManager.doorTex, endPos, Color.White);
                     enemyManager.Draw(spriteBatch);
                     projectileManager.Draw(spriteBatch);
+                    player.Draw(spriteBatch);
                     break;
                 case GameState.GameOver:
                     if (wonTheGame)
