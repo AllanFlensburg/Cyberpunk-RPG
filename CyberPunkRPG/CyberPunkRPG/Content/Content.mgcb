@@ -266,7 +266,7 @@
 /processorParam:TextureFormat=Color
 /build:images/Ground1_01.jpg
 
-#begin images/Ground1_02.gif
+#begin images/Ground1_02.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -276,9 +276,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Ground1_02.gif
+/build:images/Ground1_02.jpg
 
-#begin images/Ground1_03.gif
+#begin images/Ground1_03.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -288,7 +288,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Ground1_03.gif
+/build:images/Ground1_03.jpg
 
 #begin images/Ground1_04.jpg
 /importer:TextureImporter
