@@ -45,9 +45,12 @@ namespace CyberPunkRPG
         bool speedBoosted;
         bool invincibleBoosted;
         bool doDeathAnimation;
+        bool readyToDash;
         public bool gameOver;
         float speedBoostTimer;
         float invincibleTimer;
+        float dashTimer;
+        float dashCooldown;
         float reloadTimer;
         float reloadTime;
         float deathAnimationTimer;
@@ -80,14 +83,18 @@ namespace CyberPunkRPG
             playerSpeed = 120;
             invincibleTimer = 5;
             speedBoostTimer = 5;
+            dashTimer = 2f;
+            dashCooldown = 2f;
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
             deathAnimationTimer = 3.6f;
+            readyToDash = true;
             reloading = false;
             speedBoosted = false;
             invincibleBoosted = false;
             doDeathAnimation = false;
             gameOver = false;
+            
             dashSpeed = new Vector2(200, 200);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
@@ -140,6 +147,15 @@ namespace CyberPunkRPG
 
         public override void Update(GameTime gameTime)
         {
+            if (!readyToDash)
+            {
+                dashTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (dashTimer <= 0)
+            {
+                dashTimer = dashCooldown;
+                readyToDash = true;
+            }
             bool noCollision = true;
             int status = 0;
             if (CurrentHealth <= 0)
@@ -282,8 +298,9 @@ namespace CyberPunkRPG
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 }
 
-                if (currentKeyboardState.IsKeyDown(Keys.Space) == true)
+                if (currentKeyboardState.IsKeyDown(Keys.Space) == true && readyToDash)
                 {
+                    readyToDash = false;
                     startingPosition = pos;
                     endPosition = pos += GetDirection(worldPosition - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     jumping = true;
