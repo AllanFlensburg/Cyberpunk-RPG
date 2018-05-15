@@ -5,7 +5,9 @@ using Microsoft.Xna.Framework.Media;
 namespace CyberPunkRPG
 {
     class AssetManager
-    {
+    {   
+        public static Texture2D winTex { get; private set; }
+        public static Texture2D endTex { get; private set; }
         public static Texture2D titleTex { get; private set; }
         public static Texture2D groundTex1 { get; private set; }
         public static Texture2D groundTex2 { get; private set; }
@@ -37,6 +39,8 @@ namespace CyberPunkRPG
 
         public static void LoadContent(ContentManager Content)
         {
+            winTex = Content.Load<Texture2D>("Win");
+            endTex = Content.Load<Texture2D>("End");
             titleTex = Content.Load<Texture2D>("Title");
             groundTex1 = Content.Load<Texture2D>("Ground1_01");
             groundTex2 = Content.Load<Texture2D>("Ground1_02");
