@@ -38,7 +38,7 @@ namespace CyberPunkRPG
         int ammoCapacity;
         int maxDistance;
         GameWindow window;
-        public int CurrentHealth = 100;
+        public float CurrentHealth = 100f;
         private int healthbarWidth = 467;
         private int healthbarHeight = 44;
         bool reloading;
@@ -217,6 +217,7 @@ namespace CyberPunkRPG
             Animation(gameTime);
             InteractCollision();
             WireColision();
+            SpikeColision(gameTime);
             EnemyBulletCollision();
             PowerUpCollision();
             WeaponCollision();
@@ -359,6 +360,17 @@ namespace CyberPunkRPG
                 {
                     playerSpeed = 100;
                     wireColision = false;
+                }
+            }
+        }
+
+        private void SpikeColision(GameTime gameTime)
+        {
+            foreach (Spikes s in map.spikeList)
+            {
+                if (hitBox.Intersects(s.hitBox) && CurrentHealth > 0)
+                {
+                    CurrentHealth = CurrentHealth - (s.damage * (float)gameTime.ElapsedGameTime.TotalSeconds);
                 }
             }
         }

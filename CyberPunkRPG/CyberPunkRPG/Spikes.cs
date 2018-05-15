@@ -18,7 +18,7 @@ namespace CyberPunkRPG
         {
             this.position = position;
             hitBox = position;
-            damage = 1;
+            damage = 2;
         }
 
         public override void Draw(SpriteBatch sb)
