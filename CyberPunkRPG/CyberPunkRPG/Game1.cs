@@ -159,7 +159,7 @@ namespace CyberPunkRPG
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkSlateGray);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetTransformation(view));
             Window.Title = "Cyberpunk-RPG";
@@ -186,7 +186,7 @@ namespace CyberPunkRPG
                     else if (lostTheGame)
                     {
                         spriteBatch.DrawString(AssetManager.gameText, "You lost the game!", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-                        spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to try agian", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2 + 30), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+                        spriteBatch.DrawString(AssetManager.gameText, "Press ENTER to try again", new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2 + 30), Color.Yellow, 0, Vector2.Zero, 2, SpriteEffects.None, 1);
                     }
                     break;
             }
