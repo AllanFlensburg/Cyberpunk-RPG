@@ -477,7 +477,7 @@ namespace CyberPunkRPG
                     hitBox.X = (int)pos.X + 20;
                     hitBox.Y = (int)pos.Y + 10;
 
-                    if (hitBox.X > w.hitBox.Right -3)
+                    if (hitBox.X > w.hitBox.Right -10)
                     {
                         pos.X += 2;
                         if (jumping)
@@ -504,7 +504,7 @@ namespace CyberPunkRPG
                             JumpReset();
                         }
                     }
-                    if (hitBox.Y > w.hitBox.Bottom -3)
+                    if (hitBox.Y > w.hitBox.Bottom -6)
                     {
                         pos.Y += 2;
                         if (jumping)
