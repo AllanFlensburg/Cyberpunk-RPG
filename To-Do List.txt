@@ -1,6 +1,6 @@
 PRIO 1
 Dash-funktion är delvis fixad, dash in från höger och nedifrån behöver en fix
-Fixa vapenklasserna, så att de kan placeras ut via MyMap.txt och texturerna ska ritas ut på rätt sätt
+Fixa vapenklasserna, så att de kan placeras ut via MyMap.txt
 Få pistol och rocketlauncher att funka
 Göra en spelbar level-layout
 

@@ -27,7 +27,7 @@ namespace CyberPunkRPG.Guns
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);
-            sb.Draw(AssetManager.pistolTex, sourceRect, Color.White);
+            sb.Draw(AssetManager.pistolTex, pos, sourceRect, Color.White);
         }
     }
 }

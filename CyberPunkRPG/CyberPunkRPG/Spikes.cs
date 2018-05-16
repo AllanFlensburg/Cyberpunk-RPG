@@ -13,17 +13,22 @@ namespace CyberPunkRPG
         Rectangle position;
         public Rectangle hitBox;
         public int damage;
+        public bool isHidden;
 
         public Spikes(Vector2 pos, Rectangle position) : base(pos)
         {
             this.position = position;
             hitBox = position;
             damage = 2;
+            isHidden = true;
         }
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.spikeTex, position, Color.White);
+            if (!isHidden)
+            {
+                sb.Draw(AssetManager.spikeTex, position, Color.White);
+            }
         }
     }
 }

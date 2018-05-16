@@ -29,9 +29,9 @@ namespace CyberPunkRPG
         HealthPickup h;
         InvinciblePickup i;
         Speedpickup s;
-        AssaultRifle ar;
-        Pistol p;
-        SniperRifle sr;
+        InteractiveObject ar;
+        InteractiveObject p;
+        InteractiveObject sr;
         RocketLauncher rl;
 
         List<Enemy> enemyList = new List<Enemy>();
@@ -93,8 +93,8 @@ namespace CyberPunkRPG
             map.weaponList.Add(p);
             sr = new SniperRifle(new Vector2(2800, 1000));
             map.weaponList.Add(sr);
-            rl = new RocketLauncher(new Vector2(2800, 920));
-            map.weaponList.Add(rl);
+            //rl = new RocketLauncher(new Vector2(2800, 920));
+            //map.weaponList.Add(rl);
 
             //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
             //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox

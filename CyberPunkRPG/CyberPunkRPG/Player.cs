@@ -368,6 +368,12 @@ namespace CyberPunkRPG
         {
             foreach (Spikes s in map.spikeList)
             {
+                if (hitBox.Intersects(s.hitBox) && s.isHidden == true)
+                {
+                    s.isHidden = false;
+                    CurrentHealth -= 10;
+                }
+
                 if (hitBox.Intersects(s.hitBox) && CurrentHealth > 0)
                 {
                     CurrentHealth = CurrentHealth - (s.damage * (float)gameTime.ElapsedGameTime.TotalSeconds);

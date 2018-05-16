@@ -48,7 +48,7 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);
+            sb.Draw(AssetManager.doorTex, pos, interactHitBox, Color.Red);
             //if (Visible)
             //{
             //    sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2 * scale), (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
