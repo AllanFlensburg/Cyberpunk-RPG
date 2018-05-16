@@ -36,7 +36,6 @@ namespace CyberPunkRPG
             if (lives == 30)
             {
                 {
-                    sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red); //Ritar ut enemy hitbox för testning
                     sb.Draw(AssetManager.strongEnemyTex, pos, sourceRect, Color.White);
                     sb.Draw(AssetManager.sniperRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 }

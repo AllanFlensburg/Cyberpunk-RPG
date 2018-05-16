@@ -25,7 +25,6 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.doorTex, interactHitBox, Color.Red);//Ritar ut interactHitbox
             sb.Draw(AssetManager.pickupTex, pos, sourceRect, Color.White);
         }
     }

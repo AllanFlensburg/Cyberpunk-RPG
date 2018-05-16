@@ -14,7 +14,6 @@ namespace CyberPunkRPG
         pistol,
         assaultRifle,
         sniperRifle,
-        rocketLauncher,
     }
     class Player : GameObject
     {
@@ -135,15 +134,6 @@ namespace CyberPunkRPG
                 reloadTime = 0.1f;
                 reloadTimer = 1.5f;
                 maxDistance = 500;
-            }
-
-            //Inte klar
-            else if (activeWeapon == weapon.rocketLauncher)
-            {
-                ammoCapacity = 1;
-                reloadTime = 6.0f;
-                reloadTimer = 6.0f;
-                maxDistance = 1000;
             }
         }
 
@@ -345,11 +335,6 @@ namespace CyberPunkRPG
                 ammoCapacity = 8;
                 ammoCount = ammoCapacity;
             }
-            else if (activeWeapon == weapon.rocketLauncher)
-            {
-                ammoCapacity = 1;
-                ammoCount = ammoCapacity;
-            }
         }
 
         private void WireColision()
@@ -412,11 +397,6 @@ namespace CyberPunkRPG
                         reloadTimer = reloadTime;
                     }
                     else if (activeWeapon == weapon.sniperRifle)
-                    {
-                        reloading = false;
-                        reloadTimer = reloadTime;
-                    }
-                    else if (activeWeapon == weapon.rocketLauncher)
                     {
                         reloading = false;
                         reloadTimer = reloadTime;
@@ -576,11 +556,6 @@ namespace CyberPunkRPG
                     {
                         activeWeapon = weapon.pistol;
                         ammoCount = 8;
-                    }
-                    if (weaponType == 4)
-                    {
-                        activeWeapon = weapon.rocketLauncher;
-                        ammoCount = 1;
                     }
 
                     CheckActiveWeapon();

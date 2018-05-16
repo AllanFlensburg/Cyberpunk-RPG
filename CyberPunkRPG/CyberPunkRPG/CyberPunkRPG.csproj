@@ -67,7 +67,6 @@
     <Compile Include="ProjectileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Guns\SniperRifle.cs" />
-    <Compile Include="Guns\RocketLauncher.cs" />
     <Compile Include="Speedpickup.cs" />
     <Compile Include="Spikes.cs" />
     <Compile Include="StrongEnemy.cs" />

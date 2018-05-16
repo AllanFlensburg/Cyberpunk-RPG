@@ -1,0 +1,9 @@
+
+
+Rör sig - "W", "A", "S", "D"
+
+Dash - "Space"
+
+Skjut - Mus
+
+Musik - F1-F5

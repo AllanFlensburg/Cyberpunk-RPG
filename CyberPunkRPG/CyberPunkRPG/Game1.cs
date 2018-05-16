@@ -110,8 +110,9 @@ namespace CyberPunkRPG
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
-
+            }
             currentKeyboardState = Keyboard.GetState();
 
             switch (currentGameState)
@@ -196,9 +197,13 @@ namespace CyberPunkRPG
         private bool ButtonPressed()
         {
             if (currentKeyboardState.IsKeyUp(Keys.Enter) && lastKeyboardState.IsKeyDown(Keys.Enter))
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public Vector2 GetDirection(Vector2 dir)
