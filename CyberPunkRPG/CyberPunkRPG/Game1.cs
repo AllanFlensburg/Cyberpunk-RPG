@@ -32,7 +32,6 @@ namespace CyberPunkRPG
         InteractiveObject ar;
         InteractiveObject p;
         InteractiveObject sr;
-        RocketLauncher rl;
 
         List<Enemy> enemyList = new List<Enemy>();
 
