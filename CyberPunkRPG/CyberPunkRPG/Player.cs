@@ -87,7 +87,7 @@ namespace CyberPunkRPG
             dashCooldown = 2f;
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
-            deathAnimationTimer = 3.6f;
+            deathAnimationTimer = 3.5f;
             readyToDash = true;
             reloading = false;
             speedBoosted = false;
