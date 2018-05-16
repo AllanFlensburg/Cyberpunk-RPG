@@ -166,7 +166,7 @@ namespace CyberPunkRPG
             switch (currentGameState)
             {
                 case GameState.Menu:
-                    spriteBatch.Draw(AssetManager.titleTex, new Vector2(200, 0));
+                    spriteBatch.Draw(AssetManager.titleTex, new Vector2(200, 0), Color.White);
                     break;
                 case GameState.PlayingGame:
 
@@ -179,11 +179,11 @@ namespace CyberPunkRPG
                 case GameState.GameOver:
                     if (wonTheGame)
                     {
-                        spriteBatch.Draw(AssetManager.winTex, new Vector2(0, 0));
+                        spriteBatch.Draw(AssetManager.winTex, new Vector2(0, 0), Color.White);
                     }
                     else if (lostTheGame)
                     {
-                        spriteBatch.Draw(AssetManager.endTex, new Vector2(0, 0));
+                        spriteBatch.Draw(AssetManager.endTex, new Vector2(0, 0), Color.White);
                     }
                     break;
             }
