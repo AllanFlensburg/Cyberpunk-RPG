@@ -46,6 +46,7 @@ namespace CyberPunkRPG
         bool invincibleBoosted;
         bool doDeathAnimation;
         bool readyToDash;
+        bool isMoving;
         public bool gameOver;
         float speedBoostTimer;
         float invincibleTimer;
@@ -129,8 +130,9 @@ namespace CyberPunkRPG
             }
             else if (activeWeapon == weapon.pistol)
             {
+                CheckActiveWeapon();
                 ammoCapacity = 8;
-                reloadTime = 1.5f;
+                reloadTime = 0.1f;
                 reloadTimer = 1.5f;
                 maxDistance = 500;
             }
@@ -242,15 +244,6 @@ namespace CyberPunkRPG
             if (activeWeapon == weapon.pistol)
             {
                 weaponFire = true;
-
-                if (weaponFire)
-                {
-                    
-                }
-                else if (weaponFire != true)
-                {
-
-                }
             }
 
             previousKeyboardState = currentKeyboardState;
@@ -276,6 +269,7 @@ namespace CyberPunkRPG
                     sourceRect.Y = 64;
                     pos.X -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    isMoving = true;
                 }
 
                 if (currentKeyboardState.IsKeyDown(Keys.D) == true)
@@ -283,6 +277,7 @@ namespace CyberPunkRPG
                     sourceRect.Y = 192;
                     pos.X += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    isMoving = true;
                 }
 
                 if (currentKeyboardState.IsKeyDown(Keys.S) == true)
@@ -290,6 +285,7 @@ namespace CyberPunkRPG
                     sourceRect.Y = 128;
                     pos.Y += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    isMoving = true;
                 }
 
                 if (currentKeyboardState.IsKeyDown(Keys.W) == true)
@@ -297,13 +293,14 @@ namespace CyberPunkRPG
                     sourceRect.Y = 0;
                     pos.Y -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    isMoving = true;
                 }
 
-                if (currentKeyboardState.IsKeyDown(Keys.Space) == true && readyToDash)
+                if (currentKeyboardState.IsKeyDown(Keys.Space) == true && readyToDash && isMoving && prevPos != pos)
                 {
                     readyToDash = false;
                     startingPosition = pos;
-                    endPosition = pos += GetDirection(worldPosition - startingPosition) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    endPosition = pos += GetDirection(pos - prevPos) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     jumping = true;
                 }
             }
@@ -319,23 +316,32 @@ namespace CyberPunkRPG
                     endPosition = Vector2.Zero;
                 }
             }
+
+            isMoving = false;
         }
 
         public void CheckActiveWeapon()
         {
             if (activeWeapon == weapon.assaultRifle)
             {
+                reloadTime = 3f;
+                reloadTimer = reloadTime;
                 ammoCapacity = 30;
                 ammoCount = ammoCapacity;
             }
 
             else if (activeWeapon == weapon.sniperRifle)
             {
+                damage = 50;
+                reloadTime = 3f;
+                reloadTimer = reloadTime;
                 ammoCapacity = 5;
                 ammoCount = ammoCapacity;
             }
             else if (activeWeapon == weapon.pistol)
             {
+                reloadTime = 0.5f;
+                reloadTimer = reloadTime;
                 ammoCapacity = 8;
                 ammoCount = ammoCapacity;
             }
@@ -423,7 +429,7 @@ namespace CyberPunkRPG
         {
             if (activeWeapon == weapon.assaultRifle)
             {
-                if (currentMouseState.LeftButton == ButtonState.Pressed && ammoCount >= 1 && reloading == false && weaponFire == true) //Ser till att man kan hålla inne "Q" för att skjuta
+                if (currentMouseState.LeftButton == ButtonState.Pressed && ammoCount >= 1 && reloading == false && weaponFire == true) //Ser till att man kan hålla inne "Left Mouse Click" för att skjuta
                 {
                     ammoCount -= 1;
                     createNewProjectile(GetDirection(worldPosition - projectileStart));
@@ -434,7 +440,8 @@ namespace CyberPunkRPG
             {
                 if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && ammoCount >= 1 && reloading == false && weaponFire == true)
                 {
-
+                    ammoCount -= 1;
+                    createNewProjectile(GetDirection(worldPosition - projectileStart));
                 }
             }
             else if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && ammoCount >= 1 && reloading == false)

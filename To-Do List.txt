@@ -12,7 +12,7 @@ Organisera spaghetti-koden
 
 
 PRIO 3
-Lägga till ljud för skotten
+Lägga till ljud för skotten / death / dörr / power-up
 Göra så att musik aktiveras efter att man tagit sig till en viss del av leveln ELLER efter en viss tid
 Animationer för enemy (Kan förfinas)
 Förfinad HUD
