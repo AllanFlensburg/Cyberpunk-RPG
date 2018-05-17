@@ -55,7 +55,7 @@ namespace CyberPunkRPG
             coverTex = Content.Load<Texture2D>("box");
             doorTex = Content.Load<Texture2D>("door");
             wireTex = Content.Load<Texture2D>("BarbedWire");
-            spikeTex = Content.Load<Texture2D>("Spikes");
+            spikeTex = Content.Load<Texture2D>("Spike_Pixel");
             pistolTex = Content.Load<Texture2D>("Pistols");
             assaultRifleTex = Content.Load<Texture2D>("AssaultRifle");
             sniperRifleTex = Content.Load<Texture2D>("Sniper");

@@ -115,10 +115,11 @@ namespace CyberPunkRPG
                 {
                     int x = Convert.ToInt32(allSpikes[0]);
                     int y = Convert.ToInt32(allSpikes[1]);
-                    int Width = Convert.ToInt32(allSpikes[2]);
-                    int Height = Convert.ToInt32(allSpikes[3]);
-                    Rectangle spikeDestination = new Rectangle(x, y, Width, Height);
-                    Spikes spikes = new Spikes(Vector2.Zero, spikeDestination);
+                    //int Width = Convert.ToInt32(allSpikes[2]);
+                    //int Height = Convert.ToInt32(allSpikes[3]);
+                    //Rectangle spikeDestination = new Rectangle(x, y, Width, Height);
+                    Vector2 spikeDestination = new Vector2(x, y);
+                    Spikes spikes = new Spikes(spikeDestination);
                     spikeList.Add(spikes);
                 }
                 catch (FormatException e)
@@ -153,7 +154,7 @@ namespace CyberPunkRPG
             {
                 w.Update(gt);
 
-                if (w is AssaultRifle || w is Pistol || w is SniperRifle || w is RocketLauncher)
+                if (w is AssaultRifle || w is Pistol || w is SniperRifle)
                 {
                     if (w.isInteracted == true)
                     {

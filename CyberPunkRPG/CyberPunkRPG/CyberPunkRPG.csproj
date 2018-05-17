@@ -102,6 +102,7 @@
     <Content Include="Content\projectile.png" />
     <Content Include="Content\Sniper.png" />
     <Content Include="Content\Spikes.png" />
+    <Content Include="Content\Spike_Pixel.png" />
     <Content Include="Content\Wall.png" />
     <Content Include="Content\Cyberpunk Moonlight Sonata.mp3" />
     <Content Include="Content\Wall1.png" />

@@ -15,10 +15,14 @@ namespace CyberPunkRPG
         public int damage;
         public bool isHidden;
 
-        public Spikes(Vector2 pos, Rectangle position) : base(pos)
+        public Spikes(Vector2 pos/*, Rectangle position*/) : base(pos)
         {
-            this.position = position;
+            position.X = (int)pos.X;
+            position.Y = (int)pos.Y;
+            position.Width = AssetManager.spikeTex.Width;
+            position.Height = AssetManager.spikeTex.Height;
             hitBox = position;
+
             damage = 2;
             isHidden = true;
         }
@@ -27,7 +31,7 @@ namespace CyberPunkRPG
         {
             if (!isHidden)
             {
-                sb.Draw(AssetManager.spikeTex, position, Color.White);
+                sb.Draw(AssetManager.spikeTex, pos, Color.White);
             }
         }
     }
