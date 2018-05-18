@@ -10,18 +10,13 @@ namespace CyberPunkRPG
 {
     class Spikes : GameObject
     {
-        Rectangle position;
         public Rectangle hitBox;
         public int damage;
         public bool isHidden;
 
-        public Spikes(Vector2 pos/*, Rectangle position*/) : base(pos)
+        public Spikes(Vector2 pos) : base(pos)
         {
-            position.X = (int)pos.X;
-            position.Y = (int)pos.Y;
-            position.Width = AssetManager.spikeTex.Width;
-            position.Height = AssetManager.spikeTex.Height;
-            hitBox = position;
+            hitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.spikeTex.Width, AssetManager.spikeTex.Height);
 
             damage = 2;
             isHidden = true;
