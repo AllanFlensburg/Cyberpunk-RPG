@@ -88,7 +88,7 @@ namespace CyberPunkRPG
             dashCooldown = 2f;
             reloadTimer = 1.5f;
             reloadTime = 1.5f;
-            deathAnimationTimer = 3.5f;
+            deathAnimationTimer = 3.8f;
             readyToDash = true;
             reloading = false;
             speedBoosted = false;
@@ -153,8 +153,10 @@ namespace CyberPunkRPG
             int status = 0;
             if (CurrentHealth <= 0)
             {
-                if (!doDeathAnimation)
+                if (!doDeathAnimation && !gameOver)
                 {
+                    MediaPlayer.Stop();
+                    AssetManager.deathSound.Play(0.5f, 0.0f, 0.0f);
                     doDeathAnimation = true;
                     status = 1;
                 }
@@ -162,12 +164,13 @@ namespace CyberPunkRPG
 
             if (status == 1)
             {
-                frameTimer = 600;
-                frameInterval = 600;
+                frameTimer = 650;
+                frameInterval = 650;
                 status = 0;
                 sourceRect.X = 0;
                 sourceRect.Y = 0;
                 frame = 0;
+                status += 1;
             }
 
             if (doDeathAnimation)

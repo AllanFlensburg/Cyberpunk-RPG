@@ -92,6 +92,7 @@
     <Content Include="Content\core_175bpm.mp3" />
     <Content Include="Content\CyberPunk_Chronicles.mp3" />
     <Content Include="Content\Death Is Just Another Path.mp3" />
+    <Content Include="Content\deathSound.wav" />
     <Content Include="Content\door.png" />
     <Content Include="Content\Explosion.png" />
     <Content Include="Content\Ground1_01.jpg" />

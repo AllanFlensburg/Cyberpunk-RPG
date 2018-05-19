@@ -392,3 +392,9 @@
 /processorParam:Quality=Best
 /build:sniperR.wav
 
+#begin deathSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:deathSound.wav
+

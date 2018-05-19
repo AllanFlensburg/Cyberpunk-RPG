@@ -39,6 +39,7 @@ namespace CyberPunkRPG
         public static SoundEffect assaultrifleReload { get; private set; }
         public static SoundEffect pistolReload { get; private set; }
         public static SoundEffect sniperReload { get; private set; }
+        public static SoundEffect deathSound { get; private set; }
 
         public static Song song1 { get; private set; }
         public static Song song2 { get; private set; }
@@ -81,6 +82,7 @@ namespace CyberPunkRPG
             assaultrifleReload = Content.Load<SoundEffect>("assaultrifleR");
             pistolReload = Content.Load<SoundEffect>("pistolR");
             sniperReload = Content.Load<SoundEffect>("sniperR");
+            deathSound = Content.Load<SoundEffect>("deathSound");
 
             song1 = Content.Load<Song>("Cyberpunk Moonlight Sonata");
             song2 = Content.Load<Song>("buildy");
