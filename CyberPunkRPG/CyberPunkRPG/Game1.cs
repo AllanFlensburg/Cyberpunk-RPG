@@ -59,6 +59,7 @@ namespace CyberPunkRPG
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            MediaPlayer.Stop();
             AssetManager.LoadContent(Content);
             graphics.PreferredBackBufferWidth = Constants.ScreenWidth;
             graphics.PreferredBackBufferHeight = Constants.ScreenHeight;
@@ -227,6 +228,7 @@ namespace CyberPunkRPG
             {
                 lostTheGame = true;
                 currentGameState = GameState.GameOver;
+                PlayDeathSong();
             }
         }
 
@@ -257,6 +259,12 @@ namespace CyberPunkRPG
                 MediaPlayer.Stop();
                 MediaPlayer.Play(AssetManager.song5);
             }
+        }
+
+        public void PlayDeathSong()
+        {
+            MediaPlayer.Stop();
+            MediaPlayer.Play(AssetManager.deathSong);
         }
     }
 }

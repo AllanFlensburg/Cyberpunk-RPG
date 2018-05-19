@@ -350,3 +350,45 @@
 /processorParam:TextureFormat=Color
 /build:Spike_Pixel.png
 
+#begin Death Is Just Another Path.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Death Is Just Another Path.mp3
+
+#begin Powerup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Powerup.wav
+
+#begin Powerup3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Powerup3.wav
+
+#begin Powerup6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Powerup6.wav
+
+#begin assaultrifleR.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:assaultrifleR.wav
+
+#begin pistolR.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:pistolR.wav
+
+#begin sniperR.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sniperR.wav
+

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -323,14 +324,14 @@ namespace CyberPunkRPG
             else if (activeWeapon == weapon.sniperRifle)
             {
                 damage = 50;
-                reloadTime = 3f;
+                reloadTime = 5f;
                 reloadTimer = reloadTime;
                 ammoCapacity = 5;
                 ammoCount = ammoCapacity;
             }
             else if (activeWeapon == weapon.pistol)
             {
-                reloadTime = 0.5f;
+                reloadTime = 2f;
                 reloadTimer = reloadTime;
                 ammoCapacity = 8;
                 ammoCount = ammoCapacity;
@@ -378,6 +379,7 @@ namespace CyberPunkRPG
             {
                 CheckActiveWeapon();
                 reloading = true;
+                PlayReloadSound();
             }
 
             if (reloading == true)
@@ -386,22 +388,25 @@ namespace CyberPunkRPG
 
                 if (reloadTimer <= 0)
                 {
-                    if (activeWeapon == weapon.pistol)
-                    {
-                        reloading = false;
-                        reloadTimer = reloadTime;
-                    }
-                    else if (activeWeapon == weapon.assaultRifle)
-                    {
-                        reloading = false;
-                        reloadTimer = reloadTime;
-                    }
-                    else if (activeWeapon == weapon.sniperRifle)
-                    {
-                        reloading = false;
-                        reloadTimer = reloadTime;
-                    }
+                    reloading = false;
+                    reloadTimer = reloadTime;
                 }
+            }
+        }
+
+        private void PlayReloadSound()
+        {
+            if (activeWeapon == weapon.pistol)
+            {
+                AssetManager.pistolReload.Play(0.4f, 0.0f, 0.0f);
+            }
+            else if (activeWeapon == weapon.assaultRifle)
+            {
+                AssetManager.assaultrifleReload.Play(0.4f, 0.0f, 0.0f);
+            }
+            else if (activeWeapon == weapon.sniperRifle)
+            {
+                AssetManager.sniperReload.Play(0.4f, 0.0f, 0.0f);
             }
         }
 
@@ -520,14 +525,17 @@ namespace CyberPunkRPG
                         {
                             CurrentHealth = 100;
                         }
+                        AssetManager.healthPowerup.Play(0.4f, 0.0f, 0.0f);
                     }
                     else if (i is Speedpickup)
                     {
                         speedBoosted = true;
+                        AssetManager.speedPowerup.Play(0.4f, 0.0f, 0.0f);
                     }
                     else if (i is InvinciblePickup)
                     {
                         invincibleBoosted = true;
+                        AssetManager.invinciblePowerup.Play(0.4f, 0.0f, 0.0f);
                     }
                 }
             }

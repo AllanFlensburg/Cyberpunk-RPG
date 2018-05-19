@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
@@ -31,11 +32,20 @@ namespace CyberPunkRPG
         public static Texture2D pickupTex { get; private set; }
         public static Texture2D playerDeathTex { get; private set; }
         public static SpriteFont gameText { get; private set; }
+
+        public static SoundEffect healthPowerup { get; private set; }
+        public static SoundEffect speedPowerup { get; private set; }
+        public static SoundEffect invinciblePowerup { get; private set; }
+        public static SoundEffect assaultrifleReload { get; private set; }
+        public static SoundEffect pistolReload { get; private set; }
+        public static SoundEffect sniperReload { get; private set; }
+
         public static Song song1 { get; private set; }
         public static Song song2 { get; private set; }
         public static Song song3 { get; private set; }
         public static Song song4 { get; private set; }
         public static Song song5 { get; private set; }
+        public static Song deathSong { get; private set; }
 
         public static void LoadContent(ContentManager Content)
         {
@@ -64,11 +74,20 @@ namespace CyberPunkRPG
             pickupTex = Content.Load<Texture2D>("LightsUp_Spritesheet");
             playerDeathTex = Content.Load<Texture2D>("AgentWalkSouth");
             gameText = Content.Load<SpriteFont>("Gametext");
+
+            healthPowerup = Content.Load<SoundEffect>("Powerup");
+            speedPowerup = Content.Load<SoundEffect>("Powerup3");
+            invinciblePowerup = Content.Load<SoundEffect>("Powerup6");
+            assaultrifleReload = Content.Load<SoundEffect>("assaultrifleR");
+            pistolReload = Content.Load<SoundEffect>("pistolR");
+            sniperReload = Content.Load<SoundEffect>("sniperR");
+
             song1 = Content.Load<Song>("Cyberpunk Moonlight Sonata");
             song2 = Content.Load<Song>("buildy");
             song3 = Content.Load<Song>("CyberPunk_Chronicles");
             song4 = Content.Load<Song>("core_175bpm");
             song5 = Content.Load<Song>("Wonderland_Round_3");
+            deathSong = Content.Load<Song>("Death Is Just Another Path");
         }
     }
 }

@@ -19,7 +19,7 @@ namespace CyberPunkRPG
             hitBox = new Rectangle((int)pos.X, (int)pos.Y, AssetManager.spikeTex.Width, AssetManager.spikeTex.Height);
 
             damage = 2;
-            isHidden = true;
+            isHidden = false;
         }
 
         public override void Draw(SpriteBatch sb)
