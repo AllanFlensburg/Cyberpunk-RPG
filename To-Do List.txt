@@ -5,14 +5,13 @@ Få pistol och rocketlauncher att funka
 Göra en spelbar level-layout
 
 PRIO 2
-När man byter vapen ska de placeras ut i världen så att de kan plockas upp igen
 Player & Enemy kan skjuta genom väggar om de själva går in i väggen
+Lägga till ljud för skotten / death / dörr / power-up
 Lägga till sprites för level dekoration, t.ex bord & stolar
 Organisera spaghetti-koden
 
 
 PRIO 3
-Lägga till ljud för skotten / death / dörr / power-up
 Göra så att musik aktiveras efter att man tagit sig till en viss del av leveln ELLER efter en viss tid
 Animationer för enemy (Kan förfinas)
 Förfinad HUD

@@ -541,6 +541,7 @@ namespace CyberPunkRPG
                 {
                     w.isInteracted = true;
                     int weaponType = w.myIdentifier();
+                    DropCurrentWeapon();
 
                     if (weaponType == 1)
                     {
@@ -559,7 +560,27 @@ namespace CyberPunkRPG
                     }
 
                     CheckActiveWeapon();
+                    break;
                 }
+            }
+        }
+
+        private void DropCurrentWeapon()
+        {
+            if (activeWeapon == weapon.assaultRifle)
+            {
+                InteractiveObject ar = new AssaultRifle(pos);
+                map.weaponList.Add(ar);
+            }
+            else if (activeWeapon == weapon.pistol)
+            {
+                InteractiveObject pi = new Guns.Pistol(pos);
+                map.weaponList.Add(pi);
+            }
+            else if (activeWeapon == weapon.sniperRifle)
+            {
+                InteractiveObject sn = new SniperRifle(pos);
+                map.weaponList.Add(sn);
             }
         }
 
