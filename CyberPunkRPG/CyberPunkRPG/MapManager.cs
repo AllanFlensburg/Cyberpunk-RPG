@@ -14,6 +14,7 @@ namespace CyberPunkRPG
     {
         List<string> strings = new List<string>();
         public List<Wall> wallList = new List<Wall>();
+        public List<Blind> blindList = new List<Blind>();
         public List<Cover> coverList = new List<Cover>();
         public List<Door> doorList = new List<Door>();
         public List<BarbedWire> barbedWireList = new List<BarbedWire>();
@@ -52,7 +53,30 @@ namespace CyberPunkRPG
                     Wall wall = new Wall(Vector2.Zero, wallDestination, true);
                     wallList.Add(wall);
                 }
-                catch (FormatException e)
+                catch (FormatException)
+                {
+                    Console.WriteLine("Someting went wrong");
+                }
+            }
+
+            string Blinds = strings[6];
+            string[] allBlindDestinations = Blinds.Split(';');
+
+            for (int i = 0; i < allBlindDestinations.Length; i++)
+            {
+                string[] allBlinds = allBlindDestinations[i].Split(',');
+
+                try
+                {
+                    int x = Convert.ToInt32(allBlinds[0]);
+                    int y = Convert.ToInt32(allBlinds[1]);
+                    int Width = Convert.ToInt32(allBlinds[2]);
+                    int Height = Convert.ToInt32(allBlinds[3]);
+                    Rectangle blindDestination = new Rectangle(x, y, Width, Height);
+                    Blind blind = new Blind(Vector2.Zero, blindDestination, true);
+                    blindList.Add(blind);
+                }
+                catch (FormatException)
                 {
                     Console.WriteLine("Someting went wrong");
                 }
@@ -75,7 +99,7 @@ namespace CyberPunkRPG
                     Cover cover = new Cover(Vector2.Zero, coverDestination, true);
                     coverList.Add(cover);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     Console.WriteLine("Someting went wrong");
                 }
@@ -98,7 +122,7 @@ namespace CyberPunkRPG
                     Door door = new Door(Vector2.Zero, doorDestination);
                     doorList.Add(door);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     Console.WriteLine("Someting went wrong");
                 }
@@ -122,7 +146,7 @@ namespace CyberPunkRPG
                     Spikes spikes = new Spikes(spikeDestination);
                     spikeList.Add(spikes);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     Console.WriteLine("Someting went wrong");
                 }
@@ -175,6 +199,11 @@ namespace CyberPunkRPG
             foreach (Wall w in wallList)
             {
                 w.Draw(sb);
+            }
+
+            foreach (Blind l in blindList)
+            {
+                l.Draw(sb);
             }
 
             foreach (Cover c in coverList)

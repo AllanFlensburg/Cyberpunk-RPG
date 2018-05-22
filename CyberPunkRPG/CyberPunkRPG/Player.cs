@@ -744,6 +744,7 @@ namespace CyberPunkRPG
                 sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Yellow);
             }
             sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Yellow);
+            sb.DrawString(AssetManager.gameText, new Vector2(pos.X, pos.Y).ToString(), pos - new Vector2(0, 10), Color.Blue); //Tillfälliga koordianter
 
             if (ammoCount == 0 & reloading == false)
             {

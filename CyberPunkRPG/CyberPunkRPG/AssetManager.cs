@@ -20,6 +20,7 @@ namespace CyberPunkRPG
         public static Texture2D reloadDisplay { get; private set; }
         public static Texture2D projectileTex { get; private set; }
         public static Texture2D wallTex { get; private set; }
+        public static Texture2D blindTex { get; private set; }
         public static Texture2D coverTex { get; private set; }
         public static Texture2D doorTex { get; private set; }
         public static Texture2D wireTex { get; private set; }
@@ -63,6 +64,7 @@ namespace CyberPunkRPG
             projectileTex = Content.Load<Texture2D>("projectile");
             reloadDisplay = Content.Load<Texture2D>("healthbar");
             wallTex = Content.Load<Texture2D>("Wall1");
+            blindTex = Content.Load<Texture2D>("Wall");
             coverTex = Content.Load<Texture2D>("box");
             doorTex = Content.Load<Texture2D>("door");
             wireTex = Content.Load<Texture2D>("BarbedWire");
