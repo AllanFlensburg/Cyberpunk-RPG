@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Blind.cs" />
     <Compile Include="Guns\AssaultRifle.cs" />
     <Compile Include="AssetManager.cs" />
     <Compile Include="Background.cs" />
