@@ -50,7 +50,7 @@ namespace CyberPunkRPG
                     BasicEnemy basicEnemy = new BasicEnemy(basicEnemyPos, player, map, projectileManager);
                     enemyList.Add(basicEnemy);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     Console.WriteLine("Someting went wrong");
                 }
@@ -71,7 +71,7 @@ namespace CyberPunkRPG
                     StrongEnemy strongEnemy = new StrongEnemy(strongEnemyPos, player, map, projectileManager);
                     enemyList.Add(strongEnemy);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     Console.WriteLine("Someting went wrong");
                 }

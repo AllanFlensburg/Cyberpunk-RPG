@@ -9,9 +9,6 @@ namespace CyberPunkRPG
 {
     class ProjectileBullet : Projectile
     {
-        bool explosion = false;
-        Vector2 explosionPos;
-
         private float explosionTimer;
         bool explosionStart = false;
 
