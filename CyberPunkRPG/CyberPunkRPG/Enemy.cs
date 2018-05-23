@@ -294,6 +294,11 @@ namespace CyberPunkRPG
                     active = true;
                 }
             }
+
+            if (map.blindList.Count == 0 && Vector2.Distance(pos, player.pos) <= 600 && isHit == false)
+            {
+                active = true;
+            }
         }
 
         public override void Draw(SpriteBatch sb)
