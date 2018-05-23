@@ -34,7 +34,6 @@ namespace CyberPunkRPG
         private Rectangle healthbarSource;
         private Rectangle healthbarEdgesSource;
         float standardPlayerSpeed;
-        float playerSpeed;
         int ammoCount;
         int ammoCapacity;
         int maxDistance;
@@ -602,12 +601,13 @@ namespace CyberPunkRPG
             if (speedBoosted)
             {
                 speedBoostTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                playerSpeed = 200;
+                standardPlayerSpeed = 200;
 
                 if (speedBoostTimer <= 0)
                 {
                     speedBoosted = false;
                     speedBoostTimer = 5;
+                    standardPlayerSpeed = 125;
                 }
             }
 
