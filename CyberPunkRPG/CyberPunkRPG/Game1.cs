@@ -76,7 +76,7 @@ namespace CyberPunkRPG
 
             projectileManager = new ProjectileManager();
             map = new MapManager();
-            player = new Player(new Vector2(9000, 3000), new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
+            player = new Player(new Vector2(5000, 3000), new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
             enemyManager = new EnemyManager(player, projectileManager, map);
             b = new BarbedWire(Vector2.Zero, new Rectangle(3500, 1500, 50, 50));
             map.barbedWireList.Add(b);
