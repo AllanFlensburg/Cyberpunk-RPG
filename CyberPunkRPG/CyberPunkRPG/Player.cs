@@ -349,12 +349,12 @@ namespace CyberPunkRPG
                 bool wireColision = false;
                 if (hitBox.Intersects(b.hitBox) && !wireColision && !speedBoosted)
                 {
-                    playerSpeed = b.slowMultiplier;
+                    standardPlayerSpeed = b.slowMultiplier;
                     wireColision = true;
                 }
                 else
                 {
-                    playerSpeed = standardPlayerSpeed;
+                    standardPlayerSpeed = 125;
                     wireColision = false;
                 }
             }
