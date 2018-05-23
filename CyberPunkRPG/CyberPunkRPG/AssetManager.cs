@@ -19,6 +19,8 @@ namespace CyberPunkRPG
         public static Texture2D strongEnemyTex { get; private set; }
         public static Texture2D reloadDisplay { get; private set; }
         public static Texture2D projectileTex { get; private set; }
+        public static Texture2D playerProjectileTex { get; private set; }
+        public static Texture2D enemyProjectileTex { get; private set; }
         public static Texture2D wallTex { get; private set; }
         public static Texture2D blindTex { get; private set; }
         public static Texture2D coverTex { get; private set; }
@@ -62,6 +64,8 @@ namespace CyberPunkRPG
             basicEnemyTex = Content.Load<Texture2D>("Armor2Shoot");
             strongEnemyTex = Content.Load<Texture2D>("ArmorShoot");
             projectileTex = Content.Load<Texture2D>("projectile");
+            playerProjectileTex = Content.Load<Texture2D>("greenProjectile");
+            enemyProjectileTex = Content.Load<Texture2D>("redProjectile");
             reloadDisplay = Content.Load<Texture2D>("healthbar");
             wallTex = Content.Load<Texture2D>("Wall1");
             blindTex = Content.Load<Texture2D>("Wall");

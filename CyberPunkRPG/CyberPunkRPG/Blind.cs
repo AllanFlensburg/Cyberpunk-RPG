@@ -12,14 +12,11 @@ namespace CyberPunkRPG
     {
         Rectangle position;
         public Rectangle blindHitBox;
-        protected bool blind;
         public bool isBlind = true;
-        //{
-        //    get { return blind; }
-        //}
 
         public Blind(Vector2 pos, Rectangle position) : base(pos)
         {
+            this.pos = pos;
             this.position = position;
             blindHitBox = position;
         }

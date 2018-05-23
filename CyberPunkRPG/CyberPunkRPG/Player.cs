@@ -442,7 +442,7 @@ namespace CyberPunkRPG
 
         private void createNewProjectile(Vector2 direction)
         {
-            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance, damage, map);
+            Projectile projectile = new Projectile(AssetManager.playerProjectileTex, projectileStart, projectileSpeed, direction, maxDistance, damage, map);
             projectile.distanceCheck(projectileStart);
             projectileManager.playerProjectileList.Add(projectile);
         }
@@ -602,12 +602,14 @@ namespace CyberPunkRPG
             {
                 speedBoostTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
                 standardPlayerSpeed = 200;
+                dashSpeed = new Vector2(300, 300);
 
                 if (speedBoostTimer <= 0)
                 {
                     speedBoosted = false;
                     speedBoostTimer = 5;
                     standardPlayerSpeed = 125;
+                    dashSpeed = new Vector2(200, 200);
                 }
             }
 
@@ -724,14 +726,14 @@ namespace CyberPunkRPG
                 {
                     Rectangle sourceRect = new Rectangle(0, 160, 32, 32);
                     sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 550, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
-                    sb.DrawString(AssetManager.gameText, "Speedboost: " + (int)speedBoostTimer, new Vector2(pos.X - 560, pos.Y - 540), Color.Purple);
+                    sb.DrawString(AssetManager.gameText, "Speedboost: " + (int)speedBoostTimer, new Vector2(pos.X - 560, pos.Y - 540), Color.Green);
                 }
 
                 if (invincibleBoosted)
                 {
                     Rectangle sourceRect = new Rectangle(96, 160, 32, 32);
                     sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 450, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
-                    sb.DrawString(AssetManager.gameText, "Invincible: " + (int)invincibleTimer, new Vector2(pos.X - 450, pos.Y - 540), Color.Purple);
+                    sb.DrawString(AssetManager.gameText, "Invincible: " + (int)invincibleTimer, new Vector2(pos.X - 450, pos.Y - 540), Color.Green);
                 }
             }
             else
@@ -742,26 +744,26 @@ namespace CyberPunkRPG
             {
                 sb.Draw(AssetManager.pistolTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.pistolTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
-                sb.DrawString(AssetManager.gameText, "Pistol", new Vector2(pos.X - 330, pos.Y - 530), Color.Purple);
+                sb.DrawString(AssetManager.gameText, "Pistol", new Vector2(pos.X - 330, pos.Y - 530), Color.Green);
             }
             else if (activeWeapon == weapon.assaultRifle && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.assaultRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
-                sb.DrawString(AssetManager.gameText, "Assault Rifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Purple);
+                sb.DrawString(AssetManager.gameText, "Assault Rifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Green);
             }
             else if (activeWeapon == weapon.sniperRifle && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.sniperRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.sniperRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
-                sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Purple);
+                sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Green);
             }
-            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Purple);
+            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Green);
             sb.DrawString(AssetManager.gameText, new Vector2(pos.X, pos.Y).ToString(), pos - new Vector2(0, 10), Color.Blue); //Tillfälliga koordianter
 
             if (ammoCount == 0 & reloading == false)
             {
-                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(0, 20), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(0, 20), Color.Green);
             }
 
             if (reloading == true)

@@ -30,9 +30,11 @@ namespace CyberPunkRPG
         //protected Rectangle explosionRect;
         public Rectangle hitBox;
         MapManager map;
+        Texture2D projectileTex;
 
-        public Projectile(Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance, int damage, MapManager map) : base(pos)
+        public Projectile(Texture2D projectileTex, Vector2 pos, Vector2 speed, Vector2 direction, int maxDistance, int damage, MapManager map) : base(pos)
         {
+            this.projectileTex = projectileTex;
             this.pos = pos;
             this.speed = speed;
             this.damage = damage;
@@ -144,12 +146,8 @@ namespace CyberPunkRPG
         {
             if (Visible)
             {
-                sb.Draw(AssetManager.projectileTex, pos, null, Color.White, 0, new Vector2((AssetManager.projectileTex.Width / 2) * scale, (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
+                sb.Draw(projectileTex, pos, /*null,*/ Color.White); //, 0, new Vector2((AssetManager.projectileTex.Width / 2) * scale, (AssetManager.projectileTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
             }
-            //if (explosion)
-            //{
-            //    sb.Draw(AssetManager.explosionTex, pos, null, Color.White, 0, new Vector2((AssetManager.explosionTex.Width / 2) * scale, (AssetManager.explosionTex.Height / 2) * scale), scale, SpriteEffects.None, 1);
-            //}
         }
 
         public void distanceCheck(Vector2 theStartPosition) // Metod för en ny projektil

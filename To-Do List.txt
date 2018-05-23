@@ -5,12 +5,19 @@ Lägga till bullet textur
 Göra en spelbar level-layout
 
 PRIO 2
-Player & Enemy kan skjuta genom dörr om de står rätt intill den
 Lägga till ljud för skotten / dörr
 Lägga till sprites för level dekoration, t.ex bord & stolar
 Organisera spaghetti-koden
 
 PRIO 3
-Lägga till ljud för skott / dörr
+Player & Enemy kan skjuta genom dörr om de står rätt intill den
 Göra så att musik aktiveras efter att man tagit sig till en viss del av leveln ELLER efter en viss tid
-Förfinad HUD
+Förfinad HUD (T.ex snyggare text för ammo, activeWeapon, "Press R to Reload")
+
+*** KÄNDA BUGGAR UTAN FIX ***
+Om du hittar fix, fixa gärna
+
+Speedboost gör så att vägg-, cover- och dörrkollision inte funkar korrekt, man fastnar
+Går man diagonalt in i ett hörn eller nuddar två hitboxes samtidigt (T.ex dörr + vägg) så fastnar man
+AssaultRifle skjuter två skott vid första klicken
+Musikspelaren kraschar ibland (okänd orsak)

@@ -157,7 +157,7 @@ namespace CyberPunkRPG
 
         private void createNewProjectile(Vector2 direction)
         {
-            Projectile projectile = new Projectile(projectileStart, projectileSpeed, direction, maxDistance, damage, map);
+            Projectile projectile = new Projectile(AssetManager.enemyProjectileTex, projectileStart, projectileSpeed, direction, maxDistance, damage, map);
             projectile.distanceCheck(pos);
             projectileManager.enemyProjectileList.Add(projectile);
         }

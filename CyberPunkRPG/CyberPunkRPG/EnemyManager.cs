@@ -96,11 +96,6 @@ namespace CyberPunkRPG
             {
                 e.Draw(sb);
             }
-
-            foreach (Blind b in blindList)
-            {
-                b.Draw(sb);
-            }
         }       
     }   
 }

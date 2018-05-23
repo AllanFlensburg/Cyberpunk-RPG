@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace CyberPunkRPG
         protected int explosionFrameWidth;
         protected Rectangle explosionRect;
 
-        public ProjectileBullet(Vector2 pos, Vector2 speed, Vector2 duration, int maxDistance, int damage, MapManager map) : base(pos, speed, duration, maxDistance, damage, map)
+        public ProjectileBullet(Texture2D tex, Vector2 pos, Vector2 speed, Vector2 duration, int maxDistance, int damage, MapManager map) : base(tex, pos, speed, duration, maxDistance, damage, map)
         {
             explosionFrameTimer = 60;
             explosionFrameInterval = 60;

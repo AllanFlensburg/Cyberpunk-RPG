@@ -37,6 +37,7 @@ namespace CyberPunkRPG
 
         MapManager map;
         Player player;
+        Blind blind;
         EnemyManager enemyManager;
         ProjectileManager projectileManager;
         Rectangle endPos;
@@ -175,8 +176,13 @@ namespace CyberPunkRPG
                     map.Draw(spriteBatch);
                     spriteBatch.Draw(AssetManager.doorTex, endPos, Color.White);
                     enemyManager.Draw(spriteBatch);
+                    foreach (Blind b in map.blindList)
+                    {
+                        b.Draw(spriteBatch);
+                    }
                     projectileManager.Draw(spriteBatch);
                     player.Draw(spriteBatch);
+
                     break;
                 case GameState.GameOver:
                     if (wonTheGame)
