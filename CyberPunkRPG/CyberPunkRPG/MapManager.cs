@@ -202,10 +202,10 @@ namespace CyberPunkRPG
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.groundTex1, new Vector2(0, 0), Color.White);
-            sb.Draw(AssetManager.groundTex2, new Vector2(4000, 0), Color.White);
-            sb.Draw(AssetManager.groundTex3, new Vector2(0, 4000), Color.White);
-            sb.Draw(AssetManager.groundTex4, new Vector2(4000, 4000), Color.White);
+            sb.Draw(AssetManager.groundTex1, new Vector2(4000, 0), Color.White);
+            sb.Draw(AssetManager.groundTex2, new Vector2(8000, 0), Color.White);
+            sb.Draw(AssetManager.groundTex3, new Vector2(4000, 4000), Color.White);
+            sb.Draw(AssetManager.groundTex4, new Vector2(-4000, 4000), Color.White);
 
             foreach (Wall w in wallList)
             {
