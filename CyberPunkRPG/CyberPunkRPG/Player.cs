@@ -643,25 +643,48 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(c.hitBox))
                 {
-                    pos = prevPos;
+                    if (!jumping)
+                    {
+                        pos = prevPos;
+                    }
                     hitBox.X = (int)pos.X + 20;
                     hitBox.Y = (int)pos.Y + 10;
 
                     if (hitBox.X > c.hitBox.Right - 3)
                     {
                         pos.X += 1;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X += 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.X < c.hitBox.Left)
                     {
                         pos.X -= 1;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X -= 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.Y < c.hitBox.Top)
                     {
                         pos.Y -= 1;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y -= 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.Y > c.hitBox.Bottom - 3)
                     {
                         pos.Y += 1;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y += 20;
+                            JumpReset();
+                        }
                     }
                 }
             }
@@ -673,22 +696,46 @@ namespace CyberPunkRPG
             {
                 if (hitBox.Intersects(d.doorHitBox) && d.isInteracted == false)
                 {
-                    pos = prevPos;
+                    if (!jumping)
+                    {
+                        pos = prevPos;
+                    }
+
                     if (hitBox.X > d.doorHitBox.Right - 3)
                     {
                         pos.X += 1;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X += 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.X < d.doorHitBox.Left)
                     {
                         pos.X -= 1;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X -= 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.Y < d.doorHitBox.Top)
                     {
                         pos.Y -= 1;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y -= 20;
+                            JumpReset();
+                        }
                     }
                     if (hitBox.Y > d.doorHitBox.Bottom - 3)
                     {
                         pos.Y += 1;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y += 20;
+                            JumpReset();
+                        }
                     }
                 }
 
