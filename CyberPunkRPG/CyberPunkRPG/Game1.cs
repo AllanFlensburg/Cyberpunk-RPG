@@ -63,6 +63,7 @@ namespace CyberPunkRPG
             AssetManager.LoadContent(Content);
             graphics.PreferredBackBufferWidth = Constants.ScreenWidth;
             graphics.PreferredBackBufferHeight = Constants.ScreenHeight;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             IsMouseVisible = true;
 

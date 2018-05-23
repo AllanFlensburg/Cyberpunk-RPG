@@ -33,6 +33,7 @@ namespace CyberPunkRPG
         public Rectangle hitBox;
         private Rectangle healthbarSource;
         private Rectangle healthbarEdgesSource;
+        float standardPlayerSpeed;
         float playerSpeed;
         int ammoCount;
         int ammoCapacity;
@@ -81,7 +82,7 @@ namespace CyberPunkRPG
             this.projectileManager = projectileManager;
             this.game = game;
             this.map = map;
-            playerSpeed = 120;
+            standardPlayerSpeed = 125;
             invincibleTimer = 5;
             speedBoostTimer = 5;
             dashTimer = 2f;
@@ -217,6 +218,7 @@ namespace CyberPunkRPG
             EnemyBulletCollision();
             PowerUpCollision();
             WeaponCollision();
+            blindCollision();
             HandlePowerUpBoosts(gameTime);
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
@@ -261,7 +263,7 @@ namespace CyberPunkRPG
                 if (currentKeyboardState.IsKeyDown(Keys.A) == true)
                 {
                     sourceRect.Y = 64;
-                    pos.X -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    pos.X -= standardPlayerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                     isMoving = true;
                 }
@@ -269,7 +271,7 @@ namespace CyberPunkRPG
                 if (currentKeyboardState.IsKeyDown(Keys.D) == true)
                 {
                     sourceRect.Y = 192;
-                    pos.X += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    pos.X += standardPlayerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                     isMoving = true;
                 }
@@ -277,7 +279,7 @@ namespace CyberPunkRPG
                 if (currentKeyboardState.IsKeyDown(Keys.S) == true)
                 {
                     sourceRect.Y = 128;
-                    pos.Y += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    pos.Y += standardPlayerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                     isMoving = true;
                 }
@@ -285,7 +287,7 @@ namespace CyberPunkRPG
                 if (currentKeyboardState.IsKeyDown(Keys.W) == true)
                 {
                     sourceRect.Y = 0;
-                    pos.Y -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    pos.Y -= standardPlayerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
                     isMoving = true;
                 }
@@ -353,7 +355,7 @@ namespace CyberPunkRPG
                 }
                 else
                 {
-                    playerSpeed = 100;
+                    playerSpeed = standardPlayerSpeed;
                     wireColision = false;
                 }
             }
@@ -699,6 +701,17 @@ namespace CyberPunkRPG
             }
         }
 
+        public void blindCollision()
+        {
+            foreach (Blind b in map.blindList)
+            {
+                if (hitBox.Intersects(b.blindHitBox))
+                {
+                    b.isBlind = false;
+                }
+            }
+        }
+
         public override void Draw(SpriteBatch sb)
         {
             Rectangle uiWeapon = new Rectangle(0, 192, 64, 64);
@@ -711,14 +724,14 @@ namespace CyberPunkRPG
                 {
                     Rectangle sourceRect = new Rectangle(0, 160, 32, 32);
                     sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 550, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
-                    sb.DrawString(AssetManager.gameText, "Speedboost: " + (int)speedBoostTimer, new Vector2(pos.X - 560, pos.Y - 540), Color.Yellow);
+                    sb.DrawString(AssetManager.gameText, "Speedboost: " + (int)speedBoostTimer, new Vector2(pos.X - 560, pos.Y - 540), Color.Purple);
                 }
 
                 if (invincibleBoosted)
                 {
                     Rectangle sourceRect = new Rectangle(96, 160, 32, 32);
                     sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 450, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
-                    sb.DrawString(AssetManager.gameText, "Invincible: " + (int)invincibleTimer, new Vector2(pos.X - 450, pos.Y - 540), Color.Yellow);
+                    sb.DrawString(AssetManager.gameText, "Invincible: " + (int)invincibleTimer, new Vector2(pos.X - 450, pos.Y - 540), Color.Purple);
                 }
             }
             else
@@ -729,21 +742,21 @@ namespace CyberPunkRPG
             {
                 sb.Draw(AssetManager.pistolTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.pistolTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
-                sb.DrawString(AssetManager.gameText, "Pistol", new Vector2(pos.X - 330, pos.Y - 530), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Pistol", new Vector2(pos.X - 330, pos.Y - 530), Color.Purple);
             }
             else if (activeWeapon == weapon.assaultRifle && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.assaultRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.assaultRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
-                sb.DrawString(AssetManager.gameText, "Assault Rifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Assault Rifle", new Vector2(pos.X - 350, pos.Y - 540), Color.Purple);
             }
             else if (activeWeapon == weapon.sniperRifle && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.sniperRifleTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
                 sb.Draw(AssetManager.sniperRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
-                sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Yellow);
+                sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Purple);
             }
-            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Yellow);
+            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Purple);
             sb.DrawString(AssetManager.gameText, new Vector2(pos.X, pos.Y).ToString(), pos - new Vector2(0, 10), Color.Blue); //Tillfälliga koordianter
 
             if (ammoCount == 0 & reloading == false)

@@ -27,6 +27,7 @@ namespace CyberPunkRPG
         protected float reloadTimer;
         protected float reloadTime;
         bool reloading;
+        protected bool active = false;
 
         protected int damage;
         public int lives;
@@ -90,6 +91,7 @@ namespace CyberPunkRPG
             EnemyWallCollision();
             EnemyCoverCollision();
             EnemyDoorCollision();
+            MakeEnemyActive();
 
             foreach (Projectile p in projectileManager.playerProjectileList)
             {
@@ -107,15 +109,21 @@ namespace CyberPunkRPG
         {
             pos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Vector2.Distance(pos, player.pos) <= 600 && (Vector2.Distance(pos, player.pos) >= 200 && isHit == false))
+            if (active)
             {
                 speed = new Vector2(100, 100);
                 direction = GetDirection(player.pos - pos);
             }
-            else
+
+            if (isHit || Vector2.Distance(pos, player.pos) <= 200)
             {
                 speed = Vector2.Zero;
                 direction = Vector2.Zero;
+
+                if (isHit)
+                {
+                    active = false;
+                }
             }
         }
 
@@ -129,7 +137,7 @@ namespace CyberPunkRPG
         {
             projectileStart = pos;
 
-            if (Vector2.Distance(pos, player.pos) <= 600 && isHit == false && reloading == false && player.CurrentHealth > 0)
+            if (Vector2.Distance(pos, player.pos) <= 600 && isHit == false && reloading == false && player.CurrentHealth > 0 && active)
             {
                 createNewProjectile(GetDirection((player.pos + new Vector2(32, 32)) - pos));
                 reloading = true;
@@ -265,6 +273,25 @@ namespace CyberPunkRPG
                     {
                         pos.Y += 2;
                     }
+                }
+            }
+        }
+
+        public void MakeEnemyActive()
+        {
+            foreach (Blind b in map.blindList)
+            {
+                if (hitBox.Intersects(b.blindHitBox) && !active)
+                {
+                    if (!b.isBlind)
+                    {
+                        active = true;
+                    }
+                }
+                // Om det inte finns några blinds kvar på mapen så nås aldrig denna kod, idéer på fix?
+                else if (Vector2.Distance(pos, player.pos) <= 600 && isHit == false)
+                {
+                    active = true;
                 }
             }
         }

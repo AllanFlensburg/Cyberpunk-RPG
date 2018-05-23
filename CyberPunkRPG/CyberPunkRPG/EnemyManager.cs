@@ -76,29 +76,6 @@ namespace CyberPunkRPG
                     Console.WriteLine("Someting went wrong");
                 }
             }
-
-            string Blinds = strings[6];
-            string[] allBlindDestinations = Blinds.Split(';');
-
-            for (int i = 0; i < allBlindDestinations.Length; i++)
-            {
-                string[] allBlinds = allBlindDestinations[i].Split(',');
-
-                try
-                {
-                    int x = Convert.ToInt32(allBlinds[0]);
-                    int y = Convert.ToInt32(allBlinds[1]);
-                    int Width = Convert.ToInt32(allBlinds[2]);
-                    int Height = Convert.ToInt32(allBlinds[3]);
-                    Rectangle blindDestination = new Rectangle(x, y, Width, Height);
-                    Blind blind = new Blind(Vector2.Zero, blindDestination, true);
-                    blindList.Add(blind);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Someting went wrong");
-                }
-            }
         }
 
         public void Update(GameTime gameTime)

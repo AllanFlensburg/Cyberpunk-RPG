@@ -1,17 +1,16 @@
 PRIO 1
-Dash-funktion är delvis fixad, dash in från höger och nedifrån behöver en fix
-Fixa vapenklasserna, så att de kan placeras ut via MyMap.txt (bör vara fixat)
-Få pistol och rocketlauncher att funka
+Dash-funktion behöver en fixas för cover- och dörr-kollision
+Fixa vapenklasserna, så att de kan placeras ut via MyMap.txt
+Lägga till bullet textur
 Göra en spelbar level-layout
 
 PRIO 2
-Player & Enemy kan skjuta genom väggar om de själva går in i väggen
+Player & Enemy kan skjuta genom dörr om de står rätt intill den
 Lägga till ljud för skotten / dörr
 Lägga till sprites för level dekoration, t.ex bord & stolar
 Organisera spaghetti-koden
 
-
 PRIO 3
+Lägga till ljud för skott / dörr
 Göra så att musik aktiveras efter att man tagit sig till en viss del av leveln ELLER efter en viss tid
-Animationer för enemy (Kan förfinas)
 Förfinad HUD

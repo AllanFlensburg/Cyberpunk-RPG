@@ -20,6 +20,7 @@ namespace CyberPunkRPG
         public List<Spikes> spikeList = new List<Spikes>();
         public List<InteractiveObject> powerUpList = new List<InteractiveObject>();
         public List<InteractiveObject> weaponList = new List<InteractiveObject>();
+        public List<Blind> blindList = new List<Blind>();
 
         public MapManager()
         {
@@ -127,6 +128,29 @@ namespace CyberPunkRPG
                     Console.WriteLine("Someting went wrong");
                 }
             }
+
+            string Blinds = strings[6];
+            string[] allBlindDestinations = Blinds.Split(';');
+
+            for (int i = 0; i < allBlindDestinations.Length; i++)
+            {
+                string[] allBlinds = allBlindDestinations[i].Split(',');
+
+                try
+                {
+                    int x = Convert.ToInt32(allBlinds[0]);
+                    int y = Convert.ToInt32(allBlinds[1]);
+                    int Width = Convert.ToInt32(allBlinds[2]);
+                    int Height = Convert.ToInt32(allBlinds[3]);
+                    Rectangle blindDestination = new Rectangle(x, y, Width, Height);
+                    Blind blind = new Blind(Vector2.Zero, blindDestination);
+                    blindList.Add(blind);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Someting went wrong");
+                }
+            }
         }
 
         public void Update(GameTime gt)
@@ -161,6 +185,17 @@ namespace CyberPunkRPG
                         weaponList.Remove(w);
                         break;
                     }
+                }
+            }
+
+            foreach (Blind b in blindList)
+            {
+                b.Update(gt);
+
+                if (b.isBlind == false)
+                {
+                    blindList.Remove(b);
+                    break;
                 }
             }
         }
@@ -205,6 +240,11 @@ namespace CyberPunkRPG
             foreach (InteractiveObject w in weaponList)
             {
                 w.Draw(sb);
+            }
+
+            foreach (Blind b in blindList)
+            {
+                b.Draw(sb);
             }
         }
     }
