@@ -27,7 +27,7 @@ namespace CyberPunkRPG
         protected float reloadTimer;
         protected float reloadTime;
         bool reloading;
-        protected bool active = false;
+        protected bool active = true;
 
         protected int damage;
         public int lives;
@@ -125,6 +125,10 @@ namespace CyberPunkRPG
             {
                 speed = new Vector2(100, 100);
                 direction = GetDirection(player.pos - pos);
+            }
+            else
+            {
+                speed = Vector2.Zero;
             }
 
             if (isHit || Vector2.Distance(pos, player.pos) <= 200)
@@ -321,17 +325,21 @@ namespace CyberPunkRPG
         {
             foreach (Blind b in map.blindList)
             {
-                if (hitBox.Intersects(b.blindHitBox) && !active)
+                if (hitBox.Intersects(b.blindHitBox))
                 {
-                    if (!b.isBlind)
+                    if (b.isBlind)
+                    {
+                        active = false;
+                    }
+                    else
                     {
                         active = true;
                     }
                 }
-                else if (Vector2.Distance(pos, player.pos) <= 600 && isHit == false)
-                {
-                    active = true;
-                }
+                //else if (Vector2.Distance(pos, player.pos) <= 600 && isHit == false)
+                //{
+                //    active = true;
+                //}
             }
 
             if (map.blindList.Count == 0 && Vector2.Distance(pos, player.pos) <= 600 && isHit == false)
