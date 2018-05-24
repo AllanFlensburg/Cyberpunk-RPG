@@ -81,7 +81,7 @@ namespace CyberPunkRPG
             this.projectileManager = projectileManager;
             this.game = game;
             this.map = map;
-            standardPlayerSpeed = 125;
+            standardPlayerSpeed = 120;
             invincibleTimer = 5;
             speedBoostTimer = 5;
             dashTimer = 2f;
@@ -354,7 +354,7 @@ namespace CyberPunkRPG
                 }
                 else
                 {
-                    standardPlayerSpeed = 125;
+                    standardPlayerSpeed = 120;
                     wireColision = false;
                 }
             }
