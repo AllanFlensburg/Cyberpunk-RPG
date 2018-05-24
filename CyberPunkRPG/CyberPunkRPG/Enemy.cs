@@ -328,7 +328,6 @@ namespace CyberPunkRPG
                         active = true;
                     }
                 }
-                // Om det inte finns några blinds kvar på mapen så nås aldrig denna kod, idéer på fix?
                 else if (Vector2.Distance(pos, player.pos) <= 600 && isHit == false)
                 {
                     active = true;

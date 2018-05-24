@@ -40,7 +40,7 @@ namespace CyberPunkRPG
         GameWindow window;
         public float CurrentHealth = 100f;
         private int healthbarWidth = 467;
-        private int healthbarHeight = 40;
+        private int healthbarHeight = 44;
         bool reloading;
         bool speedBoosted;
         bool invincibleBoosted;
@@ -888,7 +888,8 @@ namespace CyberPunkRPG
             }
 
             sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height/2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);
-            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20- window.ClientBounds.Height / 2, (int)(healthbarWidth * ((double)CurrentHealth / 100)), healthbarHeight), healthbarSource, Color.Red);
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height / 2, (int)(healthbarWidth * ((double)CurrentHealth / 100)), healthbarHeight), healthbarSource, Color.Red);
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height / 2, healthbarWidth, healthbarHeight), healthbarEdgesSource, Color.White);
         }
     }
 }
