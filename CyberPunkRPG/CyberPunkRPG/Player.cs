@@ -81,15 +81,10 @@ namespace CyberPunkRPG
             this.projectileManager = projectileManager;
             this.game = game;
             this.map = map;
-<<<<<<< HEAD
-            standardPlayerSpeed = 125;
+
+            standardPlayerSpeed = 120;
             invincibleTimer = 8;
             speedBoostTimer = 8;
-=======
-            standardPlayerSpeed = 120;
-            invincibleTimer = 5;
-            speedBoostTimer = 5;
->>>>>>> 896eba4f2b36e77ec0e10e0921331514cdfb4252
             dashTimer = 2f;
             dashCooldown = 2f;
             reloadTimer = 1.5f;
