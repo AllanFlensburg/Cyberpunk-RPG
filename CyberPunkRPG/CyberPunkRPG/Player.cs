@@ -236,10 +236,9 @@ namespace CyberPunkRPG
             ShootProjectile(currentKeyboardState);
             Reload(currentKeyboardState, gameTime);
 
-            weaponTimer += (float)gameTime.ElapsedGameTime.Milliseconds;
-
             if (activeWeapon == weapon.assaultRifle)
             {
+                weaponTimer += (float)gameTime.ElapsedGameTime.Milliseconds;
                 if (weaponTimer >= 300 || weaponTimer == 0)
                 {
                     weaponTimer -= 300;
@@ -830,7 +829,7 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(AssetManager.wallTex, hitBox, hitBox, Color.Red);  //ritar ut karaktärens hitbox för att testa kollision
+            //sb.Draw(AssetManager.wallTex, hitBox, hitBox, Color.Red);  //ritar ut karaktärens hitbox för att testa kollision
             if (CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
@@ -841,7 +840,7 @@ namespace CyberPunkRPG
             }
 
             sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Green);
-            sb.DrawString(AssetManager.gameText, new Vector2(pos.X + 45, pos.Y + 65).ToString(), pos - new Vector2(0, -310), Color.Blue); //Tillfälliga koordianter
+            //sb.DrawString(AssetManager.gameText, new Vector2(pos.X + 45, pos.Y + 65).ToString(), pos - new Vector2(0, -310), Color.Blue); //Tillfälliga koordianter
 
             if (ammoCount == 0 & reloading == false)
             {

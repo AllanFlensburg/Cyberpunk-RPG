@@ -26,7 +26,7 @@ namespace CyberPunkRPG
         int maxDistance;
         protected float reloadTimer;
         protected float reloadTime;
-        bool reloading;
+        public bool reloading = false;
         protected bool active = true;
 
         protected int damage;
@@ -333,6 +333,8 @@ namespace CyberPunkRPG
                     }
                     else
                     {
+                        reloadTimer = 0.5f;
+                        reloading = true;
                         active = true;
                     }
                 }
