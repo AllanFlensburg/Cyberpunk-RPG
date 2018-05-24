@@ -85,9 +85,9 @@ namespace CyberPunkRPG
             endPos = new Rectangle(10270, 2370, 70, 70);
             s = new Speedpickup(new Vector2(6900, 2400));
             map.powerUpList.Add(s);
-            i = new InvinciblePickup(new Vector2(10400, 1100));
+            i = new InvinciblePickup(new Vector2(10200, 1100));
             map.powerUpList.Add(i);
-            h = new HealthPickup(new Vector2(8200, 850));
+            h = new HealthPickup(new Vector2(10600, 1850));
             map.powerUpList.Add(h);
             ar = new AssaultRifle(new Vector2(5510, 1850));
             map.weaponList.Add(ar);
