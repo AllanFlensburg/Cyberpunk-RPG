@@ -830,30 +830,54 @@ namespace CyberPunkRPG
 
         public override void Draw(SpriteBatch sb)
         {
-            Rectangle uiWeapon = new Rectangle(0, 192, 64, 64);
             //sb.Draw(AssetManager.wallTex, hitBox, hitBox, Color.Red);  //ritar ut karaktärens hitbox för att testa kollision
             if (CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
-
-                if (speedBoosted)
-                {
-                    Rectangle sourceRect = new Rectangle(0, 160, 32, 32);
-                    sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 550, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
-                    sb.DrawString(AssetManager.gameText, "Speedboost: " + (int)speedBoostTimer, new Vector2(pos.X - 560, pos.Y - 540), Color.Green);
-                }
-
-                if (invincibleBoosted)
-                {
-                    Rectangle sourceRect = new Rectangle(96, 160, 32, 32);
-                    sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 450, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
-                    sb.DrawString(AssetManager.gameText, "Invincible: " + (int)invincibleTimer, new Vector2(pos.X - 450, pos.Y - 540), Color.Green);
-                }
             }
             else
             {
                 sb.Draw(AssetManager.playerDeathTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
             }
+
+            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Green);
+            //sb.DrawString(AssetManager.gameText, new Vector2(pos.X + 45, pos.Y + 65).ToString(), pos - new Vector2(0, -310), Color.Blue); //Tillfälliga koordianter
+
+            if (ammoCount == 0 & reloading == false)
+            {
+                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(0, 20), Color.Green);
+            }
+
+            if (reloading == true)
+            {
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y- 20), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X, (int)pos.Y - 20, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
+                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 20), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
+            }
+
+            //sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height/2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);
+            //sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height / 2, (int)(healthbarWidth * ((double)CurrentHealth / 100)), healthbarHeight), healthbarSource, Color.Red);
+            //sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height / 2, healthbarWidth, healthbarHeight), healthbarEdgesSource, Color.White);
+        }
+
+        public void DrawHealthbar(SpriteBatch sb)
+        {
+            Rectangle uiWeapon = new Rectangle(0, 192, 64, 64);
+
+            if (speedBoosted)
+            {
+                Rectangle sourceRect = new Rectangle(0, 160, 32, 32);
+                sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 550, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
+                sb.DrawString(AssetManager.gameText, "Speedboost: " + (int)speedBoostTimer, new Vector2(pos.X - 560, pos.Y - 540), Color.Green);
+            }
+
+            if (invincibleBoosted)
+            {
+                Rectangle sourceRect = new Rectangle(96, 160, 32, 32);
+                sb.Draw(AssetManager.pickupTex, new Vector2(pos.X - 450, pos.Y - 540), sourceRect, Color.White, 0, new Vector2(), 2.2f, SpriteEffects.None, 1);
+                sb.DrawString(AssetManager.gameText, "Invincible: " + (int)invincibleTimer, new Vector2(pos.X - 450, pos.Y - 540), Color.Green);
+            }
+
             if (activeWeapon == weapon.pistol && CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.pistolTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
@@ -872,22 +896,7 @@ namespace CyberPunkRPG
                 sb.Draw(AssetManager.sniperRifleTex, new Vector2(pos.X - 420, pos.Y - 600), uiWeapon, Color.White, 0, new Vector2(), 2.5f, SpriteEffects.None, 1);
                 sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Green);
             }
-            sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Green);
-            //sb.DrawString(AssetManager.gameText, new Vector2(pos.X + 45, pos.Y + 65).ToString(), pos - new Vector2(0, -310), Color.Blue); //Tillfälliga koordianter
-
-            if (ammoCount == 0 & reloading == false)
-            {
-                sb.DrawString(AssetManager.gameText, "Press R to Reload", pos - new Vector2(0, 20), Color.Green);
-            }
-
-            if (reloading == true)
-            {
-                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y- 20), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
-                sb.Draw(AssetManager.reloadDisplay, new Rectangle((int)pos.X, (int)pos.Y - 20, (int)((AssetManager.reloadDisplay.Width * 0.2f) * ((double)reloadTimer / reloadTime)), (int)(44 * 0.2f)), new Rectangle(0, 45,AssetManager.reloadDisplay.Width, 44), Color.Green);
-                sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 20), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
-            }
-
-            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height/2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height / 2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);
             sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height / 2, (int)(healthbarWidth * ((double)CurrentHealth / 100)), healthbarHeight), healthbarSource, Color.Red);
             sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height / 2, healthbarWidth, healthbarHeight), healthbarEdgesSource, Color.White);
         }

@@ -184,6 +184,8 @@ namespace CyberPunkRPG
                     player.Draw(spriteBatch);
                     spriteBatch.Draw(AssetManager.fenceTex1, new Vector2(4000, 0), Color.White);
                     spriteBatch.Draw(AssetManager.fenceTex2, new Vector2(8000, 0), Color.White);
+                    player.DrawHealthbar(spriteBatch);
+
 
                     break;
                 case GameState.GameOver:
@@ -243,27 +245,28 @@ namespace CyberPunkRPG
 
         public void ChangeMusic()
         {
-            if (currentKeyboardState.IsKeyDown(Keys.F1) == true)
+            if (currentKeyboardState.IsKeyDown(Keys.F1) == true && !lastKeyboardState.IsKeyDown(Keys.F1))
             {
+                MediaPlayer.Resume();
                 MediaPlayer.Stop();
                 MediaPlayer.Play(AssetManager.song1);
             }
-            else if (currentKeyboardState.IsKeyDown(Keys.F2) == true)
+            else if (currentKeyboardState.IsKeyDown(Keys.F2) == true && !lastKeyboardState.IsKeyDown(Keys.F2))
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(AssetManager.song2);
             }
-            else if (currentKeyboardState.IsKeyDown(Keys.F3) == true)
+            else if (currentKeyboardState.IsKeyDown(Keys.F3) == true && !lastKeyboardState.IsKeyDown(Keys.F3))
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(AssetManager.song3);
             }
-            else if (currentKeyboardState.IsKeyDown(Keys.F4) == true)
+            else if (currentKeyboardState.IsKeyDown(Keys.F4) == true && !lastKeyboardState.IsKeyDown(Keys.F4))
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(AssetManager.song4);
             }
-            else if (currentKeyboardState.IsKeyDown(Keys.F5) == true)
+            else if (currentKeyboardState.IsKeyDown(Keys.F5) == true && !lastKeyboardState.IsKeyDown(Keys.F5))
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(AssetManager.song5);

@@ -121,7 +121,7 @@ namespace CyberPunkRPG
         {
             pos += speed * direction * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (active)
+            if (active && Vector2.Distance(pos, player.pos) <= 600 && isHit == false)
             {
                 speed = new Vector2(100, 100);
                 direction = GetDirection(player.pos - pos);
