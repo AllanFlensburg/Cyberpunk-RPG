@@ -14,6 +14,8 @@ namespace CyberPunkRPG
         public static Texture2D groundTex2 { get; private set; }
         public static Texture2D groundTex3 { get; private set; }
         public static Texture2D groundTex4 { get; private set; }
+        public static Texture2D fenceTex1 { get; private set; }
+        public static Texture2D fenceTex2 { get; private set; }
         public static Texture2D playerTex { get; private set; }
         public static Texture2D basicEnemyTex { get; private set; }
         public static Texture2D strongEnemyTex { get; private set; }
@@ -23,6 +25,8 @@ namespace CyberPunkRPG
         public static Texture2D enemyProjectileTex { get; private set; }
         public static Texture2D wallTex { get; private set; }
         public static Texture2D blindTex { get; private set; }
+        public static Texture2D blockTex { get; private set; }
+        public static Texture2D tunnelTex { get; private set; }
         public static Texture2D coverTex { get; private set; }
         public static Texture2D doorTex { get; private set; }
         public static Texture2D wireTex { get; private set; }
@@ -60,6 +64,8 @@ namespace CyberPunkRPG
             groundTex2 = Content.Load<Texture2D>("Ground1_02");
             groundTex3 = Content.Load<Texture2D>("Ground1_03");
             groundTex4 = Content.Load<Texture2D>("Ground1_04");
+            fenceTex1 = Content.Load<Texture2D>("Fence1");
+            fenceTex2 = Content.Load<Texture2D>("Fence2");
             playerTex = Content.Load<Texture2D>("AgentShoot");
             basicEnemyTex = Content.Load<Texture2D>("Armor2Shoot");
             strongEnemyTex = Content.Load<Texture2D>("ArmorShoot");
@@ -69,6 +75,8 @@ namespace CyberPunkRPG
             reloadDisplay = Content.Load<Texture2D>("healthbar");
             wallTex = Content.Load<Texture2D>("Wall1");
             blindTex = Content.Load<Texture2D>("Wall");
+            blockTex = Content.Load<Texture2D>("Block");
+            tunnelTex = Content.Load<Texture2D>("Tunnel");
             coverTex = Content.Load<Texture2D>("box");
             doorTex = Content.Load<Texture2D>("door");
             wireTex = Content.Load<Texture2D>("BarbedWire");

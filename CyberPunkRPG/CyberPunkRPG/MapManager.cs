@@ -21,6 +21,7 @@ namespace CyberPunkRPG
         public List<InteractiveObject> powerUpList = new List<InteractiveObject>();
         public List<InteractiveObject> weaponList = new List<InteractiveObject>();
         public List<Blind> blindList = new List<Blind>();
+        public List<Block> blockList = new List<Block>();
 
         public MapManager()
         {
@@ -151,6 +152,28 @@ namespace CyberPunkRPG
                     Console.WriteLine("Someting went wrong");
                 }
             }
+            string Blocks = strings[7];
+            string[] allBlockDestinations = Blocks.Split(';');
+
+            for (int i = 0; i < allBlockDestinations.Length; i++)
+            {
+                string[] allBlocks = allBlockDestinations[i].Split(',');
+
+                try
+                {
+                    int x = Convert.ToInt32(allBlocks[0]);
+                    int y = Convert.ToInt32(allBlocks[1]);
+                    int Width = Convert.ToInt32(allBlocks[2]);
+                    int Height = Convert.ToInt32(allBlocks[3]);
+                    Rectangle blockDestination = new Rectangle(x, y, Width, Height);
+                    Block block = new Block(Vector2.Zero, blockDestination, true);
+                    blockList.Add(block);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Someting went wrong");
+                }
+            }
         }
 
         public void Update(GameTime gt)
@@ -198,6 +221,7 @@ namespace CyberPunkRPG
                     break;
                 }
             }
+
         }
 
         public void Draw(SpriteBatch sb)
@@ -245,6 +269,10 @@ namespace CyberPunkRPG
             foreach (Blind b in blindList)
             {
                 b.Draw(sb);
+            }
+            foreach (Block l in blockList)
+            {
+                l.Draw(sb);
             }
         }
     }

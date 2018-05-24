@@ -40,7 +40,7 @@ namespace CyberPunkRPG
         GameWindow window;
         public float CurrentHealth = 100f;
         private int healthbarWidth = 467;
-        private int healthbarHeight = 44;
+        private int healthbarHeight = 40;
         bool reloading;
         bool speedBoosted;
         bool invincibleBoosted;
@@ -82,8 +82,8 @@ namespace CyberPunkRPG
             this.game = game;
             this.map = map;
             standardPlayerSpeed = 125;
-            invincibleTimer = 5;
-            speedBoostTimer = 5;
+            invincibleTimer = 8;
+            speedBoostTimer = 8;
             dashTimer = 2f;
             dashCooldown = 2f;
             reloadTimer = 1.5f;
@@ -99,7 +99,7 @@ namespace CyberPunkRPG
             dashSpeed = new Vector2(200, 200);
             projectileSpeed = new Vector2(500, 500);
             this.hitBox = hitBox;
-            activeWeapon = weapon.assaultRifle;
+            activeWeapon = weapon.pistol;
 
             frameTimer = 60;
             frameInterval = 60;
@@ -134,7 +134,7 @@ namespace CyberPunkRPG
                 ammoCapacity = 8;
                 reloadTime = 0.1f;
                 reloadTimer = 1.5f;
-                maxDistance = 500;
+                maxDistance = 350;
             }
         }
 
@@ -197,6 +197,18 @@ namespace CyberPunkRPG
             {
                 prevPos = pos;
             }
+            foreach (Block w in map.blockList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    noCollision = false;
+                }
+            }
+            if (noCollision)
+            {
+                prevPos = pos;
+            }
+
             projectileStart = pos + new Vector2(32, 32);
             hitBox.X = (int)pos.X + 20;
             hitBox.Y = (int)pos.Y + 10;
@@ -208,6 +220,7 @@ namespace CyberPunkRPG
             worldPosition = Vector2.Transform(mousePos, Matrix.Invert(camera.GetTransformation(camera.view)));
 
             UpdateMovement(currentKeyboardState, gameTime);
+            BlockCollision();
             WallCollision();
             CoverCollision();
             Animation(gameTime);
@@ -506,6 +519,59 @@ namespace CyberPunkRPG
             }
         }
 
+        public void BlockCollision()
+        {
+            foreach (Block b in map.blockList)
+            {
+                if (hitBox.Intersects(b.hitBox))
+                {
+                    if (!jumping)
+                    {
+                        pos = prevPos;
+                    }
+                    hitBox.X = (int)pos.X + 20;
+                    hitBox.Y = (int)pos.Y + 10;
+
+                    if (hitBox.X > b.hitBox.Right - 10)
+                    {
+                        pos.X += 2;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X += 20;
+                            JumpReset();
+                        }
+                    }
+                    if (hitBox.X < b.hitBox.Left)
+                    {
+                        pos.X -= 2;
+                        if (jumping)
+                        {
+                            startingPosition.X = pos.X -= 20;
+                            JumpReset();
+                        }
+                    }
+                    if (hitBox.Y < b.hitBox.Top)
+                    {
+                        pos.Y -= 2;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y -= 20;
+                            JumpReset();
+                        }
+                    }
+                    if (hitBox.Y > b.hitBox.Bottom - 6)
+                    {
+                        pos.Y += 2;
+                        if (jumping)
+                        {
+                            startingPosition.Y = pos.Y += 20;
+                            JumpReset();
+                        }
+                    }
+                }
+            }
+        }
+
         private void JumpReset()
         {
             endPosition = endPosition * -1;
@@ -764,7 +830,7 @@ namespace CyberPunkRPG
         public override void Draw(SpriteBatch sb)
         {
             Rectangle uiWeapon = new Rectangle(0, 192, 64, 64);
-            //sb.Draw(AssetManager.doorTex, hitBox, hitBox, Color.Red);  //ritar ut karaktärens hitbox för att testa kollision
+            //sb.Draw(AssetManager.wallTex, hitBox, hitBox, Color.Red);  //ritar ut karaktärens hitbox för att testa kollision
             if (CurrentHealth > 0)
             {
                 sb.Draw(AssetManager.playerTex, pos, sourceRect, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 1);
@@ -806,7 +872,7 @@ namespace CyberPunkRPG
                 sb.DrawString(AssetManager.gameText, "Sniper", new Vector2(pos.X - 330, pos.Y - 530), Color.Green);
             }
             sb.DrawString(AssetManager.gameText, ammoCount.ToString(), pos - new Vector2(0, 40), Color.Green);
-            sb.DrawString(AssetManager.gameText, new Vector2(pos.X, pos.Y).ToString(), pos - new Vector2(0, 10), Color.Blue); //Tillfälliga koordianter
+            //sb.DrawString(AssetManager.gameText, new Vector2(pos.X + 45, pos.Y + 65).ToString(), pos - new Vector2(0, -310), Color.Blue); //Tillfälliga koordianter
 
             if (ammoCount == 0 & reloading == false)
             {
@@ -820,9 +886,8 @@ namespace CyberPunkRPG
                 sb.Draw(AssetManager.reloadDisplay, new Vector2(pos.X, pos.Y - 20), new Rectangle(0, 0,AssetManager.reloadDisplay.Width, 44), Color.White, 0f, new Vector2(), 0.2f, SpriteEffects.None, 1);
             }
 
-            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y - window.ClientBounds.Height/2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);
-            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y - window.ClientBounds.Height / 2, (int)(healthbarWidth * ((double)CurrentHealth / 100)), healthbarHeight), healthbarSource, Color.Red);
-            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y - window.ClientBounds.Height / 2, healthbarWidth, healthbarHeight), healthbarEdgesSource, Color.White);
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20 - window.ClientBounds.Height/2, healthbarWidth, healthbarHeight), healthbarSource, Color.Gray);
+            sb.Draw(AssetManager.healthbarTex, new Rectangle((int)pos.X - healthbarWidth / 2, (int)pos.Y + 20- window.ClientBounds.Height / 2, (int)(healthbarWidth * ((double)CurrentHealth / 100)), healthbarHeight), healthbarSource, Color.Red);
         }
     }
 }

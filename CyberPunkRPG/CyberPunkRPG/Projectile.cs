@@ -61,6 +61,7 @@ namespace CyberPunkRPG
             //}
 
             projectileWallCollision();
+            projectileBlockCollision();
             projectileCoverCollision();
             projectileDoorCollision();
 
@@ -111,6 +112,17 @@ namespace CyberPunkRPG
         public void projectileWallCollision()
         {
             foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    Visible = false;
+                }
+            }
+        }
+
+        public void projectileBlockCollision()
+        {
+            foreach (Block w in map.blockList)
             {
                 if (hitBox.Intersects(w.hitBox))
                 {

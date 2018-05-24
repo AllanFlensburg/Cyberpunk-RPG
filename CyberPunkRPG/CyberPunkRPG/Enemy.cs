@@ -67,6 +67,17 @@ namespace CyberPunkRPG
                     noCollision = true;
                 }
             }
+            foreach (Block w in map.blockList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    noCollision = false;
+                }
+                else
+                {
+                    noCollision = true;
+                }
+            }
 
             foreach (Cover c in map.coverList)
             {
@@ -89,6 +100,7 @@ namespace CyberPunkRPG
             UpdateMovement(gameTime);
             Animation(gameTime);
             EnemyWallCollision();
+            EnemyBlockCollision();
             EnemyCoverCollision();
             EnemyDoorCollision();
             MakeEnemyActive();
@@ -196,6 +208,34 @@ namespace CyberPunkRPG
         public void EnemyWallCollision()
         {
             foreach (Wall w in map.wallList)
+            {
+                if (hitBox.Intersects(w.hitBox))
+                {
+                    pos = prevPos;
+
+                    if (hitBox.X > w.hitBox.Right - 3)
+                    {
+                        pos.X += 2;
+                    }
+                    if (hitBox.X < w.hitBox.Left)
+                    {
+                        pos.X -= 2;
+                    }
+                    if (hitBox.Y < w.hitBox.Top)
+                    {
+                        pos.Y -= 2;
+                    }
+                    if (hitBox.Y > w.hitBox.Bottom - 3)
+                    {
+                        pos.Y += 2;
+                    }
+                }
+            }
+        }
+
+        public void EnemyBlockCollision()
+        {
+            foreach (Block w in map.blockList)
             {
                 if (hitBox.Intersects(w.hitBox))
                 {

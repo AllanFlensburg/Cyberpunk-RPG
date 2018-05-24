@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Blind.cs" />
+    <Compile Include="Block.cs" />
     <Compile Include="Guns\AssaultRifle.cs" />
     <Compile Include="AssetManager.cs" />
     <Compile Include="Background.cs" />

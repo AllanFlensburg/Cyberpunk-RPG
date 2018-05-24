@@ -76,24 +76,24 @@ namespace CyberPunkRPG
 
             projectileManager = new ProjectileManager();
             map = new MapManager();
-            player = new Player(new Vector2(5000, 3000), new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
+            player = new Player(new Vector2(6030, 5350), new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
             enemyManager = new EnemyManager(player, projectileManager, map);
             b = new BarbedWire(Vector2.Zero, new Rectangle(3500, 1500, 50, 50));
             map.barbedWireList.Add(b);
             wonTheGame = false;
             lostTheGame = false;
-            endPos = new Rectangle(4900, 3600, 50, 50);
-            s = new Speedpickup(new Vector2(3200, 1200));
+            endPos = new Rectangle(10270, 2370, 70, 70);
+            s = new Speedpickup(new Vector2(6900, 2400));
             map.powerUpList.Add(s);
-            i = new InvinciblePickup(new Vector2(3100, 1100));
+            i = new InvinciblePickup(new Vector2(10400, 1100));
             map.powerUpList.Add(i);
-            h = new HealthPickup(new Vector2(3000, 1000));
+            h = new HealthPickup(new Vector2(8200, 850));
             map.powerUpList.Add(h);
-            ar = new AssaultRifle(new Vector2(2900, 1000));
+            ar = new AssaultRifle(new Vector2(5510, 1850));
             map.weaponList.Add(ar);
-            p = new Pistol(new Vector2(2850, 1000));
+            p = new Pistol(new Vector2(9050, 1000));
             map.weaponList.Add(p);
-            sr = new SniperRifle(new Vector2(2800, 1000));
+            sr = new SniperRifle(new Vector2(6050, 3300));
             map.weaponList.Add(sr);
             //rl = new RocketLauncher(new Vector2(2800, 920));
             //map.weaponList.Add(rl);
@@ -174,7 +174,7 @@ namespace CyberPunkRPG
                 case GameState.PlayingGame:
 
                     map.Draw(spriteBatch);
-                    spriteBatch.Draw(AssetManager.doorTex, endPos, Color.White);
+                    spriteBatch.Draw(AssetManager.tunnelTex, endPos, Color.White);
                     enemyManager.Draw(spriteBatch);
                     foreach (Blind b in map.blindList)
                     {
@@ -182,6 +182,8 @@ namespace CyberPunkRPG
                     }
                     projectileManager.Draw(spriteBatch);
                     player.Draw(spriteBatch);
+                    spriteBatch.Draw(AssetManager.fenceTex1, new Vector2(4000, 0), Color.White);
+                    spriteBatch.Draw(AssetManager.fenceTex2, new Vector2(8000, 0), Color.White);
 
                     break;
                 case GameState.GameOver:
