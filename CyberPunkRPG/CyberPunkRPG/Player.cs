@@ -198,9 +198,9 @@ namespace CyberPunkRPG
             {
                 prevPos = pos;
             }
-            foreach (Block w in map.blockList)
+            foreach (Block b in map.blockList)
             {
-                if (hitBox.Intersects(w.hitBox))
+                if (hitBox.Intersects(b.hitBox))
                 {
                     noCollision = false;
                 }
@@ -298,13 +298,6 @@ namespace CyberPunkRPG
 
                 if (currentKeyboardState.IsKeyDown(Keys.W) == true)
                 {
-                    foreach (Wall w in map.wallList)
-                    {
-                        if (hitBox.Y - w.hitBox.Y < 250)
-                        {
-                            readyToDash = false;
-                        }
-                    }
                     sourceRect.Y = 0;
                     pos.Y -= standardPlayerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
