@@ -54,8 +54,7 @@ namespace CyberPunkRPG
             }
             else if (lives <= 0)
             {
-                sb.Draw(AssetManager.strongEnemyTex, pos, sourceRect, Color.Red);
-                sb.Draw(AssetManager.sniperRifleTex, pos, sourceRect, Color.Red, 0, new Vector2(), 1, SpriteEffects.None, 1);
+                sb.Draw(AssetManager.strongEnemyTex, pos, sourceRect, Color.Black * 0.3f);
             }
         }
     }
