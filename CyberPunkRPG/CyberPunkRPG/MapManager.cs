@@ -50,7 +50,7 @@ namespace CyberPunkRPG
             weaponList.Add(p);
             sn = new SniperRifle(new Vector2(6050, 3300));
             weaponList.Add(sn);
-            b = new BarbedWire(Vector2.Zero, new Rectangle(3500, 1500, 50, 50));
+            b = new BarbedWire(Vector2.Zero, new Rectangle(5665, 4500, 300, 70));
             barbedWireList.Add(b);
 
             StreamReader sr = new StreamReader("../../../../Content/MyMap.txt");
