@@ -13,7 +13,7 @@ namespace CyberPunkRPG
         Vector2 speed;
         Vector2 direction;
         int maxDistance;
-        float scale = 0.15f;
+        //float scale = 0.15f;
         Vector2 startPosition;
         public bool Visible = false;
         public int damage;

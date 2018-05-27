@@ -12,6 +12,14 @@ namespace CyberPunkRPG
 {
     class MapManager
     {
+        HealthPickup h;
+        InvinciblePickup i;
+        Speedpickup s;
+        InteractiveObject ar;
+        InteractiveObject p;
+        InteractiveObject sn;
+        BarbedWire b;
+
         List<string> strings = new List<string>();
         public List<Wall> wallList = new List<Wall>();
         public List<Cover> coverList = new List<Cover>();
@@ -30,6 +38,21 @@ namespace CyberPunkRPG
 
         void CreateCurrentLevel()
         {
+            s = new Speedpickup(new Vector2(6900, 2400));
+            powerUpList.Add(s);
+            i = new InvinciblePickup(new Vector2(10200, 1100));
+            powerUpList.Add(i);
+            h = new HealthPickup(new Vector2(10600, 1850));
+            powerUpList.Add(h);
+            ar = new AssaultRifle(new Vector2(5510, 1850));
+            weaponList.Add(ar);
+            p = new Pistol(new Vector2(9050, 1000));
+            weaponList.Add(p);
+            sn = new SniperRifle(new Vector2(6050, 3300));
+            weaponList.Add(sn);
+            b = new BarbedWire(Vector2.Zero, new Rectangle(3500, 1500, 50, 50));
+            barbedWireList.Add(b);
+
             StreamReader sr = new StreamReader("../../../../Content/MyMap.txt");
             while (!sr.EndOfStream)
             {
@@ -229,7 +252,6 @@ namespace CyberPunkRPG
             sb.Draw(AssetManager.groundTex1, new Vector2(4000, 0), Color.White);
             sb.Draw(AssetManager.groundTex2, new Vector2(8000, 0), Color.White);
             sb.Draw(AssetManager.groundTex3, new Vector2(4000, 4000), Color.White);
-            sb.Draw(AssetManager.groundTex4, new Vector2(-4000, 4000), Color.White);
 
             foreach (Wall w in wallList)
             {

@@ -23,7 +23,6 @@ namespace CyberPunkRPG
             frame = 0;
             numberOfFrames = 9;
             frameWidth = 64;
-            //sourceRect = new Rectangle(0, 64, 64, 64);
         }
 
         public override void Update(GameTime gameTime)

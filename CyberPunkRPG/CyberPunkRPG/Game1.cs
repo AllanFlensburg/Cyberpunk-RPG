@@ -26,24 +26,17 @@ namespace CyberPunkRPG
         GameState currentGameState;
         Viewport view;
         Camera camera;
-        HealthPickup h;
-        InvinciblePickup i;
-        Speedpickup s;
-        InteractiveObject ar;
-        InteractiveObject p;
-        InteractiveObject sr;
 
         List<Enemy> enemyList = new List<Enemy>();
 
         MapManager map;
         Player player;
-        Blind blind;
         EnemyManager enemyManager;
         ProjectileManager projectileManager;
         Rectangle endPos;
+
         bool wonTheGame;
         bool lostTheGame;
-        BarbedWire b;
         
         public Game1()
         {
@@ -77,30 +70,10 @@ namespace CyberPunkRPG
             projectileManager = new ProjectileManager();
             map = new MapManager();
             player = new Player(new Vector2(6030, 5350), new Rectangle(0, 0, 25, 55), camera, this, map, Window, projectileManager);
+            endPos = new Rectangle(10270, 2370, 70, 70);
             enemyManager = new EnemyManager(player, projectileManager, map);
-            b = new BarbedWire(Vector2.Zero, new Rectangle(3500, 1500, 50, 50));
-            map.barbedWireList.Add(b);
             wonTheGame = false;
             lostTheGame = false;
-            endPos = new Rectangle(10270, 2370, 70, 70);
-            s = new Speedpickup(new Vector2(6900, 2400));
-            map.powerUpList.Add(s);
-            i = new InvinciblePickup(new Vector2(10200, 1100));
-            map.powerUpList.Add(i);
-            h = new HealthPickup(new Vector2(10600, 1850));
-            map.powerUpList.Add(h);
-            ar = new AssaultRifle(new Vector2(5510, 1850));
-            map.weaponList.Add(ar);
-            p = new Pistol(new Vector2(9050, 1000));
-            map.weaponList.Add(p);
-            sr = new SniperRifle(new Vector2(6050, 3300));
-            map.weaponList.Add(sr);
-            //rl = new RocketLauncher(new Vector2(2800, 920));
-            //map.weaponList.Add(rl);
-
-            //Rectangle hitboxBackup = new Rectangle(20, 10, 25, 60); Backup värden för när vi testade hitbox
-            //Rectangle playerBackup = new Rectangle(0, 0, 92, 76); Backup värden för när vi testade hitbox
-
             currentGameState = GameState.Menu;
         }
 

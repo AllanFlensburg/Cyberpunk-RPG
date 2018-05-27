@@ -13,14 +13,12 @@ namespace CyberPunkRPG
         public static Texture2D groundTex1 { get; private set; }
         public static Texture2D groundTex2 { get; private set; }
         public static Texture2D groundTex3 { get; private set; }
-        public static Texture2D groundTex4 { get; private set; }
         public static Texture2D fenceTex1 { get; private set; }
         public static Texture2D fenceTex2 { get; private set; }
         public static Texture2D playerTex { get; private set; }
         public static Texture2D basicEnemyTex { get; private set; }
         public static Texture2D strongEnemyTex { get; private set; }
         public static Texture2D reloadDisplay { get; private set; }
-        public static Texture2D projectileTex { get; private set; }
         public static Texture2D playerProjectileTex { get; private set; }
         public static Texture2D enemyProjectileTex { get; private set; }
         public static Texture2D wallTex { get; private set; }
@@ -34,7 +32,6 @@ namespace CyberPunkRPG
         public static Texture2D pistolTex { get; private set; }
         public static Texture2D assaultRifleTex { get; private set; }
         public static Texture2D sniperRifleTex { get; private set; }
-        public static Texture2D explosionTex { get; private set; }
         public static Texture2D healthbarTex { get; private set; }
         public static Texture2D pickupTex { get; private set; }
         public static Texture2D playerDeathTex { get; private set; }
@@ -63,13 +60,11 @@ namespace CyberPunkRPG
             groundTex1 = Content.Load<Texture2D>("Ground1_01");
             groundTex2 = Content.Load<Texture2D>("Ground1_02");
             groundTex3 = Content.Load<Texture2D>("Ground1_03");
-            groundTex4 = Content.Load<Texture2D>("Ground1_04");
             fenceTex1 = Content.Load<Texture2D>("Fence1");
             fenceTex2 = Content.Load<Texture2D>("Fence2");
             playerTex = Content.Load<Texture2D>("AgentShoot");
             basicEnemyTex = Content.Load<Texture2D>("Armor2Shoot");
             strongEnemyTex = Content.Load<Texture2D>("ArmorShoot");
-            projectileTex = Content.Load<Texture2D>("projectile");
             playerProjectileTex = Content.Load<Texture2D>("greenProjectile");
             enemyProjectileTex = Content.Load<Texture2D>("redProjectile");
             reloadDisplay = Content.Load<Texture2D>("healthbar");
@@ -84,7 +79,6 @@ namespace CyberPunkRPG
             pistolTex = Content.Load<Texture2D>("Pistols");
             assaultRifleTex = Content.Load<Texture2D>("AssaultRifle");
             sniperRifleTex = Content.Load<Texture2D>("Sniper");
-            explosionTex = Content.Load<Texture2D>("Explosion");
             healthbarTex = Content.Load<Texture2D>("healthBar");
             pickupTex = Content.Load<Texture2D>("LightsUp_Spritesheet");
             playerDeathTex = Content.Load<Texture2D>("AgentWalkSouth");

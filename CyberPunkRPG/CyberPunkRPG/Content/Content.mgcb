@@ -32,18 +32,6 @@
 /processorParam:TextureFormat=Color
 /build:healthbar.png
 
-#begin projectile.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:projectile.png
-
 #begin Wall.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -79,18 +67,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:BarbedWire.png
-
-#begin Spikes.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Spikes.png
 
 #begin Cyberpunk Moonlight Sonata.mp3
 /importer:Mp3Importer
@@ -212,18 +188,6 @@
 /processorParam:TextureFormat=Color
 /build:Sniper.png
 
-#begin Explosion.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Explosion.png
-
 #begin Wonderland_round_3.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -289,18 +253,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Ground1_03.jpg
-
-#begin Ground1_04.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Ground1_04.jpg
 
 #begin Title.png
 /importer:TextureImporter
@@ -397,18 +349,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:deathSound.wav
-
-#begin BulletCollection.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:BulletCollection.png
 
 #begin greenProjectile.png
 /importer:TextureImporter
