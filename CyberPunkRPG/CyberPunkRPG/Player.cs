@@ -298,6 +298,13 @@ namespace CyberPunkRPG
 
                 if (currentKeyboardState.IsKeyDown(Keys.W) == true)
                 {
+                    foreach (Wall w in map.wallList)
+                    {
+                        if (hitBox.Y - w.hitBox.Y < 250)
+                        {
+                            readyToDash = false;
+                        }
+                    }
                     sourceRect.Y = 0;
                     pos.Y -= standardPlayerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
