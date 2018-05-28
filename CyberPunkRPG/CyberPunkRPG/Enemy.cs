@@ -67,9 +67,9 @@ namespace CyberPunkRPG
                     noCollision = true;
                 }
             }
-            foreach (Block w in map.blockList)
+            foreach (Block b in map.blockList)
             {
-                if (hitBox.Intersects(w.hitBox))
+                if (hitBox.Intersects(b.hitBox))
                 {
                     noCollision = false;
                 }
@@ -239,25 +239,25 @@ namespace CyberPunkRPG
 
         public void EnemyBlockCollision()
         {
-            foreach (Block w in map.blockList)
+            foreach (Block b in map.blockList)
             {
-                if (hitBox.Intersects(w.hitBox))
+                if (hitBox.Intersects(b.hitBox))
                 {
                     pos = prevPos;
 
-                    if (hitBox.X > w.hitBox.Right - 3)
+                    if (hitBox.X > b.hitBox.Right - 3)
                     {
                         pos.X += 2;
                     }
-                    if (hitBox.X < w.hitBox.Left)
+                    if (hitBox.X < b.hitBox.Left)
                     {
                         pos.X -= 2;
                     }
-                    if (hitBox.Y < w.hitBox.Top)
+                    if (hitBox.Y < b.hitBox.Top)
                     {
                         pos.Y -= 2;
                     }
-                    if (hitBox.Y > w.hitBox.Bottom - 3)
+                    if (hitBox.Y > b.hitBox.Bottom - 3)
                     {
                         pos.Y += 2;
                     }

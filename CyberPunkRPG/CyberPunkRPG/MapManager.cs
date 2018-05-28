@@ -292,9 +292,9 @@ namespace CyberPunkRPG
             {
                 b.Draw(sb);
             }
-            foreach (Block l in blockList)
+            foreach (Block b in blockList)
             {
-                l.Draw(sb);
+                b.Draw(sb);
             }
         }
     }

@@ -122,9 +122,9 @@ namespace CyberPunkRPG
 
         public void projectileBlockCollision()
         {
-            foreach (Block w in map.blockList)
+            foreach (Block b in map.blockList)
             {
-                if (hitBox.Intersects(w.hitBox))
+                if (hitBox.Intersects(b.hitBox))
                 {
                     Visible = false;
                 }

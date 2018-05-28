@@ -506,7 +506,7 @@ namespace CyberPunkRPG
                             JumpReset();
                         }
                     }
-                    if (hitBox.Y > w.hitBox.Bottom -6)
+                    if (hitBox.Y > w.hitBox.Bottom -10)
                     {
                         pos.Y += 2;
                         if (jumping)
@@ -559,7 +559,7 @@ namespace CyberPunkRPG
                             JumpReset();
                         }
                     }
-                    if (hitBox.Y > b.hitBox.Bottom - 6)
+                    if (hitBox.Y > b.hitBox.Bottom - 10)
                     {
                         pos.Y += 2;
                         if (jumping)
