@@ -18,7 +18,7 @@ namespace CyberPunkRPG
         InteractiveObject ar;
         InteractiveObject p;
         InteractiveObject sn;
-        BarbedWire b;
+        //BarbedWire b;
 
         List<string> strings = new List<string>();
         public List<Wall> wallList = new List<Wall>();
@@ -50,8 +50,13 @@ namespace CyberPunkRPG
             weaponList.Add(p);
             sn = new SniperRifle(new Vector2(6050, 3300));
             weaponList.Add(sn);
-            b = new BarbedWire(Vector2.Zero, new Rectangle(5665, 4500, 300, 70));
+            BarbedWire b = new BarbedWire(Vector2.Zero, new Rectangle(5665, 4500, 300, 70));
             barbedWireList.Add(b);
+            b = new BarbedWire(Vector2.Zero, new Rectangle(5665, 4300, 300, 70));
+            barbedWireList.Add(b);
+            b = new BarbedWire(Vector2.Zero, new Rectangle(5665, 4100, 300, 70));
+            barbedWireList.Add(b);
+
 
             StreamReader sr = new StreamReader("../../../../Content/MyMap.txt");
             while (!sr.EndOfStream)

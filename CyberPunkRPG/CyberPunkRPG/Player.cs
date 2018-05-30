@@ -357,19 +357,19 @@ namespace CyberPunkRPG
 
         private void WireColision()
         {
+            bool wireColision = false;
             foreach (BarbedWire b in map.barbedWireList)
             {
-                bool wireColision = false;
                 if (hitBox.Intersects(b.hitBox) && !wireColision && !speedBoosted)
                 {
                     standardPlayerSpeed = b.slowMultiplier;
                     wireColision = true;
                 }
-                else
-                {
-                    standardPlayerSpeed = 120;
-                    wireColision = false;
-                }
+            }
+
+            if (wireColision == false)
+            {
+                standardPlayerSpeed = 120;
             }
         }
 
